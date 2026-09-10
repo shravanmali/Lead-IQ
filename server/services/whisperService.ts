@@ -24,11 +24,13 @@ export const whisperService = {
         const ext = path.extname(chunk.filePath).toLowerCase();
         let mimeType = 'audio/mp3';
         if (ext === '.wav') mimeType = 'audio/wav';
-        else if (ext === '.ogg') mimeType = 'audio/ogg';
+        else if (ext === '.ogg' || ext === '.opus' || ext === '.oga') mimeType = 'audio/ogg';
         else if (ext === '.m4a' || ext === '.aac') mimeType = 'audio/aac';
         else if (ext === '.webm') mimeType = 'audio/webm';
         else if (ext === '.flac') mimeType = 'audio/flac';
         else if (ext === '.mp4') mimeType = 'audio/mp4';
+        else if (ext === '.amr') mimeType = 'audio/amr';
+        else if (ext === '.3gp' || ext === '.3gpp') mimeType = 'audio/3gpp';
 
         const prompt = `You are a high-accuracy Speech-to-Text neural model specializing in enterprise sales conversations, phone recordings, WhatsApp voice messages, and Indian English / Hindi business dialogue.
 Transcribe all spoken dialogue in this audio accurately and verbatim.

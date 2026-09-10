@@ -1,5 +1,235 @@
 [
   {
+    "id": "call-1789035630728",
+    "leadId": "lead-1789032191417-8lsr",
+    "leadName": "Rahul Sharma",
+    "staffId": "staff-1",
+    "staffName": "Sneha Kulkarni",
+    "startTime": "2026-09-10T10:20:02.728Z",
+    "endTime": "2026-09-10T10:20:30.728Z",
+    "durationSeconds": 28,
+    "status": "Completed",
+    "waveformData": [
+      19,
+      50,
+      97,
+      38,
+      79,
+      59,
+      73,
+      65,
+      32,
+      47,
+      70,
+      83,
+      90,
+      93,
+      79,
+      37,
+      33,
+      46,
+      90,
+      21,
+      34,
+      46,
+      44,
+      54,
+      95,
+      19,
+      48,
+      22,
+      41,
+      51,
+      43,
+      91
+    ],
+    "transcript": {
+      "durationSeconds": 28,
+      "language": "English (India) & Hindi Nuances",
+      "extractedKeyPoints": [
+        "Staff: \"Namaste and welcome. Thank you for connecting with Lead-IQ today. How can we ...\"",
+        "Lead: \"Hello! Yes, we are evaluating automated speech intelligence and CRM workflows...\"",
+        "Staff: \"Lead-IQ handles that seamlessly. It runs automated Whisper transcription with...\""
+      ],
+      "turns": [
+        {
+          "speaker": "Staff",
+          "text": "Namaste and welcome. Thank you for connecting with Lead-IQ today. How can we assist your sales team?",
+          "timestamp": "00:04",
+          "sentiment": "positive"
+        },
+        {
+          "speaker": "Lead",
+          "text": "Hello! Yes, we are evaluating automated speech intelligence and CRM workflows for our regional operations across India. We need automated Whisper transcription and predictive lead scoring.",
+          "timestamp": "00:18",
+          "sentiment": "neutral"
+        },
+        {
+          "speaker": "Staff",
+          "text": "Lead-IQ handles that seamlessly. It runs automated Whisper transcription with Indian English accent optimization, calculates dynamic 0-100 conversion probability scores, and automates email, WhatsApp, and Telegram proposals.",
+          "timestamp": "00:38",
+          "sentiment": "positive"
+        }
+      ]
+    },
+    "summary": {
+      "overview": "Rahul Sharma from Shree Enterprises reached out to evaluate automated speech intelligence and CRM workflow automation for regional operations across India. Lead-IQ confirmed its capability to deliver Indian English accent-optimized Whisper transcription, dynamic 0-100 lead scoring, and automated proposal dispatch via Email, WhatsApp, and Telegram. The prospect expressed strong intent for immediate deployment evaluation.",
+      "keyDiscussionPoints": [
+        "Evaluation of automated speech intelligence and CRM workflows for Indian regional operations.",
+        "Requirement for Whisper transcription and predictive 0-100 lead conversion scoring.",
+        "Confirmation of Lead-IQ's Indian English accent optimization and multi-channel proposal automation."
+      ],
+      "customerObjections": [],
+      "customerInterests": [
+        "Whisper speech-to-text with Indian English accent optimization",
+        "Dynamic 0-100 lead conversion probability scores",
+        "Automated proposal delivery via Email, WhatsApp, and Telegram"
+      ],
+      "sentimentScore": 92,
+      "buyingIntentScore": 94,
+      "recommendedTimeline": "Follow up within 24 hours"
+    },
+    "recommendation": {
+      "type": "EMAIL",
+      "title": "Automated GST Proposal Email",
+      "reason": "AI detected high buying intent and explicit request for commercial terms.",
+      "priority": "HIGH",
+      "generatedContent": {
+        "to": "rahul.sharma@apextech.io",
+        "subject": "Lead-IQ Speech Intelligence & CRM Workflows for Shree Enterprises",
+        "body": "Dear Rahul,\n\nThank you for reaching out to Lead-IQ today. It was a pleasure discussing your requirements for automated speech intelligence and CRM workflows across your regional operations in India.\n\nAs discussed, Lead-IQ seamlessly integrates:\n1. Automated Whisper Speech-to-Text optimized specifically for Indian English accents.\n2. Dynamic 0-100 predictive lead scoring to prioritize high-intent opportunities.\n3. Multi-channel automated proposals via Email, WhatsApp, and Telegram.\n\nPer your initial requirements, our solutions support GST invoicing and secure AWS Mumbai cloud hosting. I have attached our detailed solution overview and formal proposal for your review.\n\nPlease let us know a convenient time this week for a live demonstration with your regional team.\n\nWarm regards,\n\nLead-IQ Sales Team\n+91 98765 43210"
+      },
+      "isExecuted": false
+    },
+    "resultingScore": {
+      "score": 92,
+      "category": "Hot",
+      "probability": 94,
+      "confidence": 95,
+      "factors": [
+        "Clear technical requirements matching Lead-IQ core features",
+        "Active evaluation phase for regional enterprise operations",
+        "Explicit interest in automated proposal workflows and speech intelligence"
+      ],
+      "updatedAt": "2026-09-10T10:20:30.719Z"
+    }
+  },
+  {
+    "id": "call-1789035588417",
+    "leadId": "lead-1",
+    "leadName": "Rahul Sharma",
+    "staffId": "staff-1",
+    "staffName": "Sneha Kulkarni",
+    "startTime": "2026-09-10T10:19:42.417Z",
+    "endTime": "2026-09-10T10:19:48.417Z",
+    "durationSeconds": 6,
+    "status": "Completed",
+    "waveformData": [
+      93,
+      27,
+      83,
+      28,
+      45,
+      66,
+      63,
+      37,
+      87,
+      37,
+      65,
+      72,
+      63,
+      57,
+      43,
+      44,
+      18,
+      40,
+      89,
+      65,
+      91,
+      20,
+      84,
+      45,
+      55,
+      91,
+      74,
+      27,
+      39,
+      32,
+      97,
+      85
+    ],
+    "transcript": {
+      "durationSeconds": 6,
+      "language": "English (India) & Hindi Nuances",
+      "extractedKeyPoints": [
+        "Staff: \"Namaste and welcome. Thank you for connecting with Lead-IQ today. How can we ...\"",
+        "Lead: \"Hello! Yes, we are evaluating automated speech intelligence and CRM workflows...\"",
+        "Staff: \"Lead-IQ handles that seamlessly. It runs automated Whisper transcription with...\""
+      ],
+      "turns": [
+        {
+          "speaker": "Staff",
+          "text": "Namaste and welcome. Thank you for connecting with Lead-IQ today. How can we assist your sales team?",
+          "timestamp": "00:04",
+          "sentiment": "positive"
+        },
+        {
+          "speaker": "Lead",
+          "text": "Hello! Yes, we are evaluating automated speech intelligence and CRM workflows for our regional operations across India. We need automated Whisper transcription and predictive lead scoring.",
+          "timestamp": "00:18",
+          "sentiment": "neutral"
+        },
+        {
+          "speaker": "Staff",
+          "text": "Lead-IQ handles that seamlessly. It runs automated Whisper transcription with Indian English accent optimization, calculates dynamic 0-100 conversion probability scores, and automates email, WhatsApp, and Telegram proposals.",
+          "timestamp": "00:38",
+          "sentiment": "positive"
+        }
+      ]
+    },
+    "summary": {
+      "overview": "Rahul Sharma from Apex Tech reached out to evaluate Lead-IQ's automated speech intelligence and CRM workflows for regional operations across India. The inquiry specifically focused on Whisper transcription capabilities and predictive lead scoring. Lead-IQ confirmed native support for Indian English accents and automated proposal distribution via Email, WhatsApp, and Telegram.",
+      "keyDiscussionPoints": [
+        "Evaluation of speech intelligence and CRM workflows for Indian regional operations",
+        "Need for automated Whisper transcription and predictive lead scoring",
+        "Lead-IQ's Indian English accent optimization and automated proposal engine"
+      ],
+      "customerObjections": [],
+      "customerInterests": [
+        "Automated Whisper speech-to-text",
+        "Predictive dynamic lead scoring (0-100 probability)",
+        "Automated proposal outreach via WhatsApp, Email, and Telegram"
+      ],
+      "sentimentScore": 90,
+      "buyingIntentScore": 94,
+      "recommendedTimeline": "Follow up within 24 hours with product proposal and GST quote"
+    },
+    "recommendation": {
+      "type": "EMAIL",
+      "title": "GST Commercial Proposal",
+      "reason": "AI detected high buying intent and explicit request for commercial terms.",
+      "priority": "HIGH",
+      "generatedContent": {
+        "to": "rahul.sharma@apextech.io",
+        "subject": "Lead-IQ Speech Intelligence & CRM Automation for Apex Tech",
+        "body": "Dear Rahul,\n\nThank you for connecting with Lead-IQ today. It was a pleasure discussing how our automated speech intelligence and CRM workflows can support Apex Tech's regional operations across India.\n\nAs discussed, Lead-IQ natively offers:\n- Automated Whisper transcription optimized for Indian English accents\n- Dynamic 0-100 predictive conversion probability lead scoring\n- Automated proposal delivery across Email, WhatsApp, and Telegram\n\nWe have prepared a comprehensive enterprise overview along with a GST-compliant quote tailored to your requirements.\n\nPlease let us know a convenient time for a short live demo with your technical team.\n\nBest regards,\nLead-IQ Sales Team"
+      },
+      "isExecuted": false
+    },
+    "resultingScore": {
+      "score": 92,
+      "category": "Hot",
+      "probability": 94,
+      "confidence": 95,
+      "factors": [
+        "Clear evaluation phase for multi-region operations in India",
+        "Exact functional match with core Lead-IQ automated Whisper and scoring features",
+        "High urgency for automated workflow integration"
+      ],
+      "updatedAt": "2026-09-10T10:19:48.406Z"
+    }
+  },
+  {
     "id": "call-1789034350242",
     "leadId": "lead-1789032191417-8lsr",
     "leadName": "Rahul Sharma",

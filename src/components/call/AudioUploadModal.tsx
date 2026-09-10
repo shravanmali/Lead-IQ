@@ -107,12 +107,23 @@ export const AudioUploadModal: React.FC<AudioUploadModalProps> = ({
 
   const validateAndSetFile = (selectedFile: File) => {
     setErrorMessage(null);
-    const validExtensions = ['.mp3', '.wav', '.m4a', '.webm', '.ogg', '.aac', '.mp4'];
+    const validExtensions = [
+      '.mp3', '.wav', '.m4a', '.webm', '.ogg', '.opus', '.oga',
+      '.aac', '.mp4', '.amr', '.3gp', '.3gpp', '.flac', '.wma',
+      '.caf', '.aiff', '.aif', '.m4b', '.m4r', '.mov', '.mkv'
+    ];
     const name = selectedFile.name.toLowerCase();
-    const isValid = validExtensions.some(ext => name.endsWith(ext)) || selectedFile.type.startsWith('audio/');
+    const isKnownExt = validExtensions.some(ext => name.endsWith(ext));
+    const isAudioOrMedia =
+      isKnownExt ||
+      selectedFile.type.startsWith('audio/') ||
+      selectedFile.type.startsWith('video/') ||
+      selectedFile.type === 'application/ogg' ||
+      selectedFile.type === 'application/octet-stream' ||
+      selectedFile.type === '';
 
-    if (!isValid) {
-      setErrorMessage('Please select a valid audio file (.mp3, .wav, .m4a, .webm, or .mp4)');
+    if (!isAudioOrMedia) {
+      setErrorMessage('Please select a valid audio recording (.mp3, .wav, .m4a, .ogg, .opus, .aac, .amr, .3gp, .webm, or .mp4)');
       return;
     }
 
@@ -125,7 +136,10 @@ export const AudioUploadModal: React.FC<AudioUploadModalProps> = ({
   };
 
   const handleStartProcessing = async () => {
-    if (!file) return;
+    if (!file) {
+      setErrorMessage('Please select or drop an audio recording file first.');
+      return;
+    }
 
     setErrorMessage(null);
     setCurrentStep('uploading');
@@ -535,7 +549,7 @@ export const AudioUploadModal: React.FC<AudioUploadModalProps> = ({
               <input
                 ref={fileInputRef}
                 type="file"
-                accept="audio/*,.mp3,.wav,.m4a,.webm,.ogg,.mp4"
+                accept="audio/*,video/*,.mp3,.wav,.m4a,.webm,.ogg,.opus,.oga,.aac,.mp4,.amr,.3gp,.flac,.wma"
                 onChange={handleFileChange}
                 style={{ display: 'none' }}
               />
@@ -583,7 +597,7 @@ export const AudioUploadModal: React.FC<AudioUploadModalProps> = ({
                     Drop customer call recording here, or click to browse
                   </div>
                   <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.35rem' }}>
-                    Supported: MP3, WAV, M4A, WEBM, MP4 (Up to 100MB)
+                    Supported: MP3, WAV, M4A, WEBM, OGG, OPUS, AMR, AAC, MP4 (Up to 100MB)
                   </div>
                 </div>
               )}
@@ -605,7 +619,7 @@ export const AudioUploadModal: React.FC<AudioUploadModalProps> = ({
             >
               <Sparkles size={16} style={{ color: 'var(--brand-primary)', flexShrink: 0 }} />
               <span>
-                Files longer than 2 minutes are automatically split into seamless 120s segments with ffmpeg and processed through Whisper STT & Gemini 2.5 Flash.
+                Files longer than 2 minutes are automatically split into seamless 120s segments with ffmpeg and processed through Whisper STT & Gemini 3.6 Flash.
               </span>
             </div>
 

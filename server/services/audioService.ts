@@ -22,7 +22,9 @@ export interface AudioValidationResult {
 }
 
 const SUPPORTED_EXTENSIONS = new Set([
-  '.mp3', '.wav', '.m4a', '.webm', '.ogg', '.flac', '.mp4', '.aac'
+  '.mp3', '.wav', '.m4a', '.webm', '.ogg', '.opus', '.oga',
+  '.flac', '.mp4', '.aac', '.amr', '.3gp', '.3gpp', '.wma',
+  '.caf', '.aiff', '.aif', '.m4b', '.m4r', '.mov', '.mkv'
 ]);
 
 export const audioService = {
@@ -34,17 +36,12 @@ export const audioService = {
       return { valid: false, error: 'Uploaded file not found on server.' };
     }
 
-    const ext = path.extname(originalName).toLowerCase();
-    if (!SUPPORTED_EXTENSIONS.has(ext)) {
-      return {
-        valid: false,
-        error: `Unsupported audio format: ${ext}. Supported formats: MP3, WAV, M4A, WEBM, OGG, FLAC, MP4.`
-      };
-    }
-
     if (sizeBytes > 100 * 1024 * 1024) {
       return { valid: false, error: 'File size exceeds maximum limit (100MB).' };
     }
+
+    const ext = path.extname(originalName).toLowerCase();
+    const isKnownExt = SUPPORTED_EXTENSIONS.has(ext);
 
     try {
       // Get audio duration using ffprobe/ffmpeg

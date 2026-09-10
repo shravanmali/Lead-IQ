@@ -33,6 +33,37 @@
     "nextAction": "Send welcome note, brochure, and schedule discovery call to capture technical requirements",
     "activityTimeline": [
       {
+        "id": "act-1789035971580",
+        "leadId": "lead-1789033428898-4dq2",
+        "type": "email_sent",
+        "title": "Automated Email Dispatched (SMTP): \"Following up on your inquiry | Enterprise Solutions for Apex Logistics\"",
+        "description": "Sent personalized proposal email to swastik310508@gmail.com via Gmail SMTP. Message ID: <9b1e8972-57b8-b799-04ec-fd8e1424b6db@gmail.com>",
+        "timestamp": "2026-09-10T10:26:11.580Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "to": "swastik310508@gmail.com",
+          "subject": "Following up on your inquiry | Enterprise Solutions for Apex Logistics",
+          "body": "Dear Rajesh,\n\nThank you for contacting us today! \n\nFollowing our brief initial connection, I would welcome the opportunity to understand your specific software requirements at Apex Logistics Solutions Pvt Ltd. Our Enterprise Cloud ERP Suite helps growing businesses optimize operational workflows, inventory management, and financial reporting.\n\nCould we schedule a brief 15-minute discovery call tomorrow to discuss your objectives? I will also be happy to share an initial GST-inclusive proposal tailored to your team.\n\nWarm regards,\n\nVikram Singh\nSenior Enterprise Consultant\nPhone: +91 98765 43210",
+          "messageId": "<9b1e8972-57b8-b799-04ec-fd8e1424b6db@gmail.com>"
+        }
+      },
+      {
+        "id": "act_1789035971540",
+        "leadId": "lead-1789033428898-4dq2",
+        "type": "email_sent",
+        "title": "Email Automatically Sent",
+        "description": "Confirmed delivered via Gmail SMTP (Shravan Mali (Lead—IQ) <shravan18loco9@gmail.com>) to swastik310508@gmail.com. Subject: \"Following up on your inquiry | Enterprise Solutions for Apex Logistics\"",
+        "timestamp": "2026-09-10T10:26:11.540Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "channel": "email",
+          "deliveryMethod": "smtp",
+          "recipient": "swastik310508@gmail.com",
+          "subject": "Following up on your inquiry | Enterprise Solutions for Apex Logistics",
+          "messageId": "<9b1e8972-57b8-b799-04ec-fd8e1424b6db@gmail.com>"
+        }
+      },
+      {
         "id": "act_1789033433125",
         "leadId": "lead-1789033428898-4dq2",
         "type": "whatsapp_prepared",
@@ -313,27 +344,71 @@
     "industry": "Enterprise Client",
     "status": "Contacted",
     "score": {
-      "score": 90,
+      "score": 92,
       "category": "Hot",
-      "probability": 92,
+      "probability": 94,
       "confidence": 95,
       "factors": [
-        "Clear technical requirements specified (Whisper STT, scoring)",
-        "Defined cloud infrastructure preference (AWS Mumbai)",
-        "Established enterprise buying compliance criteria (GST invoicing)"
+        "Clear technical requirements matching Lead-IQ core features",
+        "Active evaluation phase for regional enterprise operations",
+        "Explicit interest in automated proposal workflows and speech intelligence"
       ],
-      "updatedAt": "2026-09-10T09:59:10.229Z"
+      "updatedAt": "2026-09-10T10:20:30.719Z"
     },
     "dealValue": 500000,
     "assignedStaffId": "staff-1",
     "assignedStaffName": "Sneha Kulkarni",
-    "lastContact": "Just now (Call Transcribed)",
+    "lastContact": "Just now (Live Call Studio)",
     "telegramChatId": "6805311711",
     "interestedIn": "Lead-IQ Enterprise Suite",
     "requirements": "Automated Whisper speech-to-text, 0-100 conversion probability scoring, GST invoicing, AWS Mumbai cloud hosting.",
     "notes": "AI Extracted from Call: Discovery call with Rahul Sharma (Shree Enterprises). Client validated active requirement for 35 sales agents, approved budget of ₹4,50,000, and requested GST commercial quotation.\n\nAI Call Summary: Initial interaction opened with Rahul Sharma from Shree Enterprises. Based on documented requirements, the lead seeks an enterprise solution offering Whisper speech-to-text, 0-100 conversion probability scoring, hosted on AWS Mumbai with GST invoicing.",
-    "nextAction": "Follow-up: Send detailed proposal with GST breakdown and schedule technical demo for Whisper STT integration on AWS Mumbai.",
+    "nextAction": "Follow-up: Send detailed product presentation, AWS Mumbai deployment specs, and GST proposal within 24 hours.",
     "activityTimeline": [
+      {
+        "id": "act-1789035657160",
+        "leadId": "lead-1789032191417-8lsr",
+        "type": "email_sent",
+        "title": "Automated Email Dispatched (SMTP): \"Lead-IQ Speech Intelligence & CRM Workflows for Shree Enterprises\"",
+        "description": "Sent personalized proposal email to shravanmaliphone@gmail.com via Gmail SMTP. Message ID: <aaf255c9-fbb0-d6aa-b3b5-b0dca5fc89a5@gmail.com>",
+        "timestamp": "2026-09-10T10:20:57.161Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "to": "shravanmaliphone@gmail.com",
+          "subject": "Lead-IQ Speech Intelligence & CRM Workflows for Shree Enterprises",
+          "body": "Dear Rahul,\n\nThank you for reaching out to Lead-IQ today. It was a pleasure discussing your requirements for automated speech intelligence and CRM workflows across your regional operations in India.\n\nAs discussed, Lead-IQ seamlessly integrates:\n1. Automated Whisper Speech-to-Text optimized specifically for Indian English accents.\n2. Dynamic 0-100 predictive lead scoring to prioritize high-intent opportunities.\n3. Multi-channel automated proposals via Email, WhatsApp, and Telegram.\n\nPer your initial requirements, our solutions support GST invoicing and secure AWS Mumbai cloud hosting. I have attached our detailed solution overview and formal proposal for your review.\n\nPlease let us know a convenient time this week for a live demonstration with your regional team.\n\nWarm regards,\n\nLead-IQ Sales Team\n+91 98765 43210",
+          "messageId": "<aaf255c9-fbb0-d6aa-b3b5-b0dca5fc89a5@gmail.com>"
+        }
+      },
+      {
+        "id": "act_1789035657112",
+        "leadId": "lead-1789032191417-8lsr",
+        "type": "email_sent",
+        "title": "Email Automatically Sent",
+        "description": "Confirmed delivered via Gmail SMTP (Shravan Mali (Lead—IQ) <shravan18loco9@gmail.com>) to shravanmaliphone@gmail.com. Subject: \"Lead-IQ Speech Intelligence & CRM Workflows for Shree Enterprises\"",
+        "timestamp": "2026-09-10T10:20:57.113Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "channel": "email",
+          "deliveryMethod": "smtp",
+          "recipient": "shravanmaliphone@gmail.com",
+          "subject": "Lead-IQ Speech Intelligence & CRM Workflows for Shree Enterprises",
+          "messageId": "<aaf255c9-fbb0-d6aa-b3b5-b0dca5fc89a5@gmail.com>"
+        }
+      },
+      {
+        "id": "act-1789035630739",
+        "leadId": "lead-1789032191417-8lsr",
+        "type": "call",
+        "title": "Call Completed (0m 28s)",
+        "description": "Whisper audio analyzed. Sentiment Score: 92%. Predictive Lead Score: 92/100.",
+        "timestamp": "2026-09-10T10:20:30.739Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "callId": "call-1789035630728",
+          "score": 92
+        }
+      },
       {
         "id": "act-1789034350258",
         "leadId": "lead-1789032191417-8lsr",
@@ -422,24 +497,43 @@
       "probability": 94,
       "confidence": 95,
       "factors": [
-        "Commercial budget (₹4,50,000) confirmed on call",
-        "Needs GST quotation for 35 sales agents",
-        "High positive sentiment (94%) detected in transcript",
-        "Active Telegram (@shravaz_mali) registered"
+        "Clear evaluation phase for multi-region operations in India",
+        "Exact functional match with core Lead-IQ automated Whisper and scoring features",
+        "High urgency for automated workflow integration"
       ],
-      "updatedAt": "2026-09-10T08:30:00Z"
+      "updatedAt": "2026-09-10T10:19:48.406Z"
     },
-    "dealValue": 450000,
+    "dealValue": 500000,
     "assignedStaffId": "staff-1",
     "assignedStaffName": "Sneha Kulkarni",
-    "lastContact": "Today, 2:30 PM",
+    "lastContact": "Just now (Call Transcribed)",
     "telegramUsername": "shravaz_mali",
     "telegramChatId": "6805311711",
     "interestedIn": "Premium Enterprise Plan (35 seats)",
-    "requirements": "Automated Whisper speech-to-text, GST compliant billing, AWS Mumbai data residency, Telegram bot integration.",
-    "notes": "Decision maker. Spoke for 12 mins. Needs formal commercial proposal before Thursday executive committee review.",
-    "nextAction": "Send Automated GST Proposal Email & Telegram sync",
+    "requirements": "Automated Whisper speech transcription with Indian English accent optimization, predictive lead scoring (0-100 conversion probability), and automated multi-channel proposals (Email, WhatsApp, Telegram).",
+    "notes": "Decision maker. Spoke for 12 mins. Needs formal commercial proposal before Thursday executive committee review.\n\nAI Call Summary: Rahul Sharma from Apex Tech reached out to evaluate Lead-IQ's automated speech intelligence and CRM workflows for regional operations across India. The inquiry specifically focused on Whisper transcription capabilities and predictive lead scoring. Lead-IQ confirmed native support for Indian English accents and automated proposal distribution via Email, WhatsApp, and Telegram.",
+    "nextAction": "Follow-up: Send detailed GST-compliant proposal and set up product demonstration",
     "activityTimeline": [
+      {
+        "id": "act-1789035588425",
+        "leadId": "lead-1",
+        "type": "call",
+        "title": "Call Recording Analyzed (0m 6s)",
+        "description": "Whisper audio transcribed into 3 dialogue turns. Sentiment: 90%. Predictive Lead Score: 92/100 (Hot).",
+        "timestamp": "2026-09-10T10:19:48.425Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "callId": "call-1789035588417",
+          "durationSeconds": 6,
+          "keywords": [
+            "Whisper Transcription",
+            "Predictive Lead Scoring",
+            "Speech Intelligence",
+            "CRM Workflows",
+            "Proposal Automation"
+          ]
+        }
+      },
       {
         "id": "act-1789032509444",
         "leadId": "lead-1",
