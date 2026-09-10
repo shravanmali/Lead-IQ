@@ -7,8 +7,9 @@ import { LeadFilterBar } from '../../components/leads/LeadFilterBar';
 import { LoadingState } from '../../components/common/LoadingState';
 import { CallStudioModal } from '../../components/call/CallStudioModal';
 import { AIProcessingOverlay } from '../../components/call/AIProcessingOverlay';
-import { callService, PipelineProgressCallback } from '../../services/callService';
+import { callService } from '../../services/callService';
 import { useToast } from '../../context/ToastContext';
+import { Users, PhoneCall, Sparkles, UserCheck } from 'lucide-react';
 
 export const StaffMyLeadsPage: React.FC = () => {
   const { user } = useAuth();
@@ -79,13 +80,32 @@ export const StaffMyLeadsPage: React.FC = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      <div>
-        <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
-          My Assigned Leads
-        </h2>
-        <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', margin: 0 }}>
-          Your dedicated client accounts, active negotiations, and call triggers
-        </p>
+      {/* Header Banner */}
+      <div className="glass-panel" style={{ padding: '1.25rem 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', marginBottom: '0.25rem' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(79, 242, 176, 0.12)', border: '1px solid rgba(79, 242, 176, 0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--brand-primary)' }}>
+              <UserCheck size={18} />
+            </div>
+            <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
+              My Assigned Client Accounts
+            </h2>
+          </div>
+          <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', margin: 0, paddingLeft: '2.625rem' }}>
+            Direct pipeline of active Indian accounts, live negotiation triggers, and automated Whisper calling
+          </p>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div className="glass-card" style={{ padding: '0.4rem 0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem' }}>
+            <span style={{ color: 'var(--text-muted)' }}>Assigned to:</span>
+            <span style={{ color: 'var(--brand-primary)', fontWeight: 700 }}>{user?.name || 'Account Executive'}</span>
+          </div>
+          <div className="glass-card" style={{ padding: '0.4rem 0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem' }}>
+            <span style={{ color: 'var(--text-muted)' }}>Active Accounts:</span>
+            <span style={{ color: 'var(--text-primary)', fontWeight: 800, fontFamily: 'var(--font-mono)' }}>{leads.length}</span>
+          </div>
+        </div>
       </div>
 
       <LeadFilterBar
@@ -100,7 +120,7 @@ export const StaffMyLeadsPage: React.FC = () => {
       {isLoading ? (
         <LoadingState message="Loading your assigned prospects..." count={5} />
       ) : (
-        <div className="card" style={{ padding: '1.25rem' }}>
+        <div className="glass-panel" style={{ padding: '1.25rem' }}>
           <LeadTable
             leads={leads}
             onSelectLead={l => {

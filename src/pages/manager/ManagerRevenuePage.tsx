@@ -87,7 +87,10 @@ export const ManagerRevenuePage: React.FC = () => {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       {/* Header Controls & Backend Endpoint Indicator */}
       <div
+        className="glass-panel"
         style={{
+          padding: '1.5rem 1.75rem',
+          borderRadius: 'var(--radius-lg)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -96,24 +99,24 @@ export const ManagerRevenuePage: React.FC = () => {
         }}
       >
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
-            <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.25rem' }}>
+            <h2 style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
               Enterprise Revenue Performance
             </h2>
             <span
               className="badge"
               style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.72rem',
-                backgroundColor: 'rgba(59, 130, 246, 0.12)',
-                color: '#60a5fa',
-                border: '1px solid rgba(59, 130, 246, 0.25)'
+                fontSize: '0.68rem',
+                backgroundColor: 'rgba(79, 242, 176, 0.12)',
+                color: 'var(--brand-primary)',
+                border: '1px solid var(--brand-primary-border)'
               }}
             >
-              GET /api/manager/revenue
+              LIVE FINANCIALS
             </span>
           </div>
-          <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', margin: 0 }}>
+          <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', margin: 0 }}>
             Aggregated financials, staff contributions, and pipeline conversion analytics
           </p>
         </div>
@@ -123,10 +126,10 @@ export const ManagerRevenuePage: React.FC = () => {
           <div
             style={{
               display: 'flex',
-              backgroundColor: 'var(--bg-surface-elevated)',
+              backgroundColor: 'rgba(0, 0, 0, 0.3)',
               padding: '3px',
               borderRadius: 'var(--radius-md)',
-              border: '1px solid var(--border-medium)'
+              border: '1px solid var(--border-subtle)'
             }}
           >
             {(['daily', 'weekly', 'monthly'] as const).map(tf => (
@@ -135,12 +138,15 @@ export const ManagerRevenuePage: React.FC = () => {
                 onClick={() => setTimeframe(tf)}
                 style={{
                   fontSize: '0.75rem',
-                  fontWeight: 600,
+                  fontWeight: timeframe === tf ? 700 : 500,
                   padding: '0.35rem 0.75rem',
-                  borderRadius: 'var(--radius-sm)',
-                  backgroundColor: timeframe === tf ? 'var(--brand-primary)' : 'transparent',
-                  color: timeframe === tf ? '#ffffff' : 'var(--text-secondary)',
-                  textTransform: 'capitalize'
+                  borderRadius: 'calc(var(--radius-md) - 2px)',
+                  backgroundColor: timeframe === tf ? 'rgba(79, 242, 176, 0.18)' : 'transparent',
+                  color: timeframe === tf ? 'var(--brand-primary)' : 'var(--text-secondary)',
+                  border: 'none',
+                  cursor: 'pointer',
+                  textTransform: 'capitalize',
+                  transition: 'all var(--transition-fast)'
                 }}
               >
                 {tf}
@@ -153,7 +159,7 @@ export const ManagerRevenuePage: React.FC = () => {
             <span>Export CSV</span>
           </button>
 
-          <button onClick={handleRefresh} disabled={isRefreshing} className="btn btn-primary btn-sm">
+          <button onClick={handleRefresh} disabled={isRefreshing} className="btn btn-primary btn-sm" style={{ fontWeight: 700 }}>
             <RefreshCw size={14} className={isRefreshing ? 'animate-spin' : ''} />
             <span>Refresh</span>
           </button>
@@ -161,24 +167,24 @@ export const ManagerRevenuePage: React.FC = () => {
       </div>
 
       {/* Revenue KPI Summary Strip */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
         <KPICard
-          title="Total Recognized Revenue"
+          title="Recognized Revenue"
           value={formatINR(totalActual)}
           trend={{ value: '+18.4%', isPositive: true, label: 'vs last year' }}
           icon={IndianRupee}
           glow
         />
         <KPICard
-          title="Target Revenue Goal"
+          title="Target Goal"
           value={formatINR(totalTarget)}
-          subtitle="Target Achievement: 108.6%"
+          trend={{ value: '108.6%', isPositive: true, label: 'target achievement' }}
           icon={TrendingUp}
         />
         <KPICard
           title="Average Deal Size"
           value={formatINR(425000)}
-          subtitle="+12% expansion in Q3"
+          trend={{ value: '+12.0%', isPositive: true, label: 'expansion' }}
           icon={Layers}
         />
         <KPICard
@@ -190,17 +196,17 @@ export const ManagerRevenuePage: React.FC = () => {
       </div>
 
       {/* Main Interactive Revenue Chart */}
-      <div className="card" style={{ padding: '1.75rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
+      <div className="glass-panel" style={{ padding: '1.75rem', borderRadius: 'var(--radius-lg)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.875rem' }}>
           <div>
-            <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
               Revenue Performance vs Target Milestones ({dateRange})
             </h3>
-            <p style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', margin: 0 }}>
+            <p style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', margin: '0.2rem 0 0' }}>
               Hover over points to inspect closed deals and target deviations
             </p>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: 'var(--brand-primary)', fontWeight: 600 }}>
             <Calendar size={14} />
             <span>Fiscal Year 2026</span>
           </div>
@@ -212,12 +218,12 @@ export const ManagerRevenuePage: React.FC = () => {
       {/* Dual Column: Staff Breakdown & Lead Source Contribution */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(440px, 1fr))', gap: '1.5rem' }}>
         {/* Staff Revenue Contribution */}
-        <div className="card" style={{ padding: '1.5rem' }}>
-          <div style={{ marginBottom: '1.25rem' }}>
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+        <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: 'var(--radius-lg)' }}>
+          <div style={{ marginBottom: '1.25rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.75rem' }}>
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
               Revenue Contribution by Sales Representative
             </h3>
-            <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', margin: 0 }}>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', margin: '0.2rem 0 0' }}>
               Closed revenue per account executive
             </p>
           </div>
@@ -225,12 +231,12 @@ export const ManagerRevenuePage: React.FC = () => {
         </div>
 
         {/* Lead Source Distribution */}
-        <div className="card" style={{ padding: '1.5rem' }}>
-          <div style={{ marginBottom: '1.25rem' }}>
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+        <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: 'var(--radius-lg)' }}>
+          <div style={{ marginBottom: '1.25rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.75rem' }}>
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
               Revenue Contribution by Lead Channel
             </h3>
-            <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', margin: 0 }}>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', margin: '0.2rem 0 0' }}>
               Channel profitability & volume distribution
             </p>
           </div>

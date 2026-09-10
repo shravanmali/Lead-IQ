@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Play, Pause, RotateCcw, Volume2 } from 'lucide-react';
+import { Play, Pause, RotateCcw, Volume2, Sparkles } from 'lucide-react';
 
 interface CallAudioPlayerProps {
   durationSeconds: number;
@@ -31,7 +31,7 @@ export const CallAudioPlayer: React.FC<CallAudioPlayerProps> = ({
 
   const formatTime = (sec: number) => {
     const mins = Math.floor(sec / 60);
-    const secs = Math.floor(sec % 60);
+    const secs = sec % 60;
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
@@ -39,14 +39,12 @@ export const CallAudioPlayer: React.FC<CallAudioPlayerProps> = ({
 
   return (
     <div
+      className="glass-card"
       style={{
-        padding: '1rem 1.25rem',
-        backgroundColor: 'var(--bg-surface-elevated)',
-        borderRadius: 'var(--radius-lg)',
-        border: '1px solid var(--border-medium)',
+        padding: '1.25rem',
         display: 'flex',
         flexDirection: 'column',
-        gap: '0.875rem'
+        gap: '1rem'
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -55,11 +53,11 @@ export const CallAudioPlayer: React.FC<CallAudioPlayerProps> = ({
             onClick={() => setIsPlaying(!isPlaying)}
             className="btn btn-primary"
             style={{
-              width: '40px',
-              height: '40px',
+              width: '42px',
+              height: '42px',
               borderRadius: '50%',
               padding: 0,
-              boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)'
+              boxShadow: '0 4px 16px rgba(79, 242, 176, 0.4)'
             }}
             title={isPlaying ? 'Pause Audio' : 'Play Recorded Call'}
           >
@@ -77,16 +75,16 @@ export const CallAudioPlayer: React.FC<CallAudioPlayerProps> = ({
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <span style={{ fontSize: '0.8125rem', fontFamily: 'var(--font-mono)', fontWeight: 600, color: 'var(--text-secondary)' }}>
-            {formatTime(currentTime)} / {formatTime(durationSeconds)}
+          <span style={{ fontSize: '0.8125rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--text-primary)' }}>
+            <span style={{ color: 'var(--brand-primary)' }}>{formatTime(currentTime)}</span> / {formatTime(durationSeconds)}
           </span>
           <button
             onClick={() => setCurrentTime(0)}
-            className="btn-ghost"
-            style={{ padding: '0.35rem', borderRadius: 'var(--radius-sm)' }}
+            className="btn btn-secondary"
+            style={{ padding: '0.35rem 0.5rem', borderRadius: 'var(--radius-sm)' }}
             title="Restart playback"
           >
-            <RotateCcw size={15} />
+            <RotateCcw size={14} />
           </button>
         </div>
       </div>
@@ -97,10 +95,10 @@ export const CallAudioPlayer: React.FC<CallAudioPlayerProps> = ({
           display: 'flex',
           alignItems: 'center',
           gap: '3px',
-          height: '38px',
+          height: '42px',
           cursor: 'pointer',
-          padding: '0 0.5rem',
-          backgroundColor: 'var(--bg-surface)',
+          padding: '0 0.75rem',
+          backgroundColor: 'rgba(255, 255, 255, 0.02)',
           borderRadius: 'var(--radius-md)',
           border: '1px solid var(--border-subtle)'
         }}
@@ -120,9 +118,10 @@ export const CallAudioPlayer: React.FC<CallAudioPlayerProps> = ({
               key={i}
               style={{
                 flex: 1,
-                height: `${Math.max(6, height * 0.35)}px`,
-                backgroundColor: isPassed ? 'var(--brand-primary)' : 'var(--border-strong)',
+                height: `${Math.max(6, height * 0.38)}px`,
+                backgroundColor: isPassed ? 'var(--brand-primary)' : 'rgba(255, 255, 255, 0.1)',
                 background: isPassed ? 'var(--brand-gradient)' : undefined,
+                boxShadow: isPassed ? '0 0 6px rgba(79, 242, 176, 0.3)' : 'none',
                 borderRadius: '2px',
                 transition: 'all 0.1s ease'
               }}

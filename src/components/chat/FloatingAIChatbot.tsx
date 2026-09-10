@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
 import { chatService, QUICK_PROMPTS } from '../../services/chatService';
 import { ChatMessage } from '../../types/chat';
+import { Role } from '../../types/auth';
 import { AIMessageItem } from './AIMessageItem';
 import {
   Sparkles,
@@ -13,16 +15,26 @@ import {
   MessageSquare,
   Shield,
   HelpCircle,
-  AlertCircle
+  AlertCircle,
+  Zap,
+  CheckCircle2,
+  AlertTriangle
 } from 'lucide-react';
+
+type MascotState = 'IDLE' | 'LISTENING' | 'THINKING' | 'TALKING' | 'SUCCESS' | 'ERROR';
 
 export const FloatingAIChatbot: React.FC = () => {
   const { user, role } = useAuth();
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
+  const currentRole: Role = role || 'STAFF';
+
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [showConfirmNewChat, setShowConfirmNewChat] = useState(false);
   const [inputQuery, setInputQuery] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [mascotState, setMascotState] = useState<MascotState>('IDLE');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -33,16 +45,19 @@ export const FloatingAIChatbot: React.FC = () => {
         id: 'msg-welcome',
         sender: 'ai',
         timestamp: new Date().toISOString(),
-        content: "Hi! I'm Lead-IQ AI. Ask me anything about your CRM data.",
-        roleScope: role || 'STAFF'
+        content: "Hi! I'm LeadIQ AI, your sales copilot. Ask me anything about high-intent leads, pipeline health, or next actions.",
+        roleScope: currentRole
       }
     ];
   });
 
-  // Role quick prompts
-  const rolePrompts = role
-    ? QUICK_PROMPTS.filter(p => p.allowedRoles.includes(role))
-    : [];
+  // Suggested Prompts
+  const suggestedPrompts = [
+    { label: '🔥 Top Leads to Contact', prompt: 'Which leads should I contact today?' },
+    { label: '📊 Conversion Drop Reasons', prompt: 'Why did conversions drop this week?' },
+    { label: '⚡ High-Intent Pipeline', prompt: 'Show me high-intent leads.' },
+    { label: '✉️ Follow-up Draft', prompt: 'Draft a follow-up for Rahul.' }
+  ];
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -72,11 +87,6 @@ export const FloatingAIChatbot: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen]);
 
-  // If Admin, do not show CRM chatbot (or if role is null)
-  if (role === 'ADMIN' || !role) {
-    return null;
-  }
-
   const handleSend = async (textToSend?: string) => {
     const query = (textToSend || inputQuery).trim();
     if (!query || !user) return;
@@ -86,27 +96,30 @@ export const FloatingAIChatbot: React.FC = () => {
       sender: 'user',
       timestamp: new Date().toISOString(),
       content: query,
-      roleScope: role
+      roleScope: currentRole
     };
 
     setMessages(prev => [...prev, userMessage]);
     setInputQuery('');
     setIsTyping(true);
+    setMascotState('THINKING');
 
     try {
-      const aiResponse = await chatService.sendQuery(query, role, user);
-      setMessages(prev => [...prev, aiResponse]);
+      const response = await chatService.sendQuery(query, currentRole, user);
+      setMascotState('TALKING');
+      setMessages(prev => [...prev, response]);
+      setTimeout(() => setMascotState('IDLE'), 1200);
     } catch (err: any) {
-      setMessages(prev => [
-        ...prev,
-        {
-          id: `msg-err-${Date.now()}`,
-          sender: 'ai',
-          timestamp: new Date().toISOString(),
-          content: `⚠️ Sorry, an error occurred while processing your request: ${err.message}`,
-          roleScope: role
-        }
-      ]);
+      setMascotState('ERROR');
+      const errorMsg: ChatMessage = {
+        id: `msg-err-${Date.now()}`,
+        sender: 'ai',
+        timestamp: new Date().toISOString(),
+        content: `Error generating response: ${err.message}`,
+        roleScope: currentRole
+      };
+      setMessages(prev => [...prev, errorMsg]);
+      setTimeout(() => setMascotState('IDLE'), 2000);
     } finally {
       setIsTyping(false);
     }
@@ -115,11 +128,11 @@ export const FloatingAIChatbot: React.FC = () => {
   const handleNewChat = () => {
     setMessages([
       {
-        id: `msg-welcome-${Date.now()}`,
+        id: `msg-${Date.now()}`,
         sender: 'ai',
         timestamp: new Date().toISOString(),
-        content: "Hi! I'm Lead-IQ AI. Ask me anything about your CRM data.",
-        roleScope: role
+        content: `Conversation reset. How can I assist you with your ${currentRole} workspace today?`,
+        roleScope: currentRole
       }
     ]);
     setShowConfirmNewChat(false);
@@ -127,56 +140,84 @@ export const FloatingAIChatbot: React.FC = () => {
 
   return (
     <>
-      {/* 1. FLOATING CHAT TRIGGER BUTTON */}
+      {/* 1. FLOATING BUTTON */}
       {!isOpen && (
         <div
           style={{
             position: 'fixed',
             bottom: '24px',
             right: '24px',
-            zIndex: 1000
+            zIndex: 999
           }}
         >
           <button
-            onClick={() => {
-              setIsOpen(true);
-              setIsMinimized(false);
-            }}
+            onClick={() => setIsOpen(true)}
             className="floating-ai-btn"
-            title="Ask Lead-IQ AI"
-            aria-label="Open Lead-IQ AI Assistant"
             style={{
-              width: '60px',
-              height: '60px',
-              borderRadius: '50%',
-              background: 'var(--brand-gradient)',
-              border: 'none',
-              color: '#ffffff',
+              padding: '0.65rem 1.15rem 0.65rem 0.85rem',
+              borderRadius: 'var(--radius-full)',
+              background: isLight
+                ? '#FFFFFF'
+                : 'linear-gradient(135deg, #0B1C17 0%, #102620 100%)',
+              border: isLight
+                ? '1.5px solid #10B981'
+                : '1.5px solid rgba(79, 242, 176, 0.4)',
+              boxShadow: isLight
+                ? '0 6px 24px rgba(16, 185, 129, 0.2), 0 2px 8px rgba(0,0,0,0.06)'
+                : '0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(79, 242, 176, 0.25)',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
+              gap: '0.75rem',
               cursor: 'pointer',
-              boxShadow: '0 6px 24px rgba(59, 130, 246, 0.45), 0 0 20px rgba(139, 92, 246, 0.35)',
-              transition: 'transform var(--transition-fast), box-shadow var(--transition-fast)',
-              position: 'relative'
+              transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
             }}
+            title="Open LeadIQ AI Assistant"
+            aria-label="Open LeadIQ AI Assistant"
           >
-            <Sparkles size={26} className="ai-spark-icon" />
-
-            {/* Glowing active status badge */}
-            <span
+            {/* Pulsing Avatar */}
+            <div
               style={{
-                position: 'absolute',
-                top: '2px',
-                right: '2px',
-                width: '12px',
-                height: '12px',
+                width: '34px',
+                height: '34px',
                 borderRadius: '50%',
-                backgroundColor: '#10b981',
-                border: '2px solid var(--bg-surface)',
-                boxShadow: '0 0 8px #10b981'
+                background: isLight
+                  ? 'linear-gradient(135deg, #10B981 0%, #059669 100%)'
+                  : 'linear-gradient(135deg, #4FF2B0 0%, #20C997 100%)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: isLight ? '#FFFFFF' : '#06110F',
+                boxShadow: isLight
+                  ? '0 0 10px rgba(16, 185, 129, 0.4)'
+                  : '0 0 12px rgba(79, 242, 176, 0.45)',
+                position: 'relative',
+                flexShrink: 0
               }}
-            />
+            >
+              <Bot size={18} />
+              <span
+                style={{
+                  position: 'absolute',
+                  top: '-1px',
+                  right: '-1px',
+                  width: '8px',
+                  height: '8px',
+                  borderRadius: '50%',
+                  backgroundColor: '#10B981',
+                  border: isLight ? '1.5px solid #FFFFFF' : '1.5px solid #06110F',
+                  boxShadow: '0 0 6px #10B981'
+                }}
+              />
+            </div>
+
+            <div style={{ textAlign: 'left' }}>
+              <div style={{ fontSize: '0.84rem', fontWeight: 700, color: isLight ? '#0B1324' : '#F4F7F6', letterSpacing: '-0.01em', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <span>LeadIQ AI</span>
+              </div>
+              <div style={{ fontSize: '0.68rem', color: 'var(--brand-primary)', fontWeight: 600 }}>
+                Sales Copilot
+              </div>
+            </div>
           </button>
         </div>
       )}
@@ -184,27 +225,29 @@ export const FloatingAIChatbot: React.FC = () => {
       {/* 2. FLOATING CHAT WINDOW */}
       {isOpen && (
         <div
-          className="floating-chat-window"
+          className="glass-panel floating-chat-window"
           role="dialog"
-          aria-label="Lead-IQ AI Assistant Window"
+          aria-label="LeadIQ AI Assistant Window"
           style={{
             position: 'fixed',
             bottom: '24px',
             right: '24px',
-            width: isMinimized ? '320px' : '400px',
-            height: isMinimized ? 'auto' : '620px',
+            width: isMinimized ? '340px' : '420px',
+            height: isMinimized ? 'auto' : '640px',
             maxHeight: isMinimized ? '60px' : 'calc(100vh - 48px)',
             maxWidth: 'calc(100vw - 24px)',
-            backgroundColor: 'var(--bg-surface)',
-            borderRadius: '22px',
-            border: '1px solid rgba(59, 130, 246, 0.3)',
-            boxShadow: '0 16px 48px rgba(0, 0, 0, 0.4), 0 0 32px rgba(59, 130, 246, 0.18)',
+            backgroundColor: isLight ? '#FFFFFF' : 'rgba(8, 24, 20, 0.92)',
+            borderRadius: '20px',
+            border: isLight ? '1px solid #E2E8F0' : '1px solid rgba(79, 242, 176, 0.25)',
+            boxShadow: isLight
+              ? '0 16px 48px rgba(0, 0, 0, 0.1), 0 0 24px rgba(16, 185, 129, 0.1)'
+              : '0 24px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(79, 242, 176, 0.12)',
             display: 'flex',
             flexDirection: 'column',
             overflow: 'hidden',
             zIndex: 1000,
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
+            backdropFilter: 'blur(24px) saturate(140%)',
+            WebkitBackdropFilter: 'blur(24px) saturate(140%)',
             transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
           }}
         >
@@ -212,7 +255,9 @@ export const FloatingAIChatbot: React.FC = () => {
           <div
             style={{
               padding: '0.875rem 1.125rem',
-              background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(139, 92, 246, 0.12) 100%)',
+              background: isLight
+                ? 'linear-gradient(135deg, #ECFDF5 0%, #FFFFFF 100%)'
+                : 'linear-gradient(135deg, rgba(79, 242, 176, 0.1) 0%, rgba(32, 201, 151, 0.05) 100%)',
               borderBottom: '1px solid var(--border-subtle)',
               display: 'flex',
               alignItems: 'center',
@@ -220,59 +265,80 @@ export const FloatingAIChatbot: React.FC = () => {
               flexShrink: 0
             }}
           >
-            {/* Left: Identity & Status */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
+            {/* Mascot Avatar & Status */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <div
                 style={{
-                  width: '34px',
-                  height: '34px',
+                  width: '36px',
+                  height: '36px',
                   borderRadius: '50%',
-                  background: 'var(--brand-gradient)',
+                  background: isLight
+                    ? 'linear-gradient(135deg, #10B981 0%, #059669 100%)'
+                    : 'linear-gradient(135deg, #4FF2B0 0%, #20C997 100%)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#ffffff',
-                  boxShadow: '0 2px 10px rgba(59, 130, 246, 0.4)',
+                  color: isLight ? '#FFFFFF' : '#06110F',
+                  boxShadow: isLight ? '0 0 10px rgba(16, 185, 129, 0.3)' : '0 0 14px rgba(79, 242, 176, 0.4)',
+                  position: 'relative',
                   flexShrink: 0
                 }}
               >
-                <Sparkles size={18} />
+                {mascotState === 'THINKING' ? (
+                  <Sparkles size={18} className="animate-spin" />
+                ) : mascotState === 'ERROR' ? (
+                  <AlertTriangle size={18} />
+                ) : mascotState === 'SUCCESS' ? (
+                  <CheckCircle2 size={18} />
+                ) : (
+                  <Bot size={18} />
+                )}
+
+                <span
+                  style={{
+                    position: 'absolute',
+                    top: '-1px',
+                    right: '-1px',
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '50%',
+                    backgroundColor: mascotState === 'ERROR' ? '#ef4444' : '#10B981',
+                    border: isLight ? '1.5px solid #FFFFFF' : '1.5px solid #06110F',
+                    boxShadow: '0 0 6px #10B981'
+                  }}
+                />
               </div>
+
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                  <span style={{ fontSize: '0.9375rem', fontWeight: 800, color: 'var(--text-primary)' }}>
-                    Lead-IQ AI
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <span style={{ fontSize: '0.9375rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                    LeadIQ AI
                   </span>
                   <span
                     style={{
-                      fontSize: '0.6rem',
+                      fontSize: '0.62rem',
                       fontWeight: 700,
-                      padding: '0.1rem 0.35rem',
+                      padding: '0.1rem 0.4rem',
                       borderRadius: '4px',
                       background: 'var(--brand-primary-light)',
-                      color: 'var(--brand-primary)'
+                      color: 'var(--brand-primary)',
+                      border: '1px solid var(--brand-primary-border)'
                     }}
                   >
-                    {role}
+                    COPILOT
                   </span>
                 </div>
-                <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  <span
-                    style={{
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '50%',
-                      backgroundColor: '#10b981',
-                      display: 'inline-block',
-                      boxShadow: '0 0 6px #10b981'
-                    }}
-                  />
-                  <span>Online • Your CRM assistant</span>
+                <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                  {mascotState === 'THINKING'
+                    ? 'Neural reasoning in progress...'
+                    : mascotState === 'TALKING'
+                    ? 'Synthesizing response...'
+                    : 'Your sales copilot • Online'}
                 </div>
               </div>
             </div>
 
-            {/* Right: Actions */}
+            {/* Actions */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
               {!isMinimized && (
                 <button
@@ -313,8 +379,8 @@ export const FloatingAIChatbot: React.FC = () => {
             <div
               style={{
                 padding: '0.875rem 1rem',
-                backgroundColor: 'var(--bg-surface-elevated)',
-                borderBottom: '1px solid var(--border-medium)',
+                backgroundColor: isLight ? '#F8FAF9' : 'rgba(12, 32, 27, 0.95)',
+                borderBottom: '1px solid var(--border-subtle)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
@@ -323,8 +389,8 @@ export const FloatingAIChatbot: React.FC = () => {
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8125rem', color: 'var(--text-primary)' }}>
-                <AlertCircle size={15} style={{ color: 'var(--brand-secondary)' }} />
-                <span>Start a new conversation?</span>
+                <AlertCircle size={15} style={{ color: 'var(--brand-primary)' }} />
+                <span>Start fresh conversation?</span>
               </div>
               <div style={{ display: 'flex', gap: '0.4rem' }}>
                 <button
@@ -345,14 +411,14 @@ export const FloatingAIChatbot: React.FC = () => {
             </div>
           )}
 
-          {/* CONVERSATION STREAM & QUICK CHIPS (Hidden when Minimized) */}
+          {/* CONVERSATION STREAM & QUICK CHIPS */}
           {!isMinimized && (
             <>
-              {/* Quick Suggestion Chips */}
+              {/* Suggested Prompts Strip */}
               <div
                 style={{
                   padding: '0.5rem 0.875rem',
-                  backgroundColor: 'var(--bg-app)',
+                  backgroundColor: isLight ? '#F8FAF9' : 'rgba(6, 17, 15, 0.6)',
                   borderBottom: '1px solid var(--border-subtle)',
                   display: 'flex',
                   gap: '0.4rem',
@@ -361,17 +427,17 @@ export const FloatingAIChatbot: React.FC = () => {
                   flexShrink: 0
                 }}
               >
-                {rolePrompts.map(prompt => (
+                {suggestedPrompts.map((item, idx) => (
                   <button
-                    key={prompt.id}
-                    onClick={() => handleSend(prompt.prompt)}
+                    key={idx}
+                    onClick={() => handleSend(item.prompt)}
                     disabled={isTyping}
                     style={{
                       padding: '0.3rem 0.65rem',
                       borderRadius: 'var(--radius-full)',
-                      backgroundColor: 'var(--bg-surface)',
+                      backgroundColor: isLight ? '#FFFFFF' : 'rgba(255, 255, 255, 0.04)',
                       border: '1px solid var(--border-subtle)',
-                      color: 'var(--text-primary)',
+                      color: isLight ? '#475569' : 'var(--text-primary)',
                       fontSize: '0.72rem',
                       fontWeight: 600,
                       whiteSpace: 'nowrap',
@@ -383,8 +449,7 @@ export const FloatingAIChatbot: React.FC = () => {
                     }}
                     className="quick-chip-btn"
                   >
-                    <MessageSquare size={11} style={{ color: 'var(--brand-primary)' }} />
-                    <span>{prompt.label}</span>
+                    <span>{item.label}</span>
                   </button>
                 ))}
               </div>
@@ -415,7 +480,7 @@ export const FloatingAIChatbot: React.FC = () => {
                     }}
                   >
                     <Sparkles size={14} className="animate-spin" />
-                    <span>Lead-IQ AI is analyzing CRM data...</span>
+                    <span>LeadIQ AI is analyzing CRM datasets...</span>
                   </div>
                 )}
 
@@ -431,7 +496,7 @@ export const FloatingAIChatbot: React.FC = () => {
                 style={{
                   padding: '0.75rem 1rem',
                   borderTop: '1px solid var(--border-subtle)',
-                  backgroundColor: 'var(--bg-surface)',
+                  backgroundColor: isLight ? '#FFFFFF' : 'rgba(8, 24, 20, 0.95)',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.5rem',
@@ -443,15 +508,15 @@ export const FloatingAIChatbot: React.FC = () => {
                   type="text"
                   value={inputQuery}
                   onChange={e => setInputQuery(e.target.value)}
-                  placeholder="Ask about your CRM..."
+                  placeholder="Ask LeadIQ about leads, revenue, deals..."
                   disabled={isTyping}
                   style={{
                     flex: 1,
                     padding: '0.625rem 0.875rem',
                     fontSize: '0.84rem',
                     borderRadius: 'var(--radius-full)',
-                    border: '1px solid var(--border-medium)',
-                    backgroundColor: 'var(--bg-app)',
+                    border: '1px solid var(--border-subtle)',
+                    backgroundColor: isLight ? '#F8FAF9' : 'rgba(6, 17, 15, 0.8)',
                     color: 'var(--text-primary)',
                     outline: 'none'
                   }}
@@ -468,7 +533,8 @@ export const FloatingAIChatbot: React.FC = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    flexShrink: 0
+                    flexShrink: 0,
+                    boxShadow: isLight ? '0 2px 8px rgba(16, 185, 129, 0.3)' : '0 2px 10px rgba(79, 242, 176, 0.3)'
                   }}
                   aria-label="Send query"
                 >
@@ -480,26 +546,11 @@ export const FloatingAIChatbot: React.FC = () => {
         </div>
       )}
 
-      {/* Embedded CSS for pulse, animations and mobile responsiveness */}
+      {/* Embedded CSS */}
       <style>{`
-        @keyframes ai-pulse {
-          0% {
-            box-shadow: 0 6px 24px rgba(59, 130, 246, 0.45), 0 0 20px rgba(139, 92, 246, 0.35);
-          }
-          50% {
-            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.65), 0 0 28px rgba(139, 92, 246, 0.55);
-          }
-          100% {
-            box-shadow: 0 6px 24px rgba(59, 130, 246, 0.45), 0 0 20px rgba(139, 92, 246, 0.35);
-          }
-        }
-
-        .floating-ai-btn {
-          animation: ai-pulse 3s infinite ease-in-out;
-        }
-
         .floating-ai-btn:hover {
-          transform: scale(1.06);
+          transform: translateY(-2px);
+          border-color: var(--brand-primary);
         }
 
         .quick-chip-btn:hover {
@@ -509,13 +560,6 @@ export const FloatingAIChatbot: React.FC = () => {
         }
 
         @media (max-width: 640px) {
-          .floating-ai-btn {
-            width: 54px !important;
-            height: 54px !important;
-            bottom: 16px !important;
-            right: 16px !important;
-          }
-
           .floating-chat-window {
             left: 12px !important;
             right: 12px !important;

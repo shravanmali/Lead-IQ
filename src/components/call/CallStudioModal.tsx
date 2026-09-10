@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, PhoneOff, Mic, MicOff, Volume2, Sparkles, UserCheck, MapPin } from 'lucide-react';
+import { Phone, PhoneOff, Mic, MicOff, Volume2, Sparkles, UserCheck, MapPin, Radio } from 'lucide-react';
 import { Lead } from '../../types/lead';
 import { Modal } from '../common/Modal';
 
@@ -33,7 +33,7 @@ export const CallStudioModal: React.FC<CallStudioModalProps> = ({
 
     const connectTimer = setTimeout(() => {
       setCallState('connected');
-    }, 2400);
+    }, 2200);
 
     return () => clearTimeout(connectTimer);
   }, [isOpen]);
@@ -50,7 +50,7 @@ export const CallStudioModal: React.FC<CallStudioModalProps> = ({
       setWaveformHeights(
         Array.from({ length: 24 }, () => Math.floor(Math.random() * 38) + 6)
       );
-    }, 180);
+    }, 160);
 
     return () => {
       clearInterval(timer);
@@ -77,7 +77,7 @@ export const CallStudioModal: React.FC<CallStudioModalProps> = ({
       isOpen={isOpen}
       onClose={onClose}
       title="Lead-IQ AI Call Studio"
-      subtitle={`Live Secure Connection with ${lead.name} (${lead.country})`}
+      subtitle={`Live Secure SIP Connection with ${lead.name} (${lead.country})`}
       maxWidth="500px"
     >
       <div style={{ textAlign: 'center', padding: '1rem 0 0.5rem' }}>
@@ -96,8 +96,8 @@ export const CallStudioModal: React.FC<CallStudioModalProps> = ({
               fontSize: '2rem',
               fontWeight: 800,
               color: 'var(--brand-primary)',
-              boxShadow: callState === 'connected' ? '0 0 35px rgba(59, 130, 246, 0.4)' : 'none',
-              animation: callState === 'ringing' ? 'pulseRing 1.5s infinite' : 'none'
+              boxShadow: callState === 'connected' ? '0 0 35px rgba(79, 242, 176, 0.4)' : 'none',
+              animation: callState === 'ringing' ? 'pulseRingEmerald 1.5s infinite' : 'none'
             }}
           >
             {lead.name.charAt(0)}
@@ -111,21 +111,22 @@ export const CallStudioModal: React.FC<CallStudioModalProps> = ({
                 width: '20px',
                 height: '20px',
                 borderRadius: '50%',
-                backgroundColor: '#10b981',
-                border: '3px solid var(--bg-surface)'
+                backgroundColor: 'var(--brand-primary)',
+                border: '3px solid var(--bg-surface)',
+                boxShadow: '0 0 10px rgba(79, 242, 176, 0.8)'
               }}
             />
           )}
         </div>
 
-        <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
+        <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.25rem', letterSpacing: '-0.01em' }}>
           {lead.name}
         </h3>
-        <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
+        <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
           {lead.title} • {lead.company}
         </p>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', fontSize: '0.8125rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-          <MapPin size={12} style={{ color: 'var(--brand-primary)' }} />
+          <MapPin size={13} style={{ color: 'var(--brand-primary)' }} />
           <span>{lead.country}</span>
           <span>•</span>
           <span>{lead.phone}</span>
@@ -139,22 +140,23 @@ export const CallStudioModal: React.FC<CallStudioModalProps> = ({
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.5rem',
-                padding: '0.4rem 1rem',
+                padding: '0.45rem 1.1rem',
                 borderRadius: 'var(--radius-full)',
-                backgroundColor: 'rgba(59, 130, 246, 0.15)',
-                color: '#60a5fa',
+                backgroundColor: 'rgba(79, 242, 176, 0.12)',
+                color: 'var(--brand-primary)',
                 fontSize: '0.84rem',
-                fontWeight: 600
+                fontWeight: 600,
+                border: '1px solid rgba(79, 242, 176, 0.25)'
               }}
             >
-              <span className="skeleton" style={{ width: '8px', height: '8px', borderRadius: '50%' }} />
+              <Radio size={14} className="animate-pulse" />
               Connecting secure SIP line to {lead.country}...
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
               <div
                 style={{
-                  fontSize: '1.85rem',
+                  fontSize: '1.95rem',
                   fontWeight: 800,
                   fontFamily: 'var(--font-mono)',
                   color: 'var(--text-primary)',
@@ -175,7 +177,7 @@ export const CallStudioModal: React.FC<CallStudioModalProps> = ({
                   width: '100%',
                   maxWidth: '320px',
                   padding: '0 1rem',
-                  backgroundColor: 'var(--bg-surface-elevated)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.02)',
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid var(--border-subtle)'
                 }}
@@ -216,7 +218,7 @@ export const CallStudioModal: React.FC<CallStudioModalProps> = ({
         >
           <button
             onClick={() => setIsMuted(!isMuted)}
-            className="btn-secondary"
+            className="btn btn-secondary"
             style={{ width: '48px', height: '48px', borderRadius: '50%', padding: 0 }}
             title={isMuted ? 'Unmute microphone' : 'Mute microphone'}
           >
@@ -227,8 +229,8 @@ export const CallStudioModal: React.FC<CallStudioModalProps> = ({
             onClick={handleHangUp}
             className="btn btn-danger"
             style={{
-              width: '60px',
-              height: '60px',
+              width: '58px',
+              height: '58px',
               borderRadius: '50%',
               padding: 0,
               backgroundColor: '#ef4444',
@@ -237,16 +239,16 @@ export const CallStudioModal: React.FC<CallStudioModalProps> = ({
             }}
             title="End Call & Process AI Insights"
           >
-            <PhoneOff size={26} />
+            <PhoneOff size={24} />
           </button>
         </div>
       </div>
 
       <style>{`
-        @keyframes pulseRing {
-          0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6); }
-          70% { box-shadow: 0 0 0 18px rgba(59, 130, 246, 0); }
-          100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        @keyframes pulseRingEmerald {
+          0% { box-shadow: 0 0 0 0 rgba(79, 242, 176, 0.6); }
+          70% { box-shadow: 0 0 0 18px rgba(79, 242, 176, 0); }
+          100% { box-shadow: 0 0 0 0 rgba(79, 242, 176, 0); }
         }
       `}</style>
     </Modal>

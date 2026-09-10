@@ -25,9 +25,9 @@ export const RevenueBarChart: React.FC<RevenueBarChartProps> = ({ data, height =
     <div style={{ width: '100%', position: 'relative' }}>
       <svg viewBox={`0 0 ${width} ${height}`} style={{ width: '100%', height: 'auto', display: 'block' }}>
         <defs>
-          <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#8b5cf6" />
-            <stop offset="100%" stopColor="#3b82f6" />
+          <linearGradient id="emeraldBarGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#4FF2B0" />
+            <stop offset="100%" stopColor="#20C997" stopOpacity="0.4" />
           </linearGradient>
         </defs>
 
@@ -46,7 +46,7 @@ export const RevenueBarChart: React.FC<RevenueBarChartProps> = ({ data, height =
                 strokeDasharray="4 4"
                 strokeWidth="1"
               />
-              <text x={paddingX - 8} y={y + 4} textAnchor="end" fontSize="10" fill="var(--text-muted)">
+              <text x={paddingX - 8} y={y + 4} textAnchor="end" fontSize="10" fontFamily="var(--font-mono)" fill="var(--text-muted)">
                 {formatINRShort(val)}
               </text>
             </g>
@@ -73,8 +73,9 @@ export const RevenueBarChart: React.FC<RevenueBarChartProps> = ({ data, height =
                 width={barWidth}
                 height={barHeight}
                 rx="6"
-                fill={isHovered ? 'var(--brand-primary)' : 'url(#barGradient)'}
-                opacity={isHovered ? 1 : 0.88}
+                fill={isHovered ? 'var(--brand-primary)' : 'url(#emeraldBarGradient)'}
+                filter={isHovered ? 'drop-shadow(0 0 12px rgba(79, 242, 176, 0.6))' : undefined}
+                opacity={isHovered ? 1 : 0.9}
                 style={{ transition: 'all 0.2s ease' }}
               />
 
@@ -84,8 +85,9 @@ export const RevenueBarChart: React.FC<RevenueBarChartProps> = ({ data, height =
                 y={y - 8}
                 textAnchor="middle"
                 fontSize="11"
-                fontWeight="700"
-                fill="var(--text-primary)"
+                fontWeight="800"
+                fontFamily="var(--font-mono)"
+                fill={isHovered ? 'var(--brand-primary)' : 'var(--text-primary)'}
               >
                 {formatINRShort(d.totalRevenue)}
               </text>

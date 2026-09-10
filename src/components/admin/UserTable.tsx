@@ -32,16 +32,16 @@ export const UserTable: React.FC<UserTableProps> = ({ users, onDeleteClick }) =>
                     <img
                       src={u.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'}
                       alt={u.name}
-                      style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }}
+                      style={{ width: '34px', height: '34px', borderRadius: '50%', objectFit: 'cover', border: '1.5px solid var(--border-medium)' }}
                     />
                     <div>
-                      <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>{u.name}</div>
+                      <div style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.875rem' }}>{u.name}</div>
                       <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{u.title || u.role}</div>
                     </div>
                   </div>
                 </td>
 
-                <td style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8125rem' }}>{u.email}</td>
+                <td style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>{u.email}</td>
 
                 <td>
                   <span
@@ -52,19 +52,19 @@ export const UserTable: React.FC<UserTableProps> = ({ users, onDeleteClick }) =>
                           ? 'rgba(239, 68, 68, 0.15)'
                           : u.role === 'MANAGER'
                           ? 'rgba(139, 92, 246, 0.15)'
-                          : 'rgba(59, 130, 246, 0.15)',
+                          : 'rgba(79, 242, 176, 0.15)',
                       color:
                         u.role === 'ADMIN'
                           ? '#f87171'
                           : u.role === 'MANAGER'
                           ? '#c084fc'
-                          : '#60a5fa',
+                          : '#4ff2b0',
                       border:
                         u.role === 'ADMIN'
                           ? '1px solid rgba(239, 68, 68, 0.3)'
                           : u.role === 'MANAGER'
                           ? '1px solid rgba(139, 92, 246, 0.3)'
-                          : '1px solid rgba(59, 130, 246, 0.3)'
+                          : '1px solid rgba(79, 242, 176, 0.3)'
                     }}
                   >
                     {u.role}
@@ -93,7 +93,7 @@ export const UserTable: React.FC<UserTableProps> = ({ users, onDeleteClick }) =>
                   </span>
                 </td>
 
-                <td style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
+                <td style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
                   {new Date(u.createdAt).toLocaleDateString(undefined, {
                     year: 'numeric',
                     month: 'short',
@@ -111,7 +111,7 @@ export const UserTable: React.FC<UserTableProps> = ({ users, onDeleteClick }) =>
                       onClick={() => onDeleteClick(u)}
                       className="btn-danger btn-sm"
                       title="Delete user account"
-                      style={{ padding: '0.3rem 0.6rem' }}
+                      style={{ padding: '0.35rem 0.65rem' }}
                     >
                       <Trash2 size={13} />
                       <span>Delete</span>

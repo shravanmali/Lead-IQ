@@ -35,13 +35,14 @@ export const RevenueLineChart: React.FC<RevenueLineChartProps> = ({ data, height
         style={{ width: '100%', height: 'auto', display: 'block', overflow: 'visible' }}
       >
         <defs>
-          <linearGradient id="actualGradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.35" />
-            <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.0" />
+          <linearGradient id="actualEmeraldGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#4FF2B0" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#4FF2B0" stopOpacity="0.0" />
           </linearGradient>
-          <linearGradient id="lineGlow" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#3b82f6" />
-            <stop offset="100%" stopColor="#8b5cf6" />
+          <linearGradient id="emeraldLineGlow" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#20C997" />
+            <stop offset="50%" stopColor="#4FF2B0" />
+            <stop offset="100%" stopColor="#38bdf8" />
           </linearGradient>
         </defs>
 
@@ -65,6 +66,7 @@ export const RevenueLineChart: React.FC<RevenueLineChartProps> = ({ data, height
                 y={y + 4}
                 textAnchor="end"
                 fontSize="10"
+                fontFamily="var(--font-mono)"
                 fill="var(--text-muted)"
               >
                 {formatINRShort(val)}
@@ -74,7 +76,7 @@ export const RevenueLineChart: React.FC<RevenueLineChartProps> = ({ data, height
         })}
 
         {/* Actual Area */}
-        <polygon points={actualAreaPoints} fill="url(#actualGradient)" />
+        <polygon points={actualAreaPoints} fill="url(#actualEmeraldGradient)" />
 
         {/* Target Line (Dashed) */}
         <polyline
@@ -83,14 +85,14 @@ export const RevenueLineChart: React.FC<RevenueLineChartProps> = ({ data, height
           stroke="var(--border-strong)"
           strokeDasharray="5 5"
           strokeWidth="2"
-          opacity="0.7"
+          opacity="0.6"
         />
 
         {/* Actual Line */}
         <polyline
           points={actualPoints}
           fill="none"
-          stroke="url(#lineGlow)"
+          stroke="url(#emeraldLineGlow)"
           strokeWidth="3.5"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -120,8 +122,8 @@ export const RevenueLineChart: React.FC<RevenueLineChartProps> = ({ data, height
                 cx={cx}
                 cy={cy}
                 r={isHovered ? 6 : 4}
-                fill="#ffffff"
-                stroke="#3b82f6"
+                fill="#091914"
+                stroke="#4FF2B0"
                 strokeWidth={isHovered ? 3 : 2}
                 style={{ transition: 'all 0.15s ease' }}
               />
@@ -133,7 +135,7 @@ export const RevenueLineChart: React.FC<RevenueLineChartProps> = ({ data, height
                     y1={paddingY}
                     x2={cx}
                     y2={height - paddingY}
-                    stroke="#3b82f6"
+                    stroke="#4FF2B0"
                     strokeWidth="1.5"
                     strokeDasharray="2 2"
                   />
@@ -144,17 +146,18 @@ export const RevenueLineChart: React.FC<RevenueLineChartProps> = ({ data, height
                     width="150"
                     height="38"
                     rx="6"
-                    fill="var(--bg-surface-elevated)"
+                    fill="#0B1C17"
                     stroke="var(--brand-primary)"
                     strokeWidth="1"
-                    filter="drop-shadow(0 4px 12px rgba(0,0,0,0.3))"
+                    filter="drop-shadow(0 4px 16px rgba(0,0,0,0.5))"
                   />
                   <text
                     x={cx}
                     y={cy - 32}
                     textAnchor="middle"
                     fontSize="11"
-                    fontWeight="700"
+                    fontWeight="800"
+                    fontFamily="var(--font-mono)"
                     fill="var(--text-primary)"
                   >
                     {formatINR(d.actualRevenue)}
@@ -163,7 +166,7 @@ export const RevenueLineChart: React.FC<RevenueLineChartProps> = ({ data, height
                     x={cx}
                     y={cy - 18}
                     textAnchor="middle"
-                    fontSize="9"
+                    fontSize="9.5"
                     fill="var(--text-muted)"
                   >
                     Target: {formatINR(d.targetRevenue)} ({d.dealsClosed} deals)
@@ -176,13 +179,13 @@ export const RevenueLineChart: React.FC<RevenueLineChartProps> = ({ data, height
       </svg>
 
       {/* Legend */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1.5rem', marginTop: '0.75rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1.5rem', marginTop: '0.875rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
-          <span style={{ width: '12px', height: '3px', borderRadius: '2px', background: 'var(--brand-gradient)' }} />
+          <span style={{ width: '14px', height: '3px', borderRadius: '2px', background: 'var(--brand-gradient)' }} />
           <span>Actual Recognized Revenue (₹)</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8125rem', color: 'var(--text-muted)' }}>
-          <span style={{ width: '12px', height: '2px', borderRadius: '2px', borderTop: '2px dashed var(--border-strong)' }} />
+          <span style={{ width: '14px', height: '2px', borderRadius: '2px', borderTop: '2px dashed var(--border-strong)' }} />
           <span>Target Milestone (₹)</span>
         </div>
       </div>

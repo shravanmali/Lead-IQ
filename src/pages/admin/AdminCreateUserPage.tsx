@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { adminService, CreateUserInput } from '../../services/adminService';
 import { UserStatus } from '../../types/auth';
 import { useToast } from '../../context/ToastContext';
-import { UserPlus, ArrowLeft, Shield, CheckCircle2 } from 'lucide-react';
+import { UserPlus, ArrowLeft, Shield, CheckCircle2, KeyRound } from 'lucide-react';
 
 export const AdminCreateUserPage: React.FC = () => {
   const { showToast } = useToast();
@@ -45,26 +45,31 @@ export const AdminCreateUserPage: React.FC = () => {
   };
 
   return (
-    <div style={{ maxWidth: '680px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+    <div style={{ maxWidth: '720px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <div className="glass-panel" style={{ padding: '1.25rem 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
-            Provision New Corporate Account
-          </h2>
-          <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', margin: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', marginBottom: '0.25rem' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(79, 242, 176, 0.12)', border: '1px solid rgba(79, 242, 176, 0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--brand-primary)' }}>
+              <UserPlus size={18} />
+            </div>
+            <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
+              Provision New Corporate Account
+            </h2>
+          </div>
+          <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', margin: 0, paddingLeft: '2.625rem' }}>
             Configure identity, role authorization, and initial access credentials
           </p>
         </div>
-        <a href="#/admin/users" className="btn-secondary btn-sm" style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+        <a href="#/admin/users" className="btn btn-secondary btn-sm" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
           <ArrowLeft size={14} />
           <span>Back to Directory</span>
         </a>
       </div>
 
-      <div className="card card-glow" style={{ padding: '2rem' }}>
+      <div className="glass-panel" style={{ padding: '2rem' }}>
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div>
-            <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
+            <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.45rem' }}>
               Full Legal Name *
             </label>
             <input
@@ -78,7 +83,7 @@ export const AdminCreateUserPage: React.FC = () => {
           </div>
 
           <div>
-            <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
+            <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.45rem' }}>
               Corporate Email Address *
             </label>
             <input
@@ -91,9 +96,9 @@ export const AdminCreateUserPage: React.FC = () => {
             />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
             <div>
-              <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
+              <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.45rem' }}>
                 Assigned Role *
               </label>
               <select
@@ -107,7 +112,7 @@ export const AdminCreateUserPage: React.FC = () => {
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
+              <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.45rem' }}>
                 Account Status *
               </label>
               <select
@@ -122,9 +127,9 @@ export const AdminCreateUserPage: React.FC = () => {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
             <div>
-              <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
+              <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.45rem' }}>
                 Job Title
               </label>
               <input
@@ -137,7 +142,7 @@ export const AdminCreateUserPage: React.FC = () => {
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
+              <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.45rem' }}>
                 Phone Number
               </label>
               <input
@@ -151,7 +156,7 @@ export const AdminCreateUserPage: React.FC = () => {
           </div>
 
           <div>
-            <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
+            <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.45rem' }}>
               Temporary Provisioning Password
             </label>
             <input
@@ -166,7 +171,7 @@ export const AdminCreateUserPage: React.FC = () => {
             <a href="#/admin/users" className="btn btn-secondary">
               Cancel
             </a>
-            <button type="submit" disabled={isSubmitting} className="btn btn-primary">
+            <button type="submit" disabled={isSubmitting} className="btn btn-primary" style={{ padding: '0.625rem 1.5rem' }}>
               {isSubmitting ? (
                 <span>Provisioning Account...</span>
               ) : (

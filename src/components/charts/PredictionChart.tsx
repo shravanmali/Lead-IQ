@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { RevenuePredictionPoint } from '../../types/revenue';
 import { formatINR, formatINRShort } from '../../utils/formatters';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, TrendingUp } from 'lucide-react';
 
 interface PredictionChartProps {
   data: RevenuePredictionPoint[];
@@ -41,14 +41,14 @@ export const PredictionChart: React.FC<PredictionChartProps> = ({ data, height =
         style={{ width: '100%', height: 'auto', display: 'block', overflow: 'visible' }}
       >
         <defs>
-          <linearGradient id="confidenceGradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.22" />
-            <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.04" />
+          <linearGradient id="emeraldConfidenceGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#4FF2B0" stopOpacity="0.22" />
+            <stop offset="100%" stopColor="#4FF2B0" stopOpacity="0.02" />
           </linearGradient>
-          <linearGradient id="predictedGradient" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#3b82f6" />
-            <stop offset="40%" stopColor="#8b5cf6" />
-            <stop offset="100%" stopColor="#ec4899" />
+          <linearGradient id="predictedEmeraldGradient" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#38bdf8" />
+            <stop offset="50%" stopColor="#4FF2B0" />
+            <stop offset="100%" stopColor="#20C997" />
           </linearGradient>
         </defs>
 
@@ -67,7 +67,7 @@ export const PredictionChart: React.FC<PredictionChartProps> = ({ data, height =
                 strokeDasharray="4 4"
                 strokeWidth="1"
               />
-              <text x={paddingX - 10} y={y + 4} textAnchor="end" fontSize="11" fill="var(--text-muted)">
+              <text x={paddingX - 10} y={y + 4} textAnchor="end" fontSize="11" fontFamily="var(--font-mono)" fill="var(--text-muted)">
                 {formatINRShort(val)}
               </text>
             </g>
@@ -75,13 +75,13 @@ export const PredictionChart: React.FC<PredictionChartProps> = ({ data, height =
         })}
 
         {/* AI Confidence Band */}
-        <polygon points={confidenceArea} fill="url(#confidenceGradient)" />
+        <polygon points={confidenceArea} fill="url(#emeraldConfidenceGradient)" />
 
         {/* AI Predicted Line */}
         <polyline
           points={predictedPath}
           fill="none"
-          stroke="url(#predictedGradient)"
+          stroke="url(#predictedEmeraldGradient)"
           strokeWidth="3.5"
           strokeDasharray="6 6"
           strokeLinecap="round"
@@ -92,7 +92,7 @@ export const PredictionChart: React.FC<PredictionChartProps> = ({ data, height =
         <polyline
           points={actualPath}
           fill="none"
-          stroke="#3b82f6"
+          stroke="#38bdf8"
           strokeWidth="4"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -110,7 +110,7 @@ export const PredictionChart: React.FC<PredictionChartProps> = ({ data, height =
                 y1={paddingY}
                 x2={cx}
                 y2={height - paddingY}
-                stroke="var(--brand-secondary)"
+                stroke="var(--brand-primary)"
                 strokeWidth="1.5"
                 strokeDasharray="3 3"
               />
@@ -120,15 +120,15 @@ export const PredictionChart: React.FC<PredictionChartProps> = ({ data, height =
                 width="100"
                 height="20"
                 rx="4"
-                fill="var(--brand-secondary)"
+                fill="var(--brand-primary)"
               />
               <text
                 x={cx}
                 y={paddingY}
                 textAnchor="middle"
                 fontSize="10"
-                fontWeight="700"
-                fill="#ffffff"
+                fontWeight="800"
+                fill="#06110F"
               >
                 NOW (AI SPLIT)
               </text>
@@ -155,8 +155,8 @@ export const PredictionChart: React.FC<PredictionChartProps> = ({ data, height =
                 cx={cx}
                 cy={cy}
                 r={isHovered ? 7 : 5}
-                fill={isActual ? '#3b82f6' : '#8b5cf6'}
-                stroke="#ffffff"
+                fill={isActual ? '#38bdf8' : '#4FF2B0'}
+                stroke="#091914"
                 strokeWidth={isHovered ? 3 : 2}
                 style={{ transition: 'all 0.15s ease' }}
               />
@@ -168,7 +168,7 @@ export const PredictionChart: React.FC<PredictionChartProps> = ({ data, height =
                 textAnchor="middle"
                 fontSize="11"
                 fontWeight={isHovered ? 700 : 500}
-                fill={isHovered ? 'var(--brand-secondary)' : 'var(--text-secondary)'}
+                fill={isHovered ? 'var(--brand-primary)' : 'var(--text-secondary)'}
               >
                 {d.date.split('(')[0]}
               </text>
@@ -180,9 +180,9 @@ export const PredictionChart: React.FC<PredictionChartProps> = ({ data, height =
                     x={cx}
                     y={cy - 12}
                     textAnchor="middle"
-                    fontSize="9"
-                    fontWeight="600"
-                    fill="var(--brand-secondary)"
+                    fontSize="9.5"
+                    fontWeight="700"
+                    fill="var(--brand-primary)"
                   >
                     {d.milestone}
                   </text>
@@ -198,18 +198,18 @@ export const PredictionChart: React.FC<PredictionChartProps> = ({ data, height =
                     width="190"
                     height="58"
                     rx="8"
-                    fill="var(--bg-surface-elevated)"
-                    stroke="var(--brand-secondary)"
+                    fill="#0B1C17"
+                    stroke="var(--brand-primary)"
                     strokeWidth="1.5"
-                    filter="drop-shadow(0 8px 20px rgba(0,0,0,0.4))"
+                    filter="drop-shadow(0 8px 24px rgba(0,0,0,0.6))"
                   />
                   <text x={cx} y={cy - 48} textAnchor="middle" fontSize="11" fontWeight="700" fill="var(--text-primary)">
                     {d.date}
                   </text>
-                  <text x={cx} y={cy - 32} textAnchor="middle" fontSize="12" fontWeight="800" fill="var(--brand-primary)">
+                  <text x={cx} y={cy - 32} textAnchor="middle" fontSize="12" fontWeight="800" fontFamily="var(--font-mono)" fill="var(--brand-primary)">
                     Predicted: {formatINR(d.predicted)}
                   </text>
-                  <text x={cx} y={cy - 18} textAnchor="middle" fontSize="9.5" fill="var(--text-muted)">
+                  <text x={cx} y={cy - 18} textAnchor="middle" fontSize="9.5" fontFamily="var(--font-mono)" fill="var(--text-muted)">
                     Confidence: {formatINRShort(d.lowerConfidence)} – {formatINRShort(d.upperConfidence)}
                   </text>
                 </g>
@@ -221,6 +221,7 @@ export const PredictionChart: React.FC<PredictionChartProps> = ({ data, height =
 
       {/* Legend & Confidence explanation */}
       <div
+        className="glass-card"
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -228,28 +229,25 @@ export const PredictionChart: React.FC<PredictionChartProps> = ({ data, height =
           flexWrap: 'wrap',
           gap: '1rem',
           marginTop: '1rem',
-          padding: '0.75rem 1rem',
-          backgroundColor: 'var(--bg-surface-elevated)',
-          borderRadius: 'var(--radius-md)',
-          border: '1px solid var(--border-subtle)'
+          padding: '0.875rem 1.25rem'
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8125rem' }}>
-            <span style={{ width: '14px', height: '4px', backgroundColor: '#3b82f6', borderRadius: '2px' }} />
-            <span style={{ fontWeight: 600 }}>Historical Actual (₹)</span>
+            <span style={{ width: '14px', height: '4px', backgroundColor: '#38bdf8', borderRadius: '2px' }} />
+            <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Historical Actual (₹)</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8125rem' }}>
-            <span style={{ width: '14px', height: '3px', borderTop: '3px dashed #8b5cf6', borderRadius: '2px' }} />
-            <span style={{ fontWeight: 600, color: 'var(--brand-secondary)' }}>AI Forecast Curve (₹)</span>
+            <span style={{ width: '14px', height: '3px', borderTop: '3px dashed #4FF2B0', borderRadius: '2px' }} />
+            <span style={{ fontWeight: 600, color: 'var(--brand-primary)' }}>AI Forecast Curve (₹)</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8125rem' }}>
-            <span style={{ width: '14px', height: '10px', backgroundColor: 'rgba(139, 92, 246, 0.25)', borderRadius: '2px' }} />
+            <span style={{ width: '14px', height: '10px', backgroundColor: 'rgba(79, 242, 176, 0.25)', borderRadius: '2px' }} />
             <span style={{ color: 'var(--text-muted)' }}>95% Confidence Band</span>
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: 'var(--brand-secondary)', fontWeight: 600 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: 'var(--brand-primary)', fontWeight: 600 }}>
           <Sparkles size={14} />
           <span>Continuous ML Bayesian Forecast Model (India Region)</span>
         </div>

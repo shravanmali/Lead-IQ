@@ -45,42 +45,42 @@ export const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = (
         </>
       }
     >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', textAlign: 'center', padding: '0.5rem 0' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', alignItems: 'center', textAlign: 'center', padding: '0.75rem 0' }}>
         <div
           style={{
-            width: '54px',
-            height: '54px',
+            width: '56px',
+            height: '56px',
             borderRadius: '50%',
             backgroundColor: 'rgba(239, 68, 68, 0.12)',
             color: '#ef4444',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            border: '1px solid rgba(239, 68, 68, 0.3)'
+            border: '1px solid rgba(239, 68, 68, 0.3)',
+            boxShadow: '0 0 24px rgba(239, 68, 68, 0.2)'
           }}
         >
           <AlertTriangle size={28} />
         </div>
 
         <div>
-          <p style={{ fontSize: '0.9375rem', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+          <p style={{ fontSize: '0.9375rem', color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
             Are you sure you want to permanently delete the account for:
           </p>
           <div
+            className="glass-card"
             style={{
-              padding: '0.75rem',
-              backgroundColor: 'var(--bg-surface-elevated)',
-              borderRadius: 'var(--radius-md)',
-              border: '1px solid var(--border-medium)',
+              padding: '1rem 1.5rem',
               display: 'inline-block',
-              textAlign: 'left'
+              textAlign: 'left',
+              minWidth: '280px'
             }}
           >
-            <div style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)' }}>
+            <div style={{ fontWeight: 800, fontSize: '0.95rem', color: 'var(--text-primary)' }}>
               {user.name}
             </div>
-            <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{user.email}</div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--brand-primary)', fontWeight: 600, marginTop: '2px' }}>
+            <div style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{user.email}</div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--brand-primary)', fontWeight: 700, marginTop: '4px' }}>
               Role: {user.role}
             </div>
           </div>

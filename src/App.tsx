@@ -35,6 +35,9 @@ import { StaffAIRecommendationsPage } from './pages/staff/StaffAIRecommendations
 import { StaffAIChatbotPage } from './pages/staff/StaffAIChatbotPage';
 import { StaffSettingsPage } from './pages/staff/StaffSettingsPage';
 
+// Common / Integrations Hub
+import { IntegrationsPage } from './pages/common/IntegrationsPage';
+
 const Router: React.FC = () => {
   const { user, role, isAuthenticated, isLoading } = useAuth();
   const [currentHash, setCurrentHash] = useState(() => window.location.hash || '#/login');
@@ -122,6 +125,16 @@ const Router: React.FC = () => {
     );
   }
 
+  if (currentHash.startsWith('#/admin/integrations')) {
+    return (
+      <ProtectedRoute allowedRoles={['ADMIN']}>
+        <AppShell currentPath={currentHash} pageTitle="System Integrations & API Gateways" pageSubtitle="Whisper, Telegram, WhatsApp, and Cloud infrastructure">
+          <IntegrationsPage />
+        </AppShell>
+      </ProtectedRoute>
+    );
+  }
+
   // =========================================================================
   // MANAGER ROUTES (Full CRM + Revenue + Forecasting + Manager Chatbot)
   // =========================================================================
@@ -190,6 +203,16 @@ const Router: React.FC = () => {
       <ProtectedRoute allowedRoles={['MANAGER']}>
         <AppShell currentPath={currentHash} pageTitle="Manager AI Chatbot" pageSubtitle="Full CRM intelligence assistant for executive queries">
           <ManagerAIChatbotPage />
+        </AppShell>
+      </ProtectedRoute>
+    );
+  }
+
+  if (currentHash.startsWith('#/manager/integrations')) {
+    return (
+      <ProtectedRoute allowedRoles={['MANAGER']}>
+        <AppShell currentPath={currentHash} pageTitle="Enterprise Integrations Hub" pageSubtitle="Whisper, Telegram, WhatsApp, and Cloud infrastructure">
+          <IntegrationsPage />
         </AppShell>
       </ProtectedRoute>
     );
@@ -274,6 +297,16 @@ const Router: React.FC = () => {
       <ProtectedRoute allowedRoles={['STAFF']}>
         <AppShell currentPath={currentHash} pageTitle="Staff AI Assistant" pageSubtitle="Lead prioritization and conversation analysis">
           <StaffAIChatbotPage />
+        </AppShell>
+      </ProtectedRoute>
+    );
+  }
+
+  if (currentHash.startsWith('#/staff/integrations')) {
+    return (
+      <ProtectedRoute allowedRoles={['STAFF']}>
+        <AppShell currentPath={currentHash} pageTitle="AI & Communication Integrations" pageSubtitle="Whisper Audio, Telegram Bot, WhatsApp API, and Cloud Infrastructure">
+          <IntegrationsPage />
         </AppShell>
       </ProtectedRoute>
     );

@@ -65,7 +65,7 @@ export const LoginPage: React.FC = () => {
       {/* LEFT SIDE: Brand Hero & AI Value Proposition */}
       <div
         style={{
-          background: 'radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.18), transparent 70%), radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.18), transparent 70%), var(--bg-surface)',
+          background: 'radial-gradient(circle at 20% 30%, rgba(79, 242, 176, 0.12), transparent 70%), radial-gradient(circle at 80% 80%, rgba(32, 201, 151, 0.10), transparent 70%), var(--bg-surface)',
           borderRight: '1px solid var(--border-subtle)',
           padding: '3.5rem 3rem',
           display: 'flex',
@@ -77,31 +77,29 @@ export const LoginPage: React.FC = () => {
       >
         <div>
           {/* Logo */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '3rem' }}>
-            <div
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', marginBottom: '3rem' }}>
+            <img
+              src="/logo.png"
+              alt="LeadIQ Logo"
               style={{
-                width: '44px',
-                height: '44px',
-                borderRadius: 'var(--radius-md)',
-                background: 'var(--brand-gradient)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#ffffff',
-                boxShadow: '0 6px 20px rgba(59, 130, 246, 0.45)'
+                width: '52px',
+                height: '52px',
+                borderRadius: '12px',
+                objectFit: 'contain',
+                backgroundColor: '#06110F',
+                boxShadow: '0 4px 18px rgba(79, 242, 176, 0.35)',
+                border: '1px solid rgba(79, 242, 176, 0.3)'
               }}
-            >
-              <Sparkles size={24} />
-            </div>
+            />
             <div>
               <div style={{ fontSize: '1.4rem', fontWeight: 800, letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <span>Lead-IQ</span>
-                <span style={{ fontSize: '0.7rem', padding: '0.15rem 0.45rem', borderRadius: '4px', background: 'var(--brand-primary-light)', color: 'var(--brand-primary)', fontWeight: 700 }}>
-                  INDIA
+                <span>LeadIQ</span>
+                <span style={{ fontSize: '0.68rem', padding: '0.15rem 0.45rem', borderRadius: '4px', background: 'var(--brand-primary-light)', color: 'var(--brand-primary)', fontWeight: 700 }}>
+                  AI
                 </span>
               </div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                Next-Gen AI Lead Intelligence & CRM Platform
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', letterSpacing: '0.04em' }}>
+                Find. Prioritize. Convert.
               </div>
             </div>
           </div>
@@ -122,7 +120,7 @@ export const LoginPage: React.FC = () => {
           </h2>
 
           <p style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.6, maxWidth: '480px', marginBottom: '2.5rem' }}>
-            Lead-IQ empowers Indian enterprise sales teams with real-time Whisper speech transcription, predictive conversion scoring, and automated multi-channel follow-ups.
+            LeadIQ empowers Indian enterprise sales teams with real-time Whisper speech transcription, predictive conversion scoring, and automated multi-channel follow-ups.
           </p>
 
           {/* Testimonial & Value Highlights */}
@@ -143,7 +141,7 @@ export const LoginPage: React.FC = () => {
                 <MessageSquareQuote size={16} />
                 <span>Enterprise Spotlight</span>
               </div>
-              "Lead-IQ helped our sales team in Pune and Mumbai prioritize high-value leads and significantly improve our follow-up process."
+              "LeadIQ helped our sales team in Pune and Mumbai prioritize high-value leads and significantly improve our follow-up process."
               <div style={{ fontWeight: 700, color: 'var(--text-primary)', marginTop: '0.5rem', fontSize: '0.78rem' }}>
                 — Priya Deshmukh, Head of Revenue Operations, Mumbai
               </div>
@@ -174,7 +172,7 @@ export const LoginPage: React.FC = () => {
 
         {/* Footer Security Badging */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '2rem' }}>
-          <ShieldCheck size={16} style={{ color: '#10b981' }} />
+          <ShieldCheck size={16} style={{ color: 'var(--brand-primary)' }} />
           <span>GST Ready • AWS Mumbai Cloud Data Residency • 3-Role Isolation</span>
         </div>
       </div>
@@ -197,7 +195,7 @@ export const LoginPage: React.FC = () => {
         <div style={{ width: '100%', maxWidth: '400px' }}>
           <div style={{ marginBottom: '2rem' }}>
             <h3 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em', marginBottom: '0.35rem' }}>
-              Sign in to Lead-IQ
+              Sign in to LeadIQ
             </h3>
             <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
               Enter your corporate credentials. Role is detected automatically.

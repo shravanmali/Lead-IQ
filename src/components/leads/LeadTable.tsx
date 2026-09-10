@@ -20,25 +20,25 @@ export const LeadTable: React.FC<LeadTableProps> = ({
 }) => {
   if (leads.length === 0) {
     return (
-      <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
+      <div style={{ textAlign: 'center', padding: '3.5rem 2rem', color: 'var(--text-muted)' }}>
         No matching leads found for current filter criteria.
       </div>
     );
   }
 
   return (
-    <div className="table-container">
-      <table className="table-custom">
+    <div className="table-container" style={{ overflowX: 'auto' }}>
+      <table className="table-custom" style={{ width: '100%', borderCollapse: 'collapse' }}>
         <thead>
           <tr>
-            {highlightTopLead && <th style={{ width: '110px' }}>Priority</th>}
-            <th>Lead Name & Company</th>
-            <th>Location & Contact</th>
-            <th>Pipeline Status</th>
-            <th>AI Predictive Score</th>
-            <th>Assigned Staff</th>
-            <th>Est. Deal Value</th>
-            <th>Next Action</th>
+            {highlightTopLead && <th style={{ width: '90px' }}>Rank</th>}
+            <th>Lead & Organization</th>
+            <th>Contact & City</th>
+            <th>Status</th>
+            <th>AI Score</th>
+            <th>Account Owner</th>
+            <th>Deal Size</th>
+            <th>Recommended Action</th>
             <th style={{ textAlign: 'right' }}>Actions</th>
           </tr>
         </thead>
@@ -50,17 +50,19 @@ export const LeadTable: React.FC<LeadTableProps> = ({
               <tr
                 key={lead.id}
                 style={{
-                  backgroundColor: isTop1 ? 'var(--brand-primary-light)' : undefined
+                  backgroundColor: isTop1 ? 'rgba(79, 242, 176, 0.06)' : undefined,
+                  borderLeft: isTop1 ? '3px solid var(--brand-primary)' : undefined,
+                  transition: 'background-color var(--transition-fast)'
                 }}
               >
                 {highlightTopLead && (
                   <td>
                     {isTop1 ? (
-                      <span className="badge badge-ai-priority">
-                        #1 PRIORITY
+                      <span className="badge" style={{ backgroundColor: 'rgba(79, 242, 176, 0.15)', color: 'var(--brand-primary)', fontWeight: 700, fontSize: '0.68rem' }}>
+                        #1 HOT
                       </span>
                     ) : (
-                      <span style={{ fontSize: '0.8125rem', fontWeight: 700, color: 'var(--text-muted)', paddingLeft: '0.5rem' }}>
+                      <span style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-muted)', paddingLeft: '0.25rem' }}>
                         #{idx + 1}
                       </span>
                     )}
@@ -69,55 +71,55 @@ export const LeadTable: React.FC<LeadTableProps> = ({
 
                 <td>
                   <div>
-                    <div style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.9375rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                       <span>{lead.name}</span>
                       {lead.telegramUsername && (
                         <span title={`Telegram: @${lead.telegramUsername}`} style={{ color: 'var(--brand-secondary)' }}>
-                          <Send size={12} />
+                          <Send size={11} />
                         </span>
                       )}
                     </div>
-                    <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '1px' }}>
                       {lead.title} • <strong style={{ color: 'var(--text-primary)' }}>{lead.company}</strong>
                     </div>
                   </div>
                 </td>
 
                 <td>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.78rem', color: 'var(--text-primary)', fontWeight: 600 }}>
-                    <MapPin size={12} style={{ color: 'var(--brand-primary)' }} />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.78rem', color: 'var(--text-primary)', fontWeight: 500 }}>
+                    <MapPin size={11} style={{ color: 'var(--brand-primary)' }} />
                     <span>{lead.country}</span>
                   </div>
-                  <div style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)' }}>{lead.phone}</div>
+                  <div style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>{lead.phone}</div>
                 </td>
 
                 <td>
-                  <LeadStatusBadge status={lead.status} />
+                  <LeadStatusBadge status={lead.status} size="sm" />
                 </td>
 
                 <td>
-                  <LeadScoreBadge score={lead.score} />
+                  <LeadScoreBadge score={lead.score} size="sm" />
                 </td>
 
                 <td>
-                  <div style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                  <div style={{ fontSize: '0.8125rem', fontWeight: 500, color: 'var(--text-primary)' }}>
                     {lead.assignedStaffName}
                   </div>
-                  <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
                     {lead.lastContact}
                   </div>
                 </td>
 
                 <td>
-                  <span style={{ fontWeight: 800, color: 'var(--text-primary)', fontSize: '0.875rem' }}>
+                  <span style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.875rem' }}>
                     {formatINR(lead.dealValue)}
                   </span>
                 </td>
 
-                <td style={{ maxWidth: '200px' }}>
+                <td style={{ maxWidth: '180px' }}>
                   <div
                     style={{
-                      fontSize: '0.8125rem',
+                      fontSize: '0.78rem',
                       color: 'var(--text-secondary)',
                       whiteSpace: 'nowrap',
                       overflow: 'hidden',
@@ -130,27 +132,27 @@ export const LeadTable: React.FC<LeadTableProps> = ({
                 </td>
 
                 <td style={{ textAlign: 'right' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '0.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '0.4rem' }}>
                     {onCallLead && (
                       <button
                         onClick={() => onCallLead(lead)}
                         className="btn btn-primary btn-sm"
-                        style={{ padding: '0.35rem 0.65rem' }}
+                        style={{ padding: '0.3rem 0.6rem', fontSize: '0.75rem' }}
                         title="Start AI Simulated Call"
                       >
-                        <Phone size={13} />
+                        <Phone size={12} />
                         <span>Call</span>
                       </button>
                     )}
 
                     <button
                       onClick={() => onSelectLead(lead)}
-                      className="btn-secondary btn-sm"
-                      style={{ padding: '0.35rem 0.65rem' }}
+                      className="btn btn-secondary btn-sm"
+                      style={{ padding: '0.3rem 0.6rem', fontSize: '0.75rem' }}
                       title="View Complete Lead Profile"
                     >
-                      <span>Profile</span>
-                      <ArrowRight size={13} />
+                      <span>Dossier</span>
+                      <ArrowRight size={12} />
                     </button>
                   </div>
                 </td>

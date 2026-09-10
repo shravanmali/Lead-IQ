@@ -14,7 +14,8 @@ import {
   AlertTriangle,
   CheckCircle2,
   Cpu,
-  Layers
+  Layers,
+  Zap
 } from 'lucide-react';
 
 export const ManagerAIPredictionPage: React.FC = () => {
@@ -47,57 +48,59 @@ export const ManagerAIPredictionPage: React.FC = () => {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       {/* Header Banner */}
       <div
+        className="glass-panel"
         style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '1.5rem',
-          background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(59, 130, 246, 0.12) 100%)',
+          padding: '1.5rem 1.75rem',
           borderRadius: 'var(--radius-lg)',
-          border: '1px solid rgba(139, 92, 246, 0.3)',
           flexWrap: 'wrap',
-          gap: '1rem'
+          gap: '1rem',
+          position: 'relative',
+          overflow: 'hidden'
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', zIndex: 1 }}>
           <div
             style={{
               width: '48px',
               height: '48px',
               borderRadius: 'var(--radius-md)',
-              background: 'linear-gradient(135deg, var(--brand-secondary) 0%, var(--brand-primary) 100%)',
-              color: 'white',
+              background: 'linear-gradient(135deg, rgba(79, 242, 176, 0.2) 0%, rgba(32, 201, 151, 0.1) 100%)',
+              border: '2px solid rgba(79, 242, 176, 0.4)',
+              color: 'var(--brand-primary)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 4px 16px rgba(139, 92, 246, 0.4)'
+              boxShadow: '0 0 16px rgba(79, 242, 176, 0.2)'
             }}
           >
             <Brain size={26} />
           </div>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '4px' }}>
-              <h2 style={{ fontSize: '1.45rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '4px' }}>
+              <h2 style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
                 AI Revenue Forecasting & Predictive Intelligence
               </h2>
-              <span className="badge badge-ai-priority" style={{ fontSize: '0.7rem' }}>
+              <span className="badge" style={{ backgroundColor: 'rgba(79, 242, 176, 0.12)', color: 'var(--brand-primary)', fontSize: '0.7rem' }}>
                 Active Neural Model
               </span>
             </div>
-            <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', margin: 0 }}>
+            <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', margin: 0 }}>
               Continuous multi-factor revenue projection modeled from call transcripts, lead score momentum, and historical closing velocity.
             </p>
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8125rem', color: 'var(--brand-secondary)', fontWeight: 700 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8125rem', color: 'var(--brand-primary)', fontWeight: 700, zIndex: 1 }}>
           <Cpu size={16} />
           <span>Model Accuracy: {summary.confidencePercent}%</span>
         </div>
       </div>
 
       {/* 4 CORE PREDICTION METRICS */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))', gap: '1.25rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))', gap: '1rem' }}>
         <KPICard
           title="Predicted 90-Day Revenue"
           value={formatINR(summary.predictedTotal)}
@@ -112,7 +115,7 @@ export const ManagerAIPredictionPage: React.FC = () => {
           icon={ShieldCheck}
         />
         <KPICard
-          title="Expected Revenue Expansion"
+          title="Revenue Expansion"
           value={`+${formatINR(summary.predictedTotal - summary.currentTotal)}`}
           subtitle={`+${summary.expectedGrowthPercent}% over 90 days`}
           icon={Sparkles}
@@ -126,24 +129,24 @@ export const ManagerAIPredictionPage: React.FC = () => {
       </div>
 
       {/* LARGE AI PREDICTION TIMELINE CHART */}
-      <div className="card" style={{ padding: '2rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
+      <div className="glass-panel" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.875rem' }}>
           <div>
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
               AI Predictive Revenue Curve (+7, +30, +60, +90 Days)
             </h3>
-            <p style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', margin: 0 }}>
+            <p style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', margin: '0.2rem 0 0' }}>
               Continuous Bayesian timeline showing historical baseline and projected pipeline realization
             </p>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#3b82f6' }} />
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#60736C' }} />
               <span>Historical Actual</span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.78rem', color: 'var(--brand-secondary)', fontWeight: 600 }}>
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#8b5cf6' }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.78rem', color: 'var(--brand-primary)', fontWeight: 600 }}>
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--brand-primary)' }} />
               <span>AI Predicted Trajectory</span>
             </div>
           </div>
@@ -155,21 +158,21 @@ export const ManagerAIPredictionPage: React.FC = () => {
       {/* AI FORECAST INSIGHT CARD & GROWTH DRIVERS */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))', gap: '1.5rem' }}>
         {/* AI Forecast Insight */}
-        <div className="card card-glow" style={{ padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Sparkles size={20} style={{ color: 'var(--brand-primary)' }} />
-            <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+        <div className="glass-panel" style={{ padding: '1.75rem', borderRadius: 'var(--radius-lg)', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.75rem' }}>
+            <Sparkles size={18} style={{ color: 'var(--brand-primary)' }} />
+            <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
               AI Executive Forecast Insight
             </h4>
           </div>
 
           <blockquote
+            className="glass-card"
             style={{
               padding: '1rem 1.25rem',
-              backgroundColor: 'var(--brand-primary-light)',
               borderRadius: 'var(--radius-md)',
               borderLeft: '4px solid var(--brand-primary)',
-              fontSize: '0.92rem',
+              fontSize: '0.875rem',
               lineHeight: 1.6,
               color: 'var(--text-primary)',
               margin: 0
@@ -179,13 +182,13 @@ export const ManagerAIPredictionPage: React.FC = () => {
           </blockquote>
 
           <div>
-            <div style={{ fontSize: '0.8125rem', fontWeight: 700, color: '#10b981', display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.5rem' }}>
-              <CheckCircle2 size={16} />
+            <div style={{ fontSize: '0.8125rem', fontWeight: 700, color: 'var(--brand-primary)', display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.5rem' }}>
+              <CheckCircle2 size={15} />
               <span>Primary Growth Catalysts Identified:</span>
             </div>
             <ul style={{ paddingLeft: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.35rem', margin: 0 }}>
               {summary.growthDrivers.map((driver, i) => (
-                <li key={i} style={{ fontSize: '0.84rem', color: 'var(--text-secondary)' }}>
+                <li key={i} style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
                   {driver}
                 </li>
               ))}
@@ -194,11 +197,11 @@ export const ManagerAIPredictionPage: React.FC = () => {
         </div>
 
         {/* Risk Factors & Recommendations */}
-        <div className="card" style={{ padding: '1.75rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '1.25rem' }}>
+        <div className="glass-panel" style={{ padding: '1.75rem', borderRadius: 'var(--radius-lg)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '1.25rem' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem' }}>
-              <AlertTriangle size={20} style={{ color: '#f59e0b' }} />
-              <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.75rem' }}>
+              <AlertTriangle size={18} style={{ color: '#eab308' }} />
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
                 Model Risk Factors & Watchlist
               </h4>
             </div>
@@ -207,12 +210,11 @@ export const ManagerAIPredictionPage: React.FC = () => {
               {summary.risks.map((risk, i) => (
                 <div
                   key={i}
+                  className="glass-card"
                   style={{
                     padding: '0.875rem 1rem',
                     borderRadius: 'var(--radius-md)',
-                    backgroundColor: 'var(--bg-surface-elevated)',
-                    border: '1px solid var(--border-subtle)',
-                    fontSize: '0.84rem',
+                    fontSize: '0.8125rem',
                     color: 'var(--text-secondary)'
                   }}
                 >
@@ -226,16 +228,16 @@ export const ManagerAIPredictionPage: React.FC = () => {
           </div>
 
           <div
+            className="glass-card"
             style={{
               padding: '0.875rem 1rem',
               borderRadius: 'var(--radius-md)',
-              backgroundColor: 'var(--bg-surface-elevated)',
-              border: '1px solid var(--border-medium)',
-              fontSize: '0.8125rem',
-              color: 'var(--text-muted)'
+              border: '1px solid rgba(79, 242, 176, 0.2)',
+              fontSize: '0.78rem',
+              color: 'var(--text-secondary)'
             }}
           >
-            <strong>Manager Action Item:</strong> Instruct Staff to follow up with Rahul Sharma (Shree Enterprises) and Priya Deshmukh (Maharashtra Business Solutions) to lock in ₹7,25,000 in early Q4 commits.
+            <strong style={{ color: 'var(--brand-primary)' }}>Manager Action Item:</strong> Instruct Staff to follow up with Rahul Sharma (Shree Enterprises) and Priya Deshmukh (Maharashtra Business Solutions) to lock in ₹7,25,000 in early Q4 commits.
           </div>
         </div>
       </div>

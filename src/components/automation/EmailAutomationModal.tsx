@@ -108,16 +108,18 @@ export const EmailAutomationModal: React.FC<EmailAutomationModalProps> = ({
         </>
       }
     >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
         <div
           style={{
-            padding: '0.75rem 1rem',
-            backgroundColor: 'var(--brand-primary-light)',
+            padding: '0.875rem 1rem',
+            backgroundColor: 'rgba(79, 242, 176, 0.08)',
             borderRadius: 'var(--radius-md)',
-            border: '1px solid rgba(59, 130, 246, 0.25)',
+            border: '1px solid rgba(79, 242, 176, 0.22)',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '0.5rem'
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8125rem', color: 'var(--brand-primary)' }}>
@@ -127,8 +129,8 @@ export const EmailAutomationModal: React.FC<EmailAutomationModalProps> = ({
           <button
             onClick={handleRegenerate}
             disabled={isRegenerating}
-            className="btn-ghost btn-sm"
-            style={{ color: 'var(--brand-primary)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}
+            className="btn btn-secondary btn-sm"
+            style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.75rem' }}
           >
             <RefreshCw size={13} className={isRegenerating ? 'animate-spin' : ''} />
             <span>Regenerate</span>
@@ -136,7 +138,7 @@ export const EmailAutomationModal: React.FC<EmailAutomationModalProps> = ({
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
+          <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.45rem' }}>
             Recipient (To)
           </label>
           <input
@@ -149,7 +151,7 @@ export const EmailAutomationModal: React.FC<EmailAutomationModalProps> = ({
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
+          <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.45rem' }}>
             Subject Line
           </label>
           <input
@@ -161,14 +163,14 @@ export const EmailAutomationModal: React.FC<EmailAutomationModalProps> = ({
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
+          <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.45rem' }}>
             Message Body
           </label>
           <textarea
             rows={8}
             value={body}
             onChange={e => setBody(e.target.value)}
-            style={{ width: '100%', resize: 'vertical', lineHeight: 1.5 }}
+            style={{ width: '100%', resize: 'vertical', lineHeight: 1.55 }}
           />
         </div>
       </div>

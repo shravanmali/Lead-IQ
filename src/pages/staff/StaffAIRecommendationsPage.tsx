@@ -8,7 +8,7 @@ import { LoadingState } from '../../components/common/LoadingState';
 import { EmailAutomationModal } from '../../components/automation/EmailAutomationModal';
 import { TelegramAutomationModal } from '../../components/automation/TelegramAutomationModal';
 import { useToast } from '../../context/ToastContext';
-import { Sparkles, Mail, Send, CheckCircle2, ArrowRight, Clock } from 'lucide-react';
+import { Sparkles, Mail, Send, CheckCircle2, ArrowRight, Clock, Zap, MessageSquare } from 'lucide-react';
 
 export const StaffAIRecommendationsPage: React.FC = () => {
   const { user } = useAuth();
@@ -63,13 +63,28 @@ export const StaffAIRecommendationsPage: React.FC = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
-      <div>
-        <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
-          AI Recommended Follow-Up Actions
-        </h2>
-        <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', margin: 0 }}>
-          Automated multi-channel proposals synthesized directly from your call transcripts
-        </p>
+      {/* Header Panel */}
+      <div className="glass-panel" style={{ padding: '1.25rem 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', marginBottom: '0.25rem' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(79, 242, 176, 0.12)', border: '1px solid rgba(79, 242, 176, 0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--brand-primary)' }}>
+              <Zap size={18} />
+            </div>
+            <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
+              AI Recommended Follow-Up Actions
+            </h2>
+          </div>
+          <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', margin: 0, paddingLeft: '2.625rem' }}>
+            Multi-channel proposals synthesized directly from your call transcripts with tailored Indian business proposals
+          </p>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div className="glass-card" style={{ padding: '0.4rem 0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem' }}>
+            <span style={{ color: 'var(--text-muted)' }}>Action Queue:</span>
+            <span style={{ color: 'var(--brand-primary)', fontWeight: 800, fontFamily: 'var(--font-mono)' }}>{calls.length}</span>
+          </div>
+        </div>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '1.5rem' }}>
@@ -81,7 +96,7 @@ export const StaffAIRecommendationsPage: React.FC = () => {
           return (
             <div
               key={call.id}
-              className="card card-glow"
+              className="glass-card"
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -91,9 +106,9 @@ export const StaffAIRecommendationsPage: React.FC = () => {
               }}
             >
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-                  <div style={{ fontWeight: 800, fontSize: '1.15rem', color: 'var(--text-primary)' }}>
-                    {call.leadName} ({lead?.company || 'Enterprise'})
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.875rem' }}>
+                  <div style={{ fontWeight: 800, fontSize: '1.15rem', color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>
+                    {call.leadName} <span style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-muted)' }}>({lead?.company || 'Enterprise'})</span>
                   </div>
                   <span className="badge badge-hot" style={{ fontSize: '0.72rem' }}>
                     High Priority
@@ -103,9 +118,9 @@ export const StaffAIRecommendationsPage: React.FC = () => {
                 <div
                   style={{
                     padding: '0.875rem 1rem',
-                    backgroundColor: 'var(--brand-primary-light)',
+                    backgroundColor: 'rgba(79, 242, 176, 0.08)',
                     borderRadius: 'var(--radius-md)',
-                    border: '1px solid rgba(59, 130, 246, 0.25)',
+                    border: '1px solid rgba(79, 242, 176, 0.22)',
                     fontSize: '0.84rem',
                     color: 'var(--text-primary)',
                     marginBottom: '1rem'
@@ -115,30 +130,33 @@ export const StaffAIRecommendationsPage: React.FC = () => {
                     <Sparkles size={15} />
                     <span>{rec.title}</span>
                   </div>
-                  {rec.reason}
+                  <div style={{ color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                    {rec.reason}
+                  </div>
                 </div>
 
                 {/* Email Draft Preview */}
                 <div
                   style={{
-                    padding: '0.75rem',
-                    backgroundColor: 'var(--bg-surface-elevated)',
+                    padding: '0.75rem 1rem',
+                    backgroundColor: 'rgba(255, 255, 255, 0.02)',
                     borderRadius: 'var(--radius-md)',
                     border: '1px solid var(--border-subtle)',
-                    fontSize: '0.78rem',
+                    fontSize: '0.8rem',
                     color: 'var(--text-muted)'
                   }}
                 >
-                  <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '2px' }}>
-                    Subject: {rec.generatedContent.subject}
+                  <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                    <Mail size={13} style={{ color: 'var(--brand-primary)' }} />
+                    <span>Subject: {rec.generatedContent.subject}</span>
                   </div>
-                  <div style={{ maxHeight: '60px', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <div style={{ maxHeight: '60px', overflow: 'hidden', textOverflow: 'ellipsis', lineHeight: 1.45, color: 'var(--text-secondary)' }}>
                     {rec.generatedContent.body.slice(0, 160)}...
                   </div>
                 </div>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--border-subtle)', paddingTop: '1rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--border-subtle)', paddingTop: '1rem', marginTop: '0.25rem' }}>
                 <div style={{ display: 'flex', gap: '0.625rem', flexWrap: 'wrap' }}>
                   <button onClick={() => handleOpenEmail(call)} className="btn btn-primary btn-sm">
                     <Mail size={14} />
@@ -155,7 +173,7 @@ export const StaffAIRecommendationsPage: React.FC = () => {
                   </button>
                 </div>
 
-                <a href={`#/staff/leads/${call.leadId}`} className="btn-ghost btn-sm" style={{ color: 'var(--brand-primary)' }}>
+                <a href={`#/staff/leads/${call.leadId}`} className="btn-ghost btn-sm" style={{ color: 'var(--brand-primary)', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
                   <span>Dossier</span>
                   <ArrowRight size={13} />
                 </a>

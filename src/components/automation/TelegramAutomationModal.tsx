@@ -87,26 +87,26 @@ export const TelegramAutomationModal: React.FC<TelegramAutomationModalProps> = (
         </>
       }
     >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
         <div
           style={{
-            padding: '0.75rem 1rem',
-            backgroundColor: 'rgba(139, 92, 246, 0.12)',
+            padding: '0.875rem 1rem',
+            backgroundColor: 'rgba(79, 242, 176, 0.08)',
             borderRadius: 'var(--radius-md)',
-            border: '1px solid rgba(139, 92, 246, 0.25)',
+            border: '1px solid rgba(79, 242, 176, 0.22)',
             display: 'flex',
             alignItems: 'center',
             gap: '0.5rem',
             fontSize: '0.8125rem',
-            color: 'var(--brand-secondary)'
+            color: 'var(--brand-primary)'
           }}
         >
           <Sparkles size={16} />
-          <span>Telegram handle detected from Whisper call transcription (@{username})</span>
+          <span>Telegram handle detected from Whisper call transcription (@{username || 'prospect'})</span>
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
+          <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.45rem' }}>
             Telegram Handle (@username)
           </label>
           <input
@@ -119,14 +119,14 @@ export const TelegramAutomationModal: React.FC<TelegramAutomationModalProps> = (
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
+          <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.45rem' }}>
             Telegram Message Content
           </label>
           <textarea
             rows={5}
             value={body}
             onChange={e => setBody(e.target.value)}
-            style={{ width: '100%', resize: 'vertical', lineHeight: 1.5 }}
+            style={{ width: '100%', resize: 'vertical', lineHeight: 1.55 }}
           />
         </div>
       </div>

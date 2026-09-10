@@ -6,7 +6,7 @@ import { CreateUserModal } from '../../components/admin/CreateUserModal';
 import { DeleteConfirmationModal } from '../../components/admin/DeleteConfirmationModal';
 import { LoadingState } from '../../components/common/LoadingState';
 import { useToast } from '../../context/ToastContext';
-import { UserPlus, Search, Filter } from 'lucide-react';
+import { UserPlus, Search, Users, ShieldCheck } from 'lucide-react';
 
 export const AdminUsersPage: React.FC = () => {
   const { showToast } = useToast();
@@ -66,9 +66,35 @@ export const AdminUsersPage: React.FC = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      {/* Header Panel */}
+      <div className="glass-panel" style={{ padding: '1.25rem 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', marginBottom: '0.25rem' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(79, 242, 176, 0.12)', border: '1px solid rgba(79, 242, 176, 0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--brand-primary)' }}>
+              <Users size={18} />
+            </div>
+            <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
+              User & Access Directory
+            </h2>
+          </div>
+          <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', margin: 0, paddingLeft: '2.625rem' }}>
+            Manage corporate identities, assign RBAC permissions, and provision CRM credentials
+          </p>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <button onClick={() => setIsCreateModalOpen(true)} className="btn btn-primary">
+            <UserPlus size={16} />
+            <span>Create User</span>
+          </button>
+        </div>
+      </div>
+
       {/* Controls & Filter Header */}
       <div
+        className="glass-panel"
         style={{
+          padding: '0.875rem 1.25rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -86,7 +112,7 @@ export const AdminUsersPage: React.FC = () => {
               type="text"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              placeholder="Search by name or email..."
+              placeholder="Search by name, email, or role..."
               style={{ width: '100%', paddingLeft: '2.25rem' }}
             />
           </div>
@@ -105,14 +131,13 @@ export const AdminUsersPage: React.FC = () => {
           </div>
         </div>
 
-        <button onClick={() => setIsCreateModalOpen(true)} className="btn btn-primary">
-          <UserPlus size={16} />
-          <span>Create User</span>
-        </button>
+        <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+          Showing {filteredUsers.length} of {users.length} accounts
+        </div>
       </div>
 
       {/* User Table Card */}
-      <div className="card">
+      <div className="glass-panel" style={{ padding: '0.5rem' }}>
         <UserTable
           users={filteredUsers}
           onDeleteClick={u => setUserToDelete(u)}
