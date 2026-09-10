@@ -596,60 +596,36 @@ input:focus, select:focus, textarea:focus {
 /* --------------------------------------------------------------------------
    LEADIQ AI MASCOT & FLOATING CHATBOT
    -------------------------------------------------------------------------- */
-.mascot-btn-trigger {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 64px;
-  height: 64px;
-  border-radius: 20px;
-  padding: 0;
-  border: 1.5px solid rgba(79, 242, 176, 0.32);
-  background: rgba(7, 24, 19, 0.75);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.38), 0 0 20px rgba(79, 242, 176, 0.18);
-  cursor: pointer;
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+.mascot-photo-btn {
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.light .mascot-btn-trigger {
-  border: 1.5px solid rgba(16, 185, 129, 0.38);
-  background: rgba(255, 255, 255, 0.88);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12), 0 0 18px rgba(16, 185, 129, 0.16);
-}
-
-.mascot-btn-trigger:hover {
+.mascot-photo-btn:hover {
   transform: scale(1.06);
-  border-color: rgba(79, 242, 176, 0.65);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45), 0 0 28px rgba(79, 242, 176, 0.35);
+  border-color: rgba(79, 242, 176, 0.7) !important;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.55), 0 0 32px rgba(79, 242, 176, 0.35) !important;
 }
 
-.light .mascot-btn-trigger:hover {
-  border-color: #10B981;
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.15), 0 0 24px rgba(16, 185, 129, 0.28);
+.light .mascot-photo-btn:hover {
+  border-color: #10B981 !important;
+  box-shadow: 0 14px 36px rgba(16, 185, 129, 0.28), 0 2px 10px rgba(0, 0, 0, 0.1) !important;
 }
 
-.mascot-btn-trigger:active {
-  transform: scale(0.98);
+.mascot-photo-btn:active {
+  transform: scale(0.96);
 }
 
 .mascot-online-dot {
   position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 9px;
-  height: 9px;
+  top: 3px;
+  right: 3px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background-color: #10B981;
-  border: 1.5px solid #06110F;
+  border: 2px solid #06110F;
   box-shadow: 0 0 8px #10B981;
   animation: subtlePulse 2.5s infinite;
   z-index: 10;
@@ -665,7 +641,7 @@ input:focus, select:focus, textarea:focus {
     opacity: 1;
   }
   50% {
-    transform: scale(1.2);
+    transform: scale(1.25);
     opacity: 0.85;
   }
 }
@@ -701,51 +677,38 @@ input:focus, select:focus, textarea:focus {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 0 12px rgba(16, 185, 129, 0.12);
 }
 
-.mascot-panel-anim {
-  animation: panelSlideUp 0.24s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes panelSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(14px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
 @media (max-width: 640px) {
-  .mascot-btn-trigger {
-    width: 56px;
-    height: 56px;
-    bottom: 16px;
-    right: 16px;
-    border-radius: 18px;
+  .mascot-photo-btn {
+    width: 56px !important;
+    height: 56px !important;
   }
 
-  .floating-chat-window-responsive {
-    position: fixed !important;
+  .mascot-slide-panel {
+    top: 0 !important;
     bottom: 0 !important;
     right: 0 !important;
     left: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
-    height: min(85vh, 700px) !important;
-    max-height: 85vh !important;
-    border-radius: 24px 24px 0 0 !important;
+    height: 100vh !important;
+    border-radius: 0 !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .mascot-slide-panel {
+    width: 40vw !important;
+    min-width: 360px !important;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mascot-btn-trigger,
-  .mascot-panel-anim,
-  .mascot-online-dot,
-  .mascot-avatar-wrapper {
+  .mascot-photo-btn,
+  .mascot-slide-panel,
+  .mascot-online-dot {
     animation: none !important;
     transition: none !important;
-    transform: none !important;
   }
 }
+
 

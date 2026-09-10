@@ -26,12 +26,28 @@ export const AIMessageItem: React.FC<{ message: ChatMessage }> = ({ message }) =
     >
       {/* Avatar */}
       {isAI ? (
-        <MascotAvatar size={30} borderRadius="10px" showGlow={false} />
+        <div
+          style={{
+            width: '32px',
+            height: '32px',
+            borderRadius: '50%',
+            overflow: 'hidden',
+            flexShrink: 0,
+            border: isLight ? '1.5px solid rgba(16, 185, 129, 0.35)' : '1.5px solid rgba(79, 242, 176, 0.35)',
+            boxShadow: isLight ? '0 2px 6px rgba(16, 185, 129, 0.15)' : '0 2px 8px rgba(79, 242, 176, 0.2)'
+          }}
+        >
+          <img
+            src="/assets/mascot-photo.jpg"
+            alt="AI"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        </div>
       ) : (
         <div
           style={{
-            width: '30px',
-            height: '30px',
+            width: '32px',
+            height: '32px',
             borderRadius: '50%',
             backgroundColor: isLight ? '#F1F5F9' : 'rgba(255, 255, 255, 0.08)',
             color: 'var(--text-secondary)',
@@ -39,7 +55,7 @@ export const AIMessageItem: React.FC<{ message: ChatMessage }> = ({ message }) =
             alignItems: 'center',
             justifyContent: 'center',
             flexShrink: 0,
-            border: isLight ? '1px solid #E2E8F0' : 'none'
+            border: isLight ? '1px solid #E2E8F0' : '1px solid rgba(255, 255, 255, 0.1)'
           }}
         >
           <UserIcon size={15} />
