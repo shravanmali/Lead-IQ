@@ -5,6 +5,8 @@ import { RevenueLineChart } from '../../components/charts/RevenueLineChart';
 import { RevenueBarChart } from '../../components/charts/RevenueBarChart';
 import { DistributionPieChart } from '../../components/charts/DistributionPieChart';
 import { KPICard } from '../../components/common/KPICard';
+import { RetentionKPICard } from '../../components/retention/RetentionKPICard';
+import { ManagerRetentionSection } from '../../components/retention/ManagerRetentionSection';
 import { LoadingState } from '../../components/common/LoadingState';
 import { useToast } from '../../context/ToastContext';
 import { formatINR } from '../../utils/formatters';
@@ -16,7 +18,8 @@ import {
   Calendar,
   Layers,
   Server,
-  Sparkles
+  Sparkles,
+  ShieldCheck
 } from 'lucide-react';
 
 export const ManagerRevenuePage: React.FC = () => {
@@ -84,7 +87,7 @@ export const ManagerRevenuePage: React.FC = () => {
   const totalTarget = timeline.reduce((acc, t) => acc + t.targetRevenue, 0);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2.25rem', maxWidth: '1440px', margin: '0 auto', width: '100%' }}>
       {/* Header Controls & Backend Endpoint Indicator */}
       <div
         className="glass-panel"
@@ -101,7 +104,7 @@ export const ManagerRevenuePage: React.FC = () => {
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.25rem' }}>
             <h2 style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
-              Enterprise Revenue Performance
+              Enterprise Analytics & Intelligence
             </h2>
             <span
               className="badge"
@@ -113,11 +116,11 @@ export const ManagerRevenuePage: React.FC = () => {
                 border: '1px solid var(--brand-primary-border)'
               }}
             >
-              LIVE FINANCIALS
+              LIVE ANALYTICS
             </span>
           </div>
           <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', margin: 0 }}>
-            Aggregated financials, staff contributions, and pipeline conversion analytics
+            Aggregated financials, cohort retention intelligence, and pipeline conversion analytics
           </p>
         </div>
 
@@ -166,7 +169,7 @@ export const ManagerRevenuePage: React.FC = () => {
         </div>
       </div>
 
-      {/* Revenue KPI Summary Strip */}
+      {/* KPI Summary Strip including Retention Rate */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
         <KPICard
           title="Recognized Revenue"
@@ -175,11 +178,12 @@ export const ManagerRevenuePage: React.FC = () => {
           icon={IndianRupee}
           glow
         />
-        <KPICard
-          title="Target Goal"
-          value={formatINR(totalTarget)}
-          trend={{ value: '108.6%', isPositive: true, label: 'target achievement' }}
-          icon={TrendingUp}
+        <RetentionKPICard
+          rate="78.4%"
+          trendPP="+4.2 pp"
+          retainedCount={392}
+          totalCount={500}
+          periodLabel="30-day retention"
         />
         <KPICard
           title="Average Deal Size"
@@ -194,6 +198,12 @@ export const ManagerRevenuePage: React.FC = () => {
           icon={Server}
         />
       </div>
+
+      {/* =================================================================== */}
+      {/* RETENTION INTELLIGENCE SECTION                                      */}
+      {/* Complete with Chart, AI Insights, Customers at Risk & 1-Click CTA   */}
+      {/* =================================================================== */}
+      <ManagerRetentionSection />
 
       {/* Main Interactive Revenue Chart */}
       <div className="glass-panel" style={{ padding: '1.75rem', borderRadius: 'var(--radius-lg)' }}>
@@ -246,3 +256,4 @@ export const ManagerRevenuePage: React.FC = () => {
     </div>
   );
 };
+

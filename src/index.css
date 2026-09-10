@@ -702,13 +702,19 @@ input:focus, select:focus, textarea:focus {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .mascot-photo-btn,
-  .mascot-slide-panel,
-  .mascot-online-dot {
-    animation: none !important;
-    transition: none !important;
+@media (max-width: 900px) {
+  .retention-grid-responsive {
+    grid-template-columns: 1fr !important;
   }
 }
+
+.table-row-hover:hover {
+  background-color: rgba(79, 242, 176, 0.04);
+}
+
+.light .table-row-hover:hover {
+  background-color: #F8FAF9;
+}
+
 
 
