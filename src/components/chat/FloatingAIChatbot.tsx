@@ -1,27 +1,23 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
-import { chatService, QUICK_PROMPTS } from '../../services/chatService';
+import { chatService } from '../../services/chatService';
 import { ChatMessage } from '../../types/chat';
 import { Role } from '../../types/auth';
 import { AIMessageItem } from './AIMessageItem';
+import { MascotAvatar } from './MascotAvatar';
 import {
-  Sparkles,
   Send,
   X,
   Minus,
   RotateCcw,
-  Bot,
-  MessageSquare,
-  Shield,
-  HelpCircle,
-  AlertCircle,
-  Zap,
-  CheckCircle2,
-  AlertTriangle
+  Sparkles,
+  Flame,
+  TrendingUp,
+  Target,
+  FileText,
+  ChevronDown
 } from 'lucide-react';
-
-type MascotState = 'IDLE' | 'LISTENING' | 'THINKING' | 'TALKING' | 'SUCCESS' | 'ERROR';
 
 export const FloatingAIChatbot: React.FC = () => {
   const { user, role } = useAuth();
@@ -31,33 +27,65 @@ export const FloatingAIChatbot: React.FC = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const [showConfirmNewChat, setShowConfirmNewChat] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [delayedPrompt, setDelayedPrompt] = useState(false);
   const [inputQuery, setInputQuery] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [mascotState, setMascotState] = useState<MascotState>('IDLE');
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  // Initial greeting
+  // Initial welcome message
   const [messages, setMessages] = useState<ChatMessage[]>(() => {
     return [
       {
         id: 'msg-welcome',
         sender: 'ai',
         timestamp: new Date().toISOString(),
-        content: "Hi! I'm LeadIQ AI, your sales copilot. Ask me anything about high-intent leads, pipeline health, or next actions.",
+        content: "Hi! I'm LeadIQ AI 👋\n\nI can help you find high-intent leads, understand your sales performance, and decide what to do next.",
         roleScope: currentRole
       }
     ];
   });
 
-  // Suggested Prompts
-  const suggestedPrompts = [
-    { label: '🔥 Top Leads to Contact', prompt: 'Which leads should I contact today?' },
-    { label: '📊 Conversion Drop Reasons', prompt: 'Why did conversions drop this week?' },
-    { label: '⚡ High-Intent Pipeline', prompt: 'Show me high-intent leads.' },
-    { label: '✉️ Follow-up Draft', prompt: 'Draft a follow-up for Rahul.' }
+  // Quick Action Suggestions
+  const quickActions = [
+    {
+      id: 'qa-1',
+      label: '🔥 Which leads should I contact today?',
+      prompt: 'Which leads should I contact today?',
+      icon: Flame
+    },
+    {
+      id: 'qa-2',
+      label: '📊 Why did my conversion rate change?',
+      prompt: 'Why did my conversion rate change?',
+      icon: TrendingUp
+    },
+    {
+      id: 'qa-3',
+      label: '🎯 Show high-intent leads',
+      prompt: 'Show me high-intent leads.',
+      icon: Target
+    },
+    {
+      id: 'qa-4',
+      label: '✍ Draft a follow-up',
+      prompt: 'Draft a follow-up for Rahul Sharma',
+      icon: FileText
+    }
   ];
+
+  // Delayed helpful nudge on closed state after 6s
+  useEffect(() => {
+    if (!isOpen) {
+      const timer = setTimeout(() => {
+        setDelayedPrompt(true);
+      }, 6000);
+      return () => clearTimeout(timer);
+    } else {
+      setDelayedPrompt(false);
+    }
+  }, [isOpen]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -69,10 +97,13 @@ export const FloatingAIChatbot: React.FC = () => {
     }
   }, [messages, isTyping, isOpen, isMinimized]);
 
-  // Focus input when chat opens
+  // Focus input when opened
   useEffect(() => {
     if (isOpen && !isMinimized) {
-      setTimeout(() => inputRef.current?.focus(), 150);
+      const timeout = setTimeout(() => {
+        inputRef.current?.focus();
+      }, 150);
+      return () => clearTimeout(timeout);
     }
   }, [isOpen, isMinimized]);
 
@@ -89,7 +120,7 @@ export const FloatingAIChatbot: React.FC = () => {
 
   const handleSend = async (textToSend?: string) => {
     const query = (textToSend || inputQuery).trim();
-    if (!query || !user) return;
+    if (!query || !user || isTyping) return;
 
     const userMessage: ChatMessage = {
       id: `msg-${Date.now()}`,
@@ -102,45 +133,48 @@ export const FloatingAIChatbot: React.FC = () => {
     setMessages(prev => [...prev, userMessage]);
     setInputQuery('');
     setIsTyping(true);
-    setMascotState('THINKING');
 
     try {
       const response = await chatService.sendQuery(query, currentRole, user);
-      setMascotState('TALKING');
       setMessages(prev => [...prev, response]);
-      setTimeout(() => setMascotState('IDLE'), 1200);
     } catch (err: any) {
-      setMascotState('ERROR');
       const errorMsg: ChatMessage = {
         id: `msg-err-${Date.now()}`,
         sender: 'ai',
         timestamp: new Date().toISOString(),
-        content: `Error generating response: ${err.message}`,
+        content: `Error generating AI response: ${err?.message || 'Please try again.'}`,
         roleScope: currentRole
       };
       setMessages(prev => [...prev, errorMsg]);
-      setTimeout(() => setMascotState('IDLE'), 2000);
     } finally {
       setIsTyping(false);
     }
   };
 
-  const handleNewChat = () => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  };
+
+  const handleResetChat = () => {
     setMessages([
       {
         id: `msg-${Date.now()}`,
         sender: 'ai',
         timestamp: new Date().toISOString(),
-        content: `Conversation reset. How can I assist you with your ${currentRole} workspace today?`,
+        content: "Hi! I'm LeadIQ AI 👋\n\nI can help you find high-intent leads, understand your sales performance, and decide what to do next.",
         roleScope: currentRole
       }
     ]);
-    setShowConfirmNewChat(false);
   };
 
   return (
     <>
-      {/* 1. FLOATING BUTTON */}
+      {/* =========================================================================
+          1. CLOSED STATE — FLOATING MASCOT TRIGGER BUTTON
+          ========================================================================= */}
       {!isOpen && (
         <div
           style={{
@@ -151,167 +185,106 @@ export const FloatingAIChatbot: React.FC = () => {
           }}
         >
           <button
-            onClick={() => setIsOpen(true)}
-            className="floating-ai-btn"
-            style={{
-              padding: '0.65rem 1.15rem 0.65rem 0.85rem',
-              borderRadius: 'var(--radius-full)',
-              background: isLight
-                ? '#FFFFFF'
-                : 'linear-gradient(135deg, #0B1C17 0%, #102620 100%)',
-              border: isLight
-                ? '1.5px solid #10B981'
-                : '1.5px solid rgba(79, 242, 176, 0.4)',
-              boxShadow: isLight
-                ? '0 6px 24px rgba(16, 185, 129, 0.2), 0 2px 8px rgba(0,0,0,0.06)'
-                : '0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(79, 242, 176, 0.25)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.75rem',
-              cursor: 'pointer',
-              transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
+            onClick={() => {
+              setIsOpen(true);
+              setIsMinimized(false);
+              setDelayedPrompt(false);
             }}
-            title="Open LeadIQ AI Assistant"
-            aria-label="Open LeadIQ AI Assistant"
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
+            className="mascot-btn-trigger"
+            aria-label="Open LeadIQ AI assistant"
+            title="Open LeadIQ AI assistant"
           >
-            {/* Pulsing Avatar */}
-            <div
-              style={{
-                width: '34px',
-                height: '34px',
-                borderRadius: '50%',
-                background: isLight
-                  ? 'linear-gradient(135deg, #10B981 0%, #059669 100%)'
-                  : 'linear-gradient(135deg, #4FF2B0 0%, #20C997 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: isLight ? '#FFFFFF' : '#06110F',
-                boxShadow: isLight
-                  ? '0 0 10px rgba(16, 185, 129, 0.4)'
-                  : '0 0 12px rgba(79, 242, 176, 0.45)',
-                position: 'relative',
-                flexShrink: 0
-              }}
-            >
-              <Bot size={18} />
-              <span
-                style={{
-                  position: 'absolute',
-                  top: '-1px',
-                  right: '-1px',
-                  width: '8px',
-                  height: '8px',
-                  borderRadius: '50%',
-                  backgroundColor: '#10B981',
-                  border: isLight ? '1.5px solid #FFFFFF' : '1.5px solid #06110F',
-                  boxShadow: '0 0 6px #10B981'
-                }}
-              />
-            </div>
-
-            <div style={{ textAlign: 'left' }}>
-              <div style={{ fontSize: '0.84rem', fontWeight: 700, color: isLight ? '#0B1324' : '#F4F7F6', letterSpacing: '-0.01em', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <span>LeadIQ AI</span>
-              </div>
-              <div style={{ fontSize: '0.68rem', color: 'var(--brand-primary)', fontWeight: 600 }}>
-                Sales Copilot
-              </div>
-            </div>
+            {/* 64px Squircle Animated Mascot */}
+            <MascotAvatar size="100%" borderRadius="20px" showGlow={false} showOnlineDot={true} />
           </button>
+
+          {/* Interactive Tooltip on Hover */}
+          {(showTooltip || delayedPrompt) && (
+            <div className="mascot-tooltip">
+              <Sparkles size={14} style={{ color: 'var(--brand-primary)' }} />
+              <span>{delayedPrompt && !showTooltip ? 'Need help prioritizing leads?' : 'Ask LeadIQ AI'}</span>
+              {delayedPrompt && !showTooltip && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setDelayedPrompt(false);
+                  }}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: 'var(--text-muted)',
+                    cursor: 'pointer',
+                    padding: '2px',
+                    marginLeft: '4px',
+                    display: 'flex',
+                    alignItems: 'center'
+                  }}
+                  title="Dismiss"
+                >
+                  <X size={12} />
+                </button>
+              )}
+            </div>
+          )}
         </div>
       )}
 
-      {/* 2. FLOATING CHAT WINDOW */}
+      {/* =========================================================================
+          2. OPEN STATE — FLOATING CHATBOT PANEL
+          ========================================================================= */}
       {isOpen && (
         <div
-          className="glass-panel floating-chat-window"
+          className="mascot-panel-anim floating-chat-window-responsive"
           role="dialog"
-          aria-label="LeadIQ AI Assistant Window"
+          aria-label="LeadIQ AI Assistant"
           style={{
             position: 'fixed',
             bottom: '24px',
             right: '24px',
-            width: isMinimized ? '340px' : '420px',
-            height: isMinimized ? 'auto' : '640px',
-            maxHeight: isMinimized ? '60px' : 'calc(100vh - 48px)',
-            maxWidth: 'calc(100vw - 24px)',
-            backgroundColor: isLight ? '#FFFFFF' : 'rgba(8, 24, 20, 0.92)',
-            borderRadius: '20px',
-            border: isLight ? '1px solid #E2E8F0' : '1px solid rgba(79, 242, 176, 0.25)',
+            width: isMinimized ? '340px' : '380px',
+            height: isMinimized ? 'auto' : '600px',
+            maxHeight: isMinimized ? '68px' : 'calc(100vh - 48px)',
+            maxWidth: 'calc(100vw - 32px)',
+            backgroundColor: isLight ? 'rgba(255, 255, 255, 0.92)' : 'rgba(6, 17, 15, 0.88)',
+            borderRadius: isMinimized ? '20px' : '24px',
+            border: isLight ? '1px solid rgba(16, 185, 129, 0.25)' : '1px solid rgba(255, 255, 255, 0.10)',
             boxShadow: isLight
-              ? '0 16px 48px rgba(0, 0, 0, 0.1), 0 0 24px rgba(16, 185, 129, 0.1)'
-              : '0 24px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(79, 242, 176, 0.12)',
+              ? '0 24px 70px rgba(0, 0, 0, 0.12), 0 0 24px rgba(16, 185, 129, 0.12)'
+              : '0 24px 80px rgba(0, 0, 0, 0.55), 0 0 35px rgba(79, 242, 176, 0.18)',
             display: 'flex',
             flexDirection: 'column',
             overflow: 'hidden',
             zIndex: 1000,
-            backdropFilter: 'blur(24px) saturate(140%)',
-            WebkitBackdropFilter: 'blur(24px) saturate(140%)',
+            backdropFilter: 'blur(28px) saturate(140%)',
+            WebkitBackdropFilter: 'blur(28px) saturate(140%)',
             transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
           }}
         >
-          {/* HEADER */}
+          {/* -------------------------------------------------------------------
+              CHATBOT HEADER
+              ------------------------------------------------------------------- */}
           <div
             style={{
-              padding: '0.875rem 1.125rem',
+              padding: '0.875rem 1.15rem',
               background: isLight
-                ? 'linear-gradient(135deg, #ECFDF5 0%, #FFFFFF 100%)'
-                : 'linear-gradient(135deg, rgba(79, 242, 176, 0.1) 0%, rgba(32, 201, 151, 0.05) 100%)',
-              borderBottom: '1px solid var(--border-subtle)',
+                ? 'linear-gradient(135deg, rgba(236, 253, 245, 0.9) 0%, rgba(255, 255, 255, 0.95) 100%)'
+                : 'linear-gradient(135deg, rgba(16, 38, 32, 0.75) 0%, rgba(6, 17, 15, 0.9) 100%)',
+              borderBottom: isLight ? '1px solid #E2E8F0' : '1px solid rgba(255, 255, 255, 0.08)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               flexShrink: 0
             }}
           >
-            {/* Mascot Avatar & Status */}
+            {/* Mascot in Header + Title */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <div
-                style={{
-                  width: '36px',
-                  height: '36px',
-                  borderRadius: '50%',
-                  background: isLight
-                    ? 'linear-gradient(135deg, #10B981 0%, #059669 100%)'
-                    : 'linear-gradient(135deg, #4FF2B0 0%, #20C997 100%)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: isLight ? '#FFFFFF' : '#06110F',
-                  boxShadow: isLight ? '0 0 10px rgba(16, 185, 129, 0.3)' : '0 0 14px rgba(79, 242, 176, 0.4)',
-                  position: 'relative',
-                  flexShrink: 0
-                }}
-              >
-                {mascotState === 'THINKING' ? (
-                  <Sparkles size={18} className="animate-spin" />
-                ) : mascotState === 'ERROR' ? (
-                  <AlertTriangle size={18} />
-                ) : mascotState === 'SUCCESS' ? (
-                  <CheckCircle2 size={18} />
-                ) : (
-                  <Bot size={18} />
-                )}
+              <MascotAvatar size={44} borderRadius="14px" showGlow={false} showOnlineDot={true} />
 
-                <span
-                  style={{
-                    position: 'absolute',
-                    top: '-1px',
-                    right: '-1px',
-                    width: '8px',
-                    height: '8px',
-                    borderRadius: '50%',
-                    backgroundColor: mascotState === 'ERROR' ? '#ef4444' : '#10B981',
-                    border: isLight ? '1.5px solid #FFFFFF' : '1.5px solid #06110F',
-                    boxShadow: '0 0 6px #10B981'
-                  }}
-                />
-              </div>
-
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <span style={{ fontSize: '0.9375rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span style={{ fontWeight: 800, fontSize: '0.92rem', color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>
                     LeadIQ AI
                   </span>
                   <span
@@ -319,34 +292,47 @@ export const FloatingAIChatbot: React.FC = () => {
                       fontSize: '0.62rem',
                       fontWeight: 700,
                       padding: '0.1rem 0.4rem',
-                      borderRadius: '4px',
-                      background: 'var(--brand-primary-light)',
-                      color: 'var(--brand-primary)',
-                      border: '1px solid var(--brand-primary-border)'
+                      borderRadius: 'var(--radius-full)',
+                      background: isLight ? '#D1FAE5' : 'rgba(79, 242, 176, 0.15)',
+                      color: isLight ? '#065F46' : 'var(--brand-primary)',
+                      border: isLight ? '1px solid #A7F3D0' : '1px solid rgba(79, 242, 176, 0.3)'
                     }}
                   >
-                    COPILOT
+                    PRO
                   </span>
                 </div>
-                <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                  {mascotState === 'THINKING'
-                    ? 'Neural reasoning in progress...'
-                    : mascotState === 'TALKING'
-                    ? 'Synthesizing response...'
-                    : 'Your sales copilot • Online'}
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginTop: '1px' }}>
+                  <span style={{ fontSize: '0.70rem', color: 'var(--text-secondary)' }}>
+                    Your sales copilot
+                  </span>
+                  <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>•</span>
+                  <span style={{ fontSize: '0.68rem', color: '#10B981', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '3px' }}>
+                    ● Online
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Actions */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+            {/* Header Control Buttons */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
               {!isMinimized && (
                 <button
-                  onClick={() => setShowConfirmNewChat(true)}
-                  className="btn-ghost"
-                  title="New Chat"
-                  aria-label="Start New Chat"
-                  style={{ padding: '0.35rem', borderRadius: 'var(--radius-sm)', color: 'var(--text-secondary)' }}
+                  onClick={handleResetChat}
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    color: 'var(--text-secondary)',
+                    padding: '6px',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    transition: 'all 0.15s ease'
+                  }}
+                  title="Reset conversation"
+                  aria-label="Reset conversation"
                 >
                   <RotateCcw size={15} />
                 </button>
@@ -354,223 +340,224 @@ export const FloatingAIChatbot: React.FC = () => {
 
               <button
                 onClick={() => setIsMinimized(!isMinimized)}
-                className="btn-ghost"
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'var(--text-secondary)',
+                  padding: '6px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.15s ease'
+                }}
                 title={isMinimized ? 'Expand' : 'Minimize'}
-                aria-label={isMinimized ? 'Expand chat' : 'Minimize chat'}
-                style={{ padding: '0.35rem', borderRadius: 'var(--radius-sm)', color: 'var(--text-secondary)' }}
+                aria-label={isMinimized ? 'Expand AI Chatbot' : 'Minimize AI Chatbot'}
               >
-                <Minus size={15} />
+                {isMinimized ? <ChevronDown size={16} /> : <Minus size={16} />}
               </button>
 
               <button
                 onClick={() => setIsOpen(false)}
-                className="btn-ghost"
-                title="Close AI assistant"
-                aria-label="Close AI assistant"
-                style={{ padding: '0.35rem', borderRadius: 'var(--radius-sm)', color: 'var(--text-secondary)' }}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'var(--text-secondary)',
+                  padding: '6px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.15s ease'
+                }}
+                title="Close LeadIQ AI assistant"
+                aria-label="Close LeadIQ AI assistant"
               >
                 <X size={16} />
               </button>
             </div>
           </div>
 
-          {/* CONFIRM NEW CHAT POPUP */}
-          {showConfirmNewChat && (
-            <div
-              style={{
-                padding: '0.875rem 1rem',
-                backgroundColor: isLight ? '#F8FAF9' : 'rgba(12, 32, 27, 0.95)',
-                borderBottom: '1px solid var(--border-subtle)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: '0.75rem',
-                animation: 'fadeIn 0.2s ease-out'
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8125rem', color: 'var(--text-primary)' }}>
-                <AlertCircle size={15} style={{ color: 'var(--brand-primary)' }} />
-                <span>Start fresh conversation?</span>
-              </div>
-              <div style={{ display: 'flex', gap: '0.4rem' }}>
-                <button
-                  onClick={() => setShowConfirmNewChat(false)}
-                  className="btn-ghost btn-sm"
-                  style={{ fontSize: '0.75rem', padding: '0.25rem 0.5rem' }}
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleNewChat}
-                  className="btn btn-primary btn-sm"
-                  style={{ fontSize: '0.75rem', padding: '0.25rem 0.6rem' }}
-                >
-                  New Chat
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* CONVERSATION STREAM & QUICK CHIPS */}
+          {/* -------------------------------------------------------------------
+              CHAT BODY (When not minimized)
+              ------------------------------------------------------------------- */}
           {!isMinimized && (
             <>
-              {/* Suggested Prompts Strip */}
-              <div
-                style={{
-                  padding: '0.5rem 0.875rem',
-                  backgroundColor: isLight ? '#F8FAF9' : 'rgba(6, 17, 15, 0.6)',
-                  borderBottom: '1px solid var(--border-subtle)',
-                  display: 'flex',
-                  gap: '0.4rem',
-                  overflowX: 'auto',
-                  scrollbarWidth: 'none',
-                  flexShrink: 0
-                }}
-              >
-                {suggestedPrompts.map((item, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => handleSend(item.prompt)}
-                    disabled={isTyping}
-                    style={{
-                      padding: '0.3rem 0.65rem',
-                      borderRadius: 'var(--radius-full)',
-                      backgroundColor: isLight ? '#FFFFFF' : 'rgba(255, 255, 255, 0.04)',
-                      border: '1px solid var(--border-subtle)',
-                      color: isLight ? '#475569' : 'var(--text-primary)',
-                      fontSize: '0.72rem',
-                      fontWeight: 600,
-                      whiteSpace: 'nowrap',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.3rem',
-                      transition: 'all var(--transition-fast)'
-                    }}
-                    className="quick-chip-btn"
-                  >
-                    <span>{item.label}</span>
-                  </button>
-                ))}
-              </div>
-
-              {/* Message List */}
+              {/* Messages Scroll Area */}
               <div
                 style={{
                   flex: 1,
                   overflowY: 'auto',
                   padding: '1rem',
                   display: 'flex',
-                  flexDirection: 'column'
+                  flexDirection: 'column',
+                  gap: '0.75rem'
                 }}
               >
-                {messages.map(msg => (
+                {/* Message stream */}
+                {messages.map((msg) => (
                   <AIMessageItem key={msg.id} message={msg} />
                 ))}
 
+                {/* AI Thinking / Typing Indicator with Mascot */}
                 {isTyping && (
                   <div
                     style={{
                       display: 'flex',
+                      gap: '0.625rem',
                       alignItems: 'center',
-                      gap: '0.5rem',
-                      color: 'var(--brand-primary)',
-                      fontSize: '0.78rem',
                       padding: '0.5rem 0.25rem'
                     }}
                   >
-                    <Sparkles size={14} className="animate-spin" />
-                    <span>LeadIQ AI is analyzing CRM datasets...</span>
+                    <MascotAvatar size={28} borderRadius="10px" showGlow={false} />
+                    <div
+                      style={{
+                        padding: '0.6rem 0.95rem',
+                        borderRadius: '16px',
+                        background: isLight ? '#FFFFFF' : 'rgba(10, 30, 27, 0.75)',
+                        border: isLight ? '1px solid #E2E8F0' : '1px solid rgba(79, 242, 176, 0.25)',
+                        color: 'var(--text-secondary)',
+                        fontSize: '0.78rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px'
+                      }}
+                    >
+                      <Sparkles size={14} className="animate-spin" style={{ color: 'var(--brand-primary)' }} />
+                      <span>Analyzing your CRM leads...</span>
+                    </div>
                   </div>
                 )}
 
                 <div ref={messagesEndRef} />
               </div>
 
-              {/* INPUT BAR */}
-              <form
-                onSubmit={e => {
-                  e.preventDefault();
-                  handleSend();
-                }}
+              {/* -----------------------------------------------------------------
+                  QUICK ACTION SUGGESTIONS PILLS
+                  ----------------------------------------------------------------- */}
+              <div
                 style={{
-                  padding: '0.75rem 1rem',
-                  borderTop: '1px solid var(--border-subtle)',
-                  backgroundColor: isLight ? '#FFFFFF' : 'rgba(8, 24, 20, 0.95)',
+                  padding: '0.5rem 0.85rem',
+                  borderTop: isLight ? '1px solid #F1F5F9' : '1px solid rgba(255, 255, 255, 0.05)',
+                  background: isLight ? '#FAFCFB' : 'rgba(6, 17, 15, 0.5)',
                   display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  flexShrink: 0
+                  flexWrap: 'wrap',
+                  gap: '0.4rem',
+                  maxHeight: '100px',
+                  overflowY: 'auto'
                 }}
               >
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={inputQuery}
-                  onChange={e => setInputQuery(e.target.value)}
-                  placeholder="Ask LeadIQ about leads, revenue, deals..."
-                  disabled={isTyping}
+                {quickActions.map((qa) => {
+                  return (
+                    <button
+                      key={qa.id}
+                      onClick={() => handleSend(qa.prompt)}
+                      disabled={isTyping}
+                      style={{
+                        background: isLight ? '#FFFFFF' : 'rgba(16, 38, 32, 0.65)',
+                        border: isLight ? '1px solid #E2E8F0' : '1px solid rgba(79, 242, 176, 0.2)',
+                        color: 'var(--text-primary)',
+                        padding: '0.35rem 0.65rem',
+                        borderRadius: 'var(--radius-full)',
+                        fontSize: '0.72rem',
+                        fontWeight: 600,
+                        cursor: isTyping ? 'not-allowed' : 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '5px',
+                        transition: 'all 0.15s ease',
+                        boxShadow: isLight ? '0 1px 3px rgba(0,0,0,0.03)' : 'none'
+                      }}
+                    >
+                      <span>{qa.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* -----------------------------------------------------------------
+                  INPUT AREA
+                  ----------------------------------------------------------------- */}
+              <div
+                style={{
+                  padding: '0.75rem 0.85rem 0.85rem',
+                  borderTop: isLight ? '1px solid #E2E8F0' : '1px solid rgba(255, 255, 255, 0.08)',
+                  background: isLight ? '#FFFFFF' : 'rgba(6, 17, 15, 0.95)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem'
+                }}
+              >
+                <div
                   style={{
                     flex: 1,
-                    padding: '0.625rem 0.875rem',
-                    fontSize: '0.84rem',
-                    borderRadius: 'var(--radius-full)',
-                    border: '1px solid var(--border-subtle)',
-                    backgroundColor: isLight ? '#F8FAF9' : 'rgba(6, 17, 15, 0.8)',
-                    color: 'var(--text-primary)',
-                    outline: 'none'
+                    position: 'relative',
+                    borderRadius: '14px',
+                    background: isLight ? '#F8FAF9' : 'rgba(16, 38, 32, 0.5)',
+                    border: isLight ? '1px solid #E2E8F0' : '1px solid rgba(255, 255, 255, 0.12)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '0.45rem 0.75rem',
+                    transition: 'border-color 0.15s ease'
                   }}
-                />
+                >
+                  <textarea
+                    ref={inputRef}
+                    value={inputQuery}
+                    onChange={(e) => setInputQuery(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Ask anything about your leads..."
+                    rows={1}
+                    style={{
+                      width: '100%',
+                      background: 'transparent',
+                      border: 'none',
+                      outline: 'none',
+                      resize: 'none',
+                      color: 'var(--text-primary)',
+                      fontSize: '0.82rem',
+                      lineHeight: '1.4',
+                      fontFamily: 'inherit'
+                    }}
+                  />
+                </div>
+
                 <button
-                  type="submit"
-                  disabled={isTyping || !inputQuery.trim()}
-                  className="btn btn-primary"
+                  onClick={() => handleSend()}
+                  disabled={!inputQuery.trim() || isTyping}
                   style={{
                     width: '38px',
                     height: '38px',
-                    borderRadius: '50%',
-                    padding: 0,
+                    borderRadius: '12px',
+                    background: inputQuery.trim() && !isTyping
+                      ? 'var(--brand-gradient)'
+                      : (isLight ? '#E2E8F0' : 'rgba(255, 255, 255, 0.1)'),
+                    color: inputQuery.trim() && !isTyping
+                      ? (isLight ? '#FFFFFF' : '#06110F')
+                      : 'var(--text-muted)',
+                    border: 'none',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    cursor: inputQuery.trim() && !isTyping ? 'pointer' : 'not-allowed',
                     flexShrink: 0,
-                    boxShadow: isLight ? '0 2px 8px rgba(16, 185, 129, 0.3)' : '0 2px 10px rgba(79, 242, 176, 0.3)'
+                    boxShadow: inputQuery.trim() && !isTyping
+                      ? (isLight ? '0 2px 10px rgba(16, 185, 129, 0.3)' : '0 0 14px rgba(79, 242, 176, 0.35)')
+                      : 'none',
+                    transition: 'all 0.2s ease'
                   }}
-                  aria-label="Send query"
+                  title="Send prompt (Enter)"
+                  aria-label="Send prompt"
                 >
-                  <Send size={15} />
+                  <Send size={16} />
                 </button>
-              </form>
+              </div>
             </>
           )}
         </div>
       )}
-
-      {/* Embedded CSS */}
-      <style>{`
-        .floating-ai-btn:hover {
-          transform: translateY(-2px);
-          border-color: var(--brand-primary);
-        }
-
-        .quick-chip-btn:hover {
-          border-color: var(--brand-primary) !important;
-          background-color: var(--brand-primary-light) !important;
-          color: var(--brand-primary) !important;
-        }
-
-        @media (max-width: 640px) {
-          .floating-chat-window {
-            left: 12px !important;
-            right: 12px !important;
-            bottom: 12px !important;
-            width: auto !important;
-            height: calc(100vh - 24px) !important;
-            max-height: calc(100vh - 24px) !important;
-            border-radius: 18px !important;
-          }
-        }
-      `}</style>
     </>
   );
 };

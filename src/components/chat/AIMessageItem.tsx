@@ -1,10 +1,11 @@
 import React from 'react';
 import { ChatMessage } from '../../types/chat';
-import { Bot, User as UserIcon, Lock, Sparkles, ExternalLink, ArrowRight, Flame } from 'lucide-react';
+import { User as UserIcon, Lock, Sparkles, ExternalLink, ArrowRight, Flame } from 'lucide-react';
 import { LeadScoreBadge } from '../common/LeadScoreBadge';
 import { LeadStatusBadge } from '../common/LeadStatusBadge';
 import { formatINR } from '../../utils/formatters';
 import { useTheme } from '../../context/ThemeContext';
+import { MascotAvatar } from './MascotAvatar';
 
 export const AIMessageItem: React.FC<{ message: ChatMessage }> = ({ message }) => {
   const { theme } = useTheme();
@@ -24,25 +25,26 @@ export const AIMessageItem: React.FC<{ message: ChatMessage }> = ({ message }) =
       }}
     >
       {/* Avatar */}
-      <div
-        style={{
-          width: '30px',
-          height: '30px',
-          borderRadius: '50%',
-          backgroundColor: isAI
-            ? (isLight ? '#ECFDF5' : 'rgba(79, 242, 176, 0.15)')
-            : (isLight ? '#F1F5F9' : 'rgba(255, 255, 255, 0.08)'),
-          color: isAI ? 'var(--brand-primary)' : 'var(--text-secondary)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexShrink: 0,
-          boxShadow: isAI ? (isLight ? '0 0 6px rgba(16, 185, 129, 0.2)' : '0 0 10px rgba(79, 242, 176, 0.25)') : 'none',
-          border: isLight ? '1px solid #E2E8F0' : 'none'
-        }}
-      >
-        {isAI ? <Sparkles size={15} /> : <UserIcon size={15} />}
-      </div>
+      {isAI ? (
+        <MascotAvatar size={30} borderRadius="10px" showGlow={false} />
+      ) : (
+        <div
+          style={{
+            width: '30px',
+            height: '30px',
+            borderRadius: '50%',
+            backgroundColor: isLight ? '#F1F5F9' : 'rgba(255, 255, 255, 0.08)',
+            color: 'var(--text-secondary)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+            border: isLight ? '1px solid #E2E8F0' : 'none'
+          }}
+        >
+          <UserIcon size={15} />
+        </div>
+      )}
 
       {/* Message Bubble & Data Payload */}
       <div style={{ flex: 1, minWidth: 0 }}>

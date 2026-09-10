@@ -124,6 +124,141 @@ As a **Staff** member, I can assist you with your assigned leads, Whisper call t
       };
     }
 
+    // 2b. WHICH LEADS TO CONTACT TODAY / PRIORITIZE
+    if (
+      normalized.includes('which leads should i contact today') ||
+      normalized.includes('contact today') ||
+      normalized.includes('who should i call today') ||
+      normalized.includes('who to contact today')
+    ) {
+      const targetList = (role === 'STAFF' ? staffLeads : leads).sort((a, b) => b.score.score - a.score.score);
+      const top3 = targetList.slice(0, 3);
+
+      return {
+        id: `msg-${Date.now()}`,
+        sender: 'ai',
+        timestamp: new Date().toISOString(),
+        roleScope: role,
+        content: `Based on recent multi-channel engagement and AI intent scoring, I recommend focusing on these **top 3 opportunities** today:
+
+🔥 **${top3[0]?.name || 'Rahul Sharma'}** — **${top3[0]?.score?.score || 94}/100**
+Opened proposal 3× and replied yesterday. High purchase velocity.
+
+🔥 **${top3[1]?.name || 'Priya Mehta'}** — **${top3[1]?.score?.score || 91}/100**
+Visited the pricing page and opened your email twice in the last 6 hours.
+
+🟢 **${top3[2]?.name || 'Arjun Patel'}** — **${top3[2]?.score?.score || 88}/100**
+High website engagement over the last 24 hours with budget inquiry.`,
+        dataPayload: {
+          type: 'lead_cards',
+          title: "Today's Priority Contact Queue",
+          data: top3
+        }
+      };
+    }
+
+    // 2c. WHY DID MY CONVERSION RATE CHANGE / DROP
+    if (
+      normalized.includes('conversion') && (
+        normalized.includes('change') ||
+        normalized.includes('drop') ||
+        normalized.includes('down') ||
+        normalized.includes('why') ||
+        normalized.includes('rate')
+      )
+    ) {
+      return {
+        id: `msg-${Date.now()}`,
+        sender: 'ai',
+        timestamp: new Date().toISOString(),
+        roleScope: role,
+        content: `📊 **AI Conversion Root Cause Analysis**:
+
+Your conversion rate is currently **38.5%** (+4.2% vs last month). Key factors impacting conversion velocity:
+
+1. ⚡ **Speed to Lead**: Inquiries followed up under 15 minutes had a **64% close rate** vs 18% for >2 hour delays.
+2. 📞 **Whisper AI Call Summaries**: Reps using AI follow-up action items had **2.4× faster proposal sign-offs**.
+3. 🎯 **High-Intent Lead Volume**: Shift towards Enterprise FinTech leads in Mumbai & Bengaluru increased deal sizes by +22%.
+
+💡 **Recommended Action**: Re-engage the 4 leads currently **On Hold** using the AI follow-up drafter.`,
+        dataPayload: {
+          type: 'kpi_cards',
+          title: 'Conversion Factors',
+          data: [
+            { label: 'Current Conversion', value: '38.5%', change: '+4.2% MoM' },
+            { label: '<15m Response Win', value: '64%', change: 'Optimal' },
+            { label: 'Avg Deal Size', value: '₹4.8L', change: '+22%' }
+          ]
+        }
+      };
+    }
+
+    // 2d. DRAFT A FOLLOW-UP
+    if (
+      normalized.includes('draft') && (
+        normalized.includes('follow-up') ||
+        normalized.includes('follow up') ||
+        normalized.includes('email') ||
+        normalized.includes('message')
+      )
+    ) {
+      const topLead = (role === 'STAFF' ? staffLeads : leads)[0] || { name: 'Rahul Sharma', company: 'TechFlow Solutions', dealValue: 450000 };
+      return {
+        id: `msg-${Date.now()}`,
+        sender: 'ai',
+        timestamp: new Date().toISOString(),
+        roleScope: role,
+        content: `✍️ **AI Drafted Follow-up for ${topLead.name} (${topLead.company})**:
+
+**Subject:** Quick follow-up regarding LeadIQ CRM implementation for ${topLead.company}
+
+*Hi ${topLead.name.split(' ')[0]},*
+
+*Following up on our recent conversation about scaling your sales pipeline. Based on your team's requirements, I've outlined how LeadIQ's AI scoring and Whisper call analysis can fast-track your conversion targets.*
+
+*Would you have 10 minutes this Thursday afternoon for a quick walk-through of the tailored rollout plan?*
+
+*Best regards,*
+*${user.name} | LeadIQ Sales Team*`,
+        dataPayload: {
+          type: 'lead_detail',
+          title: `Follow-up Ready: ${topLead.name}`,
+          data: topLead
+        }
+      };
+    }
+
+    // 2e. WHY IS THIS LEAD SCORED 94 / AI SCORING EXPLANATION
+    if (
+      normalized.includes('scored') ||
+      normalized.includes('why is this lead scored') ||
+      normalized.includes('score breakdown')
+    ) {
+      return {
+        id: `msg-${Date.now()}`,
+        sender: 'ai',
+        timestamp: new Date().toISOString(),
+        roleScope: role,
+        content: `🎯 **AI Lead Score Breakdown (Score: 94 / 100 — Hot Lead)**:
+
+• **Engagement Velocity (40% weight):** Opened proposal 3×, visited pricing calculator twice in 24h.
+• **Buying Intent Signals (30% weight):** Budget confirmed at ₹4.5L+, timeline set for Q3 FY26.
+• **ICP & Persona Fit (30% weight):** CTO / VP Technology in Tier-1 FinTech company (100+ seats).
+
+**AI Recommendation:** High probability to close. Schedule final quotation review.`,
+        dataPayload: {
+          type: 'kpi_cards',
+          title: 'Scoring Weight Factors',
+          data: [
+            { label: 'Engagement', value: '98/100', change: 'Very High' },
+            { label: 'Intent Signal', value: '92/100', change: 'Confirmed' },
+            { label: 'ICP Match', value: '95/100', change: 'Tier 1' }
+          ]
+        }
+      };
+    }
+
+
     // 3. SHOW TOTAL LEADS (Manager & Staff)
     if (
       normalized.includes('total leads') ||
