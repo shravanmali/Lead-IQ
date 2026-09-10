@@ -59,7 +59,7 @@ INSTRUCTIONS:
 3. Be professional, concise, and helpful.`;
 
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 15000);
+      const timeoutId = setTimeout(() => controller.abort(), 45000);
 
       const response = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/${config.gemini.model}:generateContent?key=${apiKey}`,

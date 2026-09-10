@@ -93,7 +93,7 @@ You MUST return a valid JSON object ONLY matching this schema exactly:
 }`;
 
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 20000);
+        const timeoutId = setTimeout(() => controller.abort(), 60000);
 
         const response = await fetch(
           `https://generativelanguage.googleapis.com/v1beta/models/${config.gemini.model}:generateContent?key=${apiKey}`,
