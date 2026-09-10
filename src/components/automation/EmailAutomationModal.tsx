@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal } from '../common/Modal';
 import { Lead } from '../../types/lead';
-import { Mail, Sparkles, Send, RefreshCw, CheckCircle2 } from 'lucide-react';
+import { Mail, Sparkles, Send, RefreshCw, CheckCircle2, ExternalLink, ShieldCheck } from 'lucide-react';
 import { automationService } from '../../services/automationService';
 import { useToast } from '../../context/ToastContext';
 import { useAuth } from '../../context/AuthContext';
@@ -31,16 +31,18 @@ export const EmailAutomationModal: React.FC<EmailAutomationModalProps> = ({
   const [body, setBody] = useState(initialBody || '');
   const [isSending, setIsSending] = useState(false);
   const [isRegenerating, setIsRegenerating] = useState(false);
+  const [smtpStatus, setSmtpStatus] = useState<{ configured: boolean; user?: string }>({ configured: true });
 
-  // Sync props when opening
-  React.useEffect(() => {
+  useEffect(() => {
     if (lead) {
-      setTo(lead.email);
+      setTo(lead.email || 'sachinshravan836@gmail.com');
       setSubject(initialSubject || `Lead-IQ Commercial Proposal & GST Quotation for ${lead.company}`);
       setBody(
         initialBody ||
           `Dear ${lead.name},\n\nThank you for speaking with me today regarding ${lead.company}'s sales operations in ${lead.country}. As discussed on our call, Lead-IQ provides automated Whisper speech transcription and predictive lead scoring designed to accelerate your pipeline.\n\nAttached is our formal enterprise GST quotation (${formatINR(lead.dealValue)}/year) and our ISO 27001 security dossier with AWS Mumbai cloud residency details.\n\nPlease let me know if tomorrow at 3:00 PM IST works for a 15-minute review with your finance committee.\n\nWarm regards,\n${user?.name || 'Sneha Kulkarni'}\nLead-IQ India Operations`
       );
+
+      automationService.checkEmailStatus().then(st => setSmtpStatus(st)).catch(() => {});
     }
   }, [lead, initialSubject, initialBody, user]);
 
@@ -48,16 +50,19 @@ export const EmailAutomationModal: React.FC<EmailAutomationModalProps> = ({
 
   const handleRegenerate = async () => {
     setIsRegenerating(true);
-    setTimeout(() => {
-      setBody(
-        `Dear ${lead.name},\n\nFollowing up on our discussion regarding ${lead.company} (${lead.country}). I have tailored an enterprise package specifically for your regional operations.\n\nKey Highlights:\n• Automated Whisper Speech Intelligence & 0-100 Lead Scoring\n• 100% GST Invoicing & AWS Mumbai Data Residency\n• 3-Week Rapid Onboarding & Staff Training\n\nLooking forward to your feedback!\n\nWarm regards,\n${user?.name || 'Sneha Kulkarni'}\nLead-IQ India`
-      );
+    try {
+      const generated = await automationService.generateEmail(lead);
+      setSubject(generated.subject);
+      setBody(generated.body);
+      showToast('AI Proposal Regenerated', 'Draft updated via Gemini 2.5 Flash intelligence.', 'info');
+    } catch (err: any) {
+      showToast('Generation Failed', err.message, 'error');
+    } finally {
       setIsRegenerating(false);
-      showToast('AI Email Regenerated', 'Draft updated with executive Indian business tone.', 'info');
-    }, 600);
+    }
   };
 
-  const handleSend = async () => {
+  const handleSendAutomatic = async () => {
     if (!to || !subject || !body) {
       showToast('Validation Error', 'Please complete all email fields.', 'warning');
       return;
@@ -73,39 +78,73 @@ export const EmailAutomationModal: React.FC<EmailAutomationModalProps> = ({
         sentBy: user?.name || 'Staff'
       });
 
-      showToast('Proposal Email Sent', `Dispatched to ${to} successfully.`, 'success');
+      showToast('Proposal Email Sent', `Dispatched via Gmail SMTP to ${to} successfully.`, 'success');
       onSuccess();
       onClose();
     } catch (err: any) {
-      showToast('Send Failed', err.message, 'error');
+      showToast('SMTP Dispatch Failed', err.message, 'error');
     } finally {
       setIsSending(false);
     }
+  };
+
+  const handleSendManual = () => {
+    if (!to || !subject || !body) {
+      showToast('Validation Error', 'Please complete recipient and subject.', 'warning');
+      return;
+    }
+
+    automationService.triggerManualEmail(to, subject, body, lead.id, user?.name);
+    showToast('Manual Email Triggered', `Opened default mail client for ${to}.`, 'info');
+    onSuccess();
+    onClose();
   };
 
   return (
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="AI Email Automation"
+      title="Email Automation & Dispatch"
       subtitle={`Personalized Proposal for ${lead.name} (${lead.company}, ${lead.country})`}
-      maxWidth="640px"
+      maxWidth="680px"
       footer={
-        <>
-          <button onClick={onClose} className="btn btn-secondary">
-            Cancel
-          </button>
-          <button onClick={handleSend} disabled={isSending} className="btn btn-primary">
-            {isSending ? (
-              <span>Sending...</span>
-            ) : (
-              <>
-                <Send size={15} />
-                <span>Send Proposal Email</span>
-              </>
-            )}
-          </button>
-        </>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', flexWrap: 'wrap', gap: '0.75rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: smtpStatus.configured ? '#10b981' : 'var(--text-muted)' }}>
+            <ShieldCheck size={14} />
+            <span>{smtpStatus.configured ? `SMTP Connected (${smtpStatus.user || 'Gmail'})` : 'SMTP Standby'}</span>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <button onClick={onClose} className="btn btn-secondary">
+              Cancel
+            </button>
+            <button
+              onClick={handleSendManual}
+              type="button"
+              className="btn btn-secondary"
+              style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}
+              title="Opens pre-filled mailto: link in local Outlook / Apple Mail / Webmail"
+            >
+              <ExternalLink size={14} />
+              <span>[ Manual Email ]</span>
+            </button>
+            <button
+              onClick={handleSendAutomatic}
+              disabled={isSending}
+              className="btn btn-primary"
+              style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 700 }}
+            >
+              {isSending ? (
+                <span>Dispatching SMTP...</span>
+              ) : (
+                <>
+                  <Send size={14} />
+                  <span>[ Automatic Email ]</span>
+                </>
+              )}
+            </button>
+          </div>
+        </div>
       }
     >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
@@ -133,7 +172,7 @@ export const EmailAutomationModal: React.FC<EmailAutomationModalProps> = ({
             style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.75rem' }}
           >
             <RefreshCw size={13} className={isRegenerating ? 'animate-spin' : ''} />
-            <span>Regenerate</span>
+            <span>Regenerate with Gemini AI</span>
           </button>
         </div>
 

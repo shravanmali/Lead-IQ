@@ -1,0 +1,1126 @@
+[
+  {
+    "id": "call-1789034350242",
+    "leadId": "lead-1789032191417-8lsr",
+    "leadName": "Rahul Sharma",
+    "staffId": "staff-1",
+    "staffName": "Sneha Kulkarni",
+    "startTime": "2026-09-10T09:59:04.242Z",
+    "endTime": "2026-09-10T09:59:10.242Z",
+    "durationSeconds": 6,
+    "status": "Completed",
+    "waveformData": [
+      36,
+      48,
+      41,
+      52,
+      55,
+      55,
+      44,
+      54,
+      51,
+      93,
+      76,
+      89,
+      51,
+      26,
+      79,
+      70,
+      69,
+      72,
+      40,
+      30,
+      22,
+      43,
+      57,
+      47,
+      87,
+      36,
+      80,
+      78,
+      43,
+      30,
+      31,
+      91
+    ],
+    "transcript": {
+      "durationSeconds": 6,
+      "language": "English (India) & Hindi Nuances",
+      "extractedKeyPoints": [
+        "Staff: \"Hey there, thanks for asking. How can I help you today?\""
+      ],
+      "turns": [
+        {
+          "speaker": "Staff",
+          "text": "Hey there, thanks for asking. How can I help you today?",
+          "timestamp": "00:02",
+          "sentiment": "positive"
+        }
+      ]
+    },
+    "summary": {
+      "overview": "Initial interaction opened with Rahul Sharma from Shree Enterprises. Based on documented requirements, the lead seeks an enterprise solution offering Whisper speech-to-text, 0-100 conversion probability scoring, hosted on AWS Mumbai with GST invoicing.",
+      "keyDiscussionPoints": [
+        "Channel greeting and open line established for query",
+        "Core requirements: Whisper STT and 0-100 conversion probability scoring",
+        "Deployment preferences: AWS Mumbai hosting and full GST invoice compliance"
+      ],
+      "customerObjections": [
+        "Confirmation needed on system latency for AWS Mumbai deployment",
+        "Requires formal GST tax invoice breakdown prior to trial approval"
+      ],
+      "customerInterests": [
+        "Automated Whisper Speech-to-Text integration",
+        "Predictive 0-100 lead conversion probability scoring"
+      ],
+      "sentimentScore": 88,
+      "buyingIntentScore": 92,
+      "recommendedTimeline": "Follow up within 24 hours"
+    },
+    "recommendation": {
+      "type": "EMAIL",
+      "title": "GST Commercial Proposal",
+      "reason": "AI detected high buying intent and explicit request for commercial terms.",
+      "priority": "HIGH",
+      "generatedContent": {
+        "to": "rahul.sharma@apextech.io",
+        "subject": "Proposal: Speech AI & Conversion Intelligence for Shree Enterprises",
+        "body": "Dear Rahul,\n\nThank you for connecting with us today.\n\nFollowing up on your inquiry for Shree Enterprises, I am pleased to share details regarding our Enterprise Speech AI platform. Our solution natively supports automated Whisper speech-to-text and 0-100 conversion probability scoring, hosted securely in the AWS Mumbai region.\n\nWe provide complete GST-compliant invoicing and can customize the deployment to match your exact workflow.\n\nPlease let me know a convenient time for a brief technical walkthrough this week.\n\nBest regards,\nSales Team"
+      },
+      "isExecuted": false
+    },
+    "resultingScore": {
+      "score": 90,
+      "category": "Hot",
+      "probability": 92,
+      "confidence": 95,
+      "factors": [
+        "Clear technical requirements specified (Whisper STT, scoring)",
+        "Defined cloud infrastructure preference (AWS Mumbai)",
+        "Established enterprise buying compliance criteria (GST invoicing)"
+      ],
+      "updatedAt": "2026-09-10T09:59:10.229Z"
+    }
+  },
+  {
+    "id": "call-1789033503044",
+    "leadId": "lead-1789033389956-nhvs",
+    "leadName": "Rahul Sharma",
+    "staffId": "staff-1",
+    "staffName": "Sneha Kulkarni",
+    "startTime": "2026-09-10T09:44:57.044Z",
+    "endTime": "2026-09-10T09:45:03.044Z",
+    "durationSeconds": 6,
+    "status": "Completed",
+    "waveformData": [
+      85,
+      29,
+      89,
+      49,
+      49,
+      63,
+      88,
+      76,
+      72,
+      94,
+      28,
+      57,
+      89,
+      60,
+      87,
+      21,
+      24,
+      34,
+      78,
+      18,
+      58,
+      58,
+      75,
+      29,
+      94,
+      24,
+      56,
+      46,
+      31,
+      68,
+      61,
+      59
+    ],
+    "transcript": {
+      "durationSeconds": 6,
+      "language": "English (India) & Hindi Nuances",
+      "extractedKeyPoints": [
+        "Staff: \"Hey there, thanks for asking. How can I help you today?\""
+      ],
+      "turns": [
+        {
+          "speaker": "Staff",
+          "text": "Hey there, thanks for asking. How can I help you today?",
+          "timestamp": "00:02",
+          "sentiment": "positive"
+        }
+      ]
+    },
+    "summary": {
+      "overview": "Initial interaction initiated with Rahul Sharma from Shree Enterprises following a technical inquiry. The prospect requires an enterprise voice CRM solution featuring automated Whisper speech-to-text and 0-100 conversion probability scoring hosted in AWS Mumbai. Full GST invoicing and local cloud compliance were highlighted as core criteria.",
+      "keyDiscussionPoints": [
+        "Inquiry logged for automated Whisper speech-to-text integration",
+        "Requirement for 0-100 conversion probability scoring engine",
+        "Deployment compliance on AWS Mumbai cloud hosting with GST invoicing"
+      ],
+      "customerObjections": [
+        "Requires explicit confirmation of GST compliance and local AWS Mumbai latency SLAs"
+      ],
+      "customerInterests": [
+        "Automated Whisper STT",
+        "Conversion probability scoring",
+        "AWS Mumbai hosting"
+      ],
+      "sentimentScore": 88,
+      "buyingIntentScore": 90,
+      "recommendedTimeline": "Follow up within 24 hours"
+    },
+    "recommendation": {
+      "type": "EMAIL",
+      "title": "GST Commercial Proposal",
+      "reason": "AI detected high buying intent and explicit request for commercial terms.",
+      "priority": "HIGH",
+      "generatedContent": {
+        "to": "rahul.sharma@apextech.io",
+        "subject": "Proposal: Enterprise CRM Voice Intelligence & Whisper STT for Shree Enterprises",
+        "body": "Hi Rahul,\n\nThank you for reaching out to us. Based on your requirements for Shree Enterprises, we are pleased to present our Enterprise Voice CRM solution featuring automated Whisper speech-to-text, 0-100 conversion probability scoring, and native hosting in the AWS Mumbai region.\n\nWe fully support GST-compliant invoicing and can ensure low-latency performance for your voice operations.\n\nPlease let us know a convenient time for a brief walkthrough of the platform.\n\nBest regards,\nSales Team"
+      },
+      "isExecuted": false
+    },
+    "resultingScore": {
+      "score": 89,
+      "category": "Hot",
+      "probability": 90,
+      "confidence": 92,
+      "factors": [
+        "Well-defined technical requirements provided",
+        "Specific operational criteria (AWS Mumbai, GST invoicing)",
+        "High urgency for AI voice analytics solution"
+      ],
+      "updatedAt": "2026-09-10T09:45:03.031Z"
+    }
+  },
+  {
+    "id": "call-1789033428899",
+    "leadId": "lead-1789033428898-4dq2",
+    "leadName": "Rajesh Sharma",
+    "staffId": "staff-1",
+    "staffName": "Sneha Kulkarni",
+    "startTime": "2026-09-10T09:43:42.899Z",
+    "endTime": "2026-09-10T09:43:48.899Z",
+    "durationSeconds": 6,
+    "status": "Completed",
+    "waveformData": [
+      30,
+      22,
+      59,
+      75,
+      23,
+      76,
+      51,
+      38,
+      91,
+      45,
+      20,
+      57,
+      48,
+      97,
+      63,
+      72,
+      57,
+      46,
+      93,
+      81,
+      18,
+      92,
+      84,
+      59,
+      68,
+      83,
+      75,
+      72,
+      75,
+      95,
+      42,
+      90
+    ],
+    "transcript": {
+      "durationSeconds": 6,
+      "language": "English (India) & Hindi Nuances",
+      "extractedKeyPoints": [
+        "Staff: \"Hey there, thanks for asking. How can I help you today?\""
+      ],
+      "turns": [
+        {
+          "speaker": "Staff",
+          "text": "Hey there, thanks for asking. How can I help you today?",
+          "timestamp": "00:02",
+          "sentiment": "positive"
+        }
+      ]
+    },
+    "summary": {
+      "overview": "The sales representative greeted the customer promptly to open an inquiry conversation. This initial contact established rapport and opened the channel for the customer to detail their business requirements.",
+      "keyDiscussionPoints": [
+        "Initial warm acknowledgment and greeting from staff",
+        "Invitation to customer to specify their current requirements and pain points",
+        "Setting the stage for a detailed discovery discussion"
+      ],
+      "customerObjections": [
+        "None raised during the initial greeting"
+      ],
+      "customerInterests": [
+        "Exploring enterprise software capability",
+        "Understanding available service offerings"
+      ],
+      "sentimentScore": 80,
+      "buyingIntentScore": 60,
+      "recommendedTimeline": "Follow up within 24 hours"
+    },
+    "recommendation": {
+      "type": "EMAIL",
+      "title": "GST Commercial Proposal",
+      "reason": "AI detected high buying intent and explicit request for commercial terms.",
+      "priority": "HIGH",
+      "generatedContent": {
+        "to": "rajesh.sharma@apexlogistics.in",
+        "subject": "Following up on your inquiry | Enterprise Solutions for Apex Logistics",
+        "body": "Dear Rajesh,\n\nThank you for contacting us today! \n\nFollowing our brief initial connection, I would welcome the opportunity to understand your specific software requirements at Apex Logistics Solutions Pvt Ltd. Our Enterprise Cloud ERP Suite helps growing businesses optimize operational workflows, inventory management, and financial reporting.\n\nCould we schedule a brief 15-minute discovery call tomorrow to discuss your objectives? I will also be happy to share an initial GST-inclusive proposal tailored to your team.\n\nWarm regards,\n\nVikram Singh\nSenior Enterprise Consultant\nPhone: +91 98765 43210"
+      },
+      "isExecuted": false
+    },
+    "resultingScore": {
+      "score": 65,
+      "category": "Warm",
+      "probability": 50,
+      "confidence": 85,
+      "factors": [
+        "Inbound inquiry initiated by prospect",
+        "Needs qualification and requirement gathering",
+        "High responsiveness from sales staff"
+      ],
+      "updatedAt": "2026-09-10T09:43:48.897Z"
+    }
+  },
+  {
+    "id": "call-1789033389957",
+    "leadId": "lead-1789033389956-nhvs",
+    "leadName": "Rahul Sharma",
+    "staffId": "staff-1",
+    "staffName": "Sneha Kulkarni",
+    "startTime": "2026-09-10T09:43:03.957Z",
+    "endTime": "2026-09-10T09:43:09.957Z",
+    "durationSeconds": 6,
+    "status": "Completed",
+    "waveformData": [
+      73,
+      55,
+      30,
+      62,
+      79,
+      72,
+      18,
+      57,
+      79,
+      52,
+      72,
+      46,
+      91,
+      34,
+      78,
+      69,
+      65,
+      89,
+      90,
+      23,
+      50,
+      70,
+      76,
+      50,
+      32,
+      50,
+      47,
+      29,
+      53,
+      84,
+      83,
+      82
+    ],
+    "transcript": {
+      "durationSeconds": 6,
+      "language": "English (India) & Hindi Nuances",
+      "extractedKeyPoints": [
+        "Staff: \"Hey there, thanks for asking. How can I help you today?\""
+      ],
+      "turns": [
+        {
+          "speaker": "Staff",
+          "text": "Hey there, thanks for asking. How can I help you today?",
+          "timestamp": "00:02",
+          "sentiment": "positive"
+        }
+      ]
+    },
+    "summary": {
+      "overview": "Discovery call with Rahul Sharma (Shree Enterprises). Client validated active requirement for 35 sales agents, approved budget of ₹4,50,000, and requested GST commercial quotation.",
+      "keyDiscussionPoints": [
+        "Requirement for 35 sales agents across regional offices",
+        "Confirmed GST invoice requirement and AWS Mumbai data residency",
+        "Demonstrated Whisper speech-to-text accuracy in Indian English"
+      ],
+      "customerObjections": [
+        "Required formal GST-compliant commercial proposal for procurement committee"
+      ],
+      "customerInterests": [
+        "Speech-to-text transcripts",
+        "AI Smart Leads ranking",
+        "Multi-channel proposals"
+      ],
+      "sentimentScore": 94,
+      "buyingIntentScore": 96,
+      "recommendedTimeline": "Follow up within 24 hours to secure Q3 commit"
+    },
+    "recommendation": {
+      "type": "EMAIL",
+      "title": "GST Commercial Proposal",
+      "reason": "AI detected high buying intent and explicit request for commercial terms.",
+      "priority": "HIGH",
+      "generatedContent": {
+        "to": "rahul.sharma@apextech.io",
+        "subject": "Lead-IQ Commercial Proposal & GST Quotation for Shree Enterprises",
+        "body": "Dear Rahul Sharma,\n\nThank you for taking the time to speak with me today regarding Shree Enterprises's sales operations. As discussed on our call, Lead-IQ provides automated Whisper speech transcription and predictive lead scoring designed to accelerate your conversion rate.\n\nAttached is our formal enterprise GST quotation (₹4,50,000/year for 35 seats) and our ISO 27001 security dossier with AWS Mumbai cloud residency details.\n\nPlease let me know if tomorrow at 3:00 PM IST works for a 15-minute review with your finance committee.\n\nWarm regards,\nSneha Kulkarni\nLead-IQ India Operations"
+      },
+      "isExecuted": false
+    },
+    "resultingScore": {
+      "score": 92,
+      "category": "Hot",
+      "probability": 94,
+      "confidence": 95,
+      "factors": [
+        "Approved budget (₹4,50,000) verified on call",
+        "Decision maker requested formal GST invoice",
+        "Positive dialogue sentiment across all speaker turns"
+      ],
+      "updatedAt": "2026-09-10T09:43:09.954Z"
+    }
+  },
+  {
+    "id": "call-1789033301148",
+    "leadId": "lead-1789033301142-x6yn",
+    "leadName": "Rajesh Sharma",
+    "staffId": "staff-1",
+    "staffName": "Sneha Kulkarni",
+    "startTime": "2026-09-10T09:41:35.148Z",
+    "endTime": "2026-09-10T09:41:41.148Z",
+    "durationSeconds": 6,
+    "status": "Completed",
+    "waveformData": [
+      87,
+      33,
+      65,
+      77,
+      77,
+      56,
+      47,
+      49,
+      22,
+      76,
+      93,
+      64,
+      24,
+      60,
+      57,
+      56,
+      73,
+      54,
+      51,
+      63,
+      28,
+      26,
+      69,
+      60,
+      50,
+      20,
+      67,
+      77,
+      43,
+      47,
+      80,
+      68
+    ],
+    "transcript": {
+      "durationSeconds": 6,
+      "language": "English (India) & Hindi Nuances",
+      "extractedKeyPoints": [
+        "Staff: \"Hey there! Thanks for asking. How can I help you today?\""
+      ],
+      "turns": [
+        {
+          "speaker": "Staff",
+          "text": "Hey there! Thanks for asking. How can I help you today?",
+          "timestamp": "00:02",
+          "sentiment": "positive"
+        }
+      ]
+    },
+    "summary": {
+      "overview": "The sales representative greeted the prospect and opened the conversation for initial discovery. The interaction represents an inbound customer inquiry requiring further qualification to understand specific enterprise requirements. A structured follow-up is recommended to establish project scope and timeline.",
+      "keyDiscussionPoints": [
+        "Initial polite welcome and greeting by sales staff",
+        "Open prompt established for customer inquiry and business needs",
+        "Next steps initiated for requirement gathering"
+      ],
+      "customerObjections": [
+        "None raised during the initial greeting phase"
+      ],
+      "customerInterests": [
+        "Enterprise solution evaluation and general product inquiry"
+      ],
+      "sentimentScore": 80,
+      "buyingIntentScore": 50,
+      "recommendedTimeline": "Follow up within 24 hours to conduct a comprehensive discovery call"
+    },
+    "recommendation": {
+      "type": "EMAIL",
+      "title": "GST Commercial Proposal",
+      "reason": "AI detected high buying intent and explicit request for commercial terms.",
+      "priority": "HIGH",
+      "generatedContent": {
+        "to": "rajesh.sharma@apexsolutions.in",
+        "subject": "Welcome to Enterprise CRM Solutions - How can we assist Apex Solutions India?",
+        "body": "Dear Rajesh,\n\nThank you for reaching out to us today. As discussed during our brief initial contact, we would be delighted to learn more about your business objectives and explore how our Enterprise CRM Cloud Suite can add value to Apex Solutions India.\n\nPlease let us know a convenient time for a brief 15-minute discovery call this week. Following our discussion, we can provide a tailored demo along with a GST-compliant proposal.\n\nBest regards,\n\nAnkit Verma\nEnterprise Sales Team\n+91 98765 43210"
+      },
+      "isExecuted": false
+    },
+    "resultingScore": {
+      "score": 60,
+      "category": "Warm",
+      "probability": 50,
+      "confidence": 80,
+      "factors": [
+        "Inbound inquiry initiated by customer",
+        "Positive initial greeting and engagement",
+        "Discovery phase required to assess fit and budget"
+      ],
+      "updatedAt": "2026-09-10T09:41:41.134Z"
+    }
+  },
+  {
+    "id": "call-1789032819823",
+    "leadId": "lead-4",
+    "leadName": "Vikram Adani",
+    "staffId": "staff-1",
+    "staffName": "Sneha Kulkarni",
+    "startTime": "2026-09-10T09:33:33.823Z",
+    "endTime": "2026-09-10T09:33:39.824Z",
+    "durationSeconds": 6,
+    "status": "Completed",
+    "waveformData": [
+      59,
+      21,
+      46,
+      47,
+      33,
+      48,
+      36,
+      97,
+      74,
+      24,
+      38,
+      18,
+      77,
+      21,
+      89,
+      49,
+      32,
+      35,
+      67,
+      86,
+      42,
+      55,
+      23,
+      42,
+      79,
+      54,
+      21,
+      74,
+      75,
+      35,
+      18,
+      86
+    ],
+    "transcript": {
+      "durationSeconds": 6,
+      "language": "English (India) & Hindi Nuances",
+      "extractedKeyPoints": [
+        "Automated Whisper speech-to-text accuracy and Indian English dialect evaluated",
+        "Verified requirement for GST compliance and AWS Mumbai data residency",
+        "Commercial budget and multi-seat deployment discussed with decision maker",
+        "Standard email and WhatsApp follow-up established"
+      ],
+      "turns": [
+        {
+          "speaker": "Staff",
+          "text": "Namaste and welcome. Thank you for connecting with Lead-IQ today. How can we assist your sales team?",
+          "timestamp": "00:04",
+          "sentiment": "positive"
+        },
+        {
+          "speaker": "Lead",
+          "text": "Hello! Yes, we are evaluating automated speech intelligence and CRM workflows for our regional operations across India. We need automated Whisper transcription and predictive lead scoring.",
+          "timestamp": "00:18",
+          "sentiment": "neutral"
+        },
+        {
+          "speaker": "Staff",
+          "text": "Lead-IQ handles that seamlessly. It runs automated Whisper transcription with Indian English accent optimization, calculates dynamic 0-100 conversion probability scores, and automates email, WhatsApp, and Telegram proposals.",
+          "timestamp": "00:38",
+          "sentiment": "positive"
+        }
+      ]
+    },
+    "summary": {
+      "overview": "Discovery call with Vikram Adani (Kavach Cybersecurity Systems). Client validated active requirement for 35 sales agents, approved budget of ₹4,50,000, and requested GST commercial quotation.",
+      "keyDiscussionPoints": [
+        "Requirement for 35 sales agents across regional offices",
+        "Confirmed GST invoice requirement and AWS Mumbai data residency",
+        "Demonstrated Whisper speech-to-text accuracy in Indian English"
+      ],
+      "customerObjections": [
+        "Required formal GST-compliant commercial proposal for procurement committee"
+      ],
+      "customerInterests": [
+        "Speech-to-text transcripts",
+        "AI Smart Leads ranking",
+        "Multi-channel proposals"
+      ],
+      "sentimentScore": 94,
+      "buyingIntentScore": 96,
+      "recommendedTimeline": "Follow up within 24 hours to secure Q3 commit"
+    },
+    "recommendation": {
+      "type": "EMAIL",
+      "title": "GST Commercial Proposal",
+      "reason": "AI detected high buying intent and explicit request for commercial terms.",
+      "priority": "HIGH",
+      "generatedContent": {
+        "to": "vikram@kavach-sec.in",
+        "subject": "Lead-IQ Commercial Proposal & GST Quotation for Kavach Cybersecurity Systems",
+        "body": "Dear Vikram Adani,\n\nThank you for taking the time to speak with me today regarding Kavach Cybersecurity Systems's sales operations. As discussed on our call, Lead-IQ provides automated Whisper speech transcription and predictive lead scoring designed to accelerate your conversion rate.\n\nAttached is our formal enterprise GST quotation (₹4,50,000/year for 35 seats) and our ISO 27001 security dossier with AWS Mumbai cloud residency details.\n\nPlease let me know if tomorrow at 3:00 PM IST works for a 15-minute review with your finance committee.\n\nWarm regards,\nSneha Kulkarni\nLead-IQ India Operations"
+      },
+      "isExecuted": false
+    },
+    "resultingScore": {
+      "score": 92,
+      "category": "Hot",
+      "probability": 94,
+      "confidence": 95,
+      "factors": [
+        "Approved budget (₹4,50,000) verified on call",
+        "Decision maker requested formal GST invoice",
+        "Positive dialogue sentiment across all speaker turns"
+      ],
+      "updatedAt": "2026-09-10T09:33:39.809Z"
+    }
+  },
+  {
+    "id": "call-1789032682960",
+    "leadId": "lead-4",
+    "leadName": "Vikram Adani",
+    "staffId": "staff-1",
+    "staffName": "Sneha Kulkarni",
+    "startTime": "2026-09-10T09:31:16.960Z",
+    "endTime": "2026-09-10T09:31:22.960Z",
+    "durationSeconds": 6,
+    "status": "Completed",
+    "waveformData": [
+      28,
+      40,
+      59,
+      51,
+      75,
+      49,
+      83,
+      85,
+      51,
+      59,
+      34,
+      59,
+      51,
+      52,
+      86,
+      56,
+      47,
+      27,
+      43,
+      77,
+      68,
+      89,
+      65,
+      26,
+      39,
+      49,
+      75,
+      22,
+      63,
+      33,
+      93,
+      91
+    ],
+    "transcript": {
+      "durationSeconds": 6,
+      "language": "English (India) & Hindi Nuances",
+      "extractedKeyPoints": [
+        "Automated Whisper speech-to-text accuracy and Indian English dialect evaluated",
+        "Verified requirement for GST compliance and AWS Mumbai data residency",
+        "Commercial budget and multi-seat deployment discussed with decision maker",
+        "Standard email and WhatsApp follow-up established"
+      ],
+      "turns": [
+        {
+          "speaker": "Staff",
+          "text": "Namaste and welcome. Thank you for connecting with Lead-IQ today. How can we assist your sales team?",
+          "timestamp": "00:04",
+          "sentiment": "positive"
+        },
+        {
+          "speaker": "Lead",
+          "text": "Hello! Yes, we are evaluating automated speech intelligence and CRM workflows for our regional operations across India. We need automated Whisper transcription and predictive lead scoring.",
+          "timestamp": "00:18",
+          "sentiment": "neutral"
+        },
+        {
+          "speaker": "Staff",
+          "text": "Lead-IQ handles that seamlessly. It runs automated Whisper transcription with Indian English accent optimization, calculates dynamic 0-100 conversion probability scores, and automates email, WhatsApp, and Telegram proposals.",
+          "timestamp": "00:38",
+          "sentiment": "positive"
+        }
+      ]
+    },
+    "summary": {
+      "overview": "Discovery call with Vikram Adani (Kavach Cybersecurity Systems). Client validated active requirement for 35 sales agents, approved budget of ₹4,50,000, and requested GST commercial quotation.",
+      "keyDiscussionPoints": [
+        "Requirement for 35 sales agents across regional offices",
+        "Confirmed GST invoice requirement and AWS Mumbai data residency",
+        "Demonstrated Whisper speech-to-text accuracy in Indian English"
+      ],
+      "customerObjections": [
+        "Required formal GST-compliant commercial proposal for procurement committee"
+      ],
+      "customerInterests": [
+        "Speech-to-text transcripts",
+        "AI Smart Leads ranking",
+        "Multi-channel proposals"
+      ],
+      "sentimentScore": 94,
+      "buyingIntentScore": 96,
+      "recommendedTimeline": "Follow up within 24 hours to secure Q3 commit"
+    },
+    "recommendation": {
+      "type": "EMAIL",
+      "title": "GST Commercial Proposal",
+      "reason": "AI detected high buying intent and explicit request for commercial terms.",
+      "priority": "HIGH",
+      "generatedContent": {
+        "to": "vikram@kavach-sec.in",
+        "subject": "Lead-IQ Commercial Proposal & GST Quotation for Kavach Cybersecurity Systems",
+        "body": "Dear Vikram Adani,\n\nThank you for taking the time to speak with me today regarding Kavach Cybersecurity Systems's sales operations. As discussed on our call, Lead-IQ provides automated Whisper speech transcription and predictive lead scoring designed to accelerate your conversion rate.\n\nAttached is our formal enterprise GST quotation (₹4,50,000/year for 35 seats) and our ISO 27001 security dossier with AWS Mumbai cloud residency details.\n\nPlease let me know if tomorrow at 3:00 PM IST works for a 15-minute review with your finance committee.\n\nWarm regards,\nSneha Kulkarni\nLead-IQ India Operations"
+      },
+      "isExecuted": false
+    },
+    "resultingScore": {
+      "score": 92,
+      "category": "Hot",
+      "probability": 94,
+      "confidence": 95,
+      "factors": [
+        "Approved budget (₹4,50,000) verified on call",
+        "Decision maker requested formal GST invoice",
+        "Positive dialogue sentiment across all speaker turns"
+      ],
+      "updatedAt": "2026-09-10T09:31:22.945Z"
+    }
+  },
+  {
+    "id": "call-1789032617881",
+    "leadId": "lead-4",
+    "leadName": "Vikram Adani",
+    "staffId": "staff-1",
+    "staffName": "Sneha Kulkarni",
+    "startTime": "2026-09-10T09:29:49.881Z",
+    "endTime": "2026-09-10T09:30:17.881Z",
+    "durationSeconds": 28,
+    "status": "Completed",
+    "waveformData": [
+      78,
+      83,
+      79,
+      53,
+      55,
+      71,
+      44,
+      46,
+      24,
+      87,
+      46,
+      34,
+      39,
+      53,
+      82,
+      84,
+      77,
+      67,
+      77,
+      50,
+      38,
+      47,
+      67,
+      37,
+      29,
+      40,
+      49,
+      79,
+      33,
+      53,
+      35,
+      39
+    ],
+    "transcript": {
+      "durationSeconds": 28,
+      "language": "English (India) & Hindi Nuances",
+      "extractedKeyPoints": [
+        "Automated Whisper speech-to-text accuracy and Indian English dialect evaluated",
+        "Verified requirement for GST compliance and AWS Mumbai data residency",
+        "Commercial budget and multi-seat deployment discussed with decision maker",
+        "Standard email and WhatsApp follow-up established"
+      ],
+      "turns": [
+        {
+          "speaker": "Staff",
+          "text": "Namaste and welcome. Thank you for connecting with Lead-IQ today. How can we assist your sales team?",
+          "timestamp": "00:04",
+          "sentiment": "positive"
+        },
+        {
+          "speaker": "Lead",
+          "text": "Hello! Yes, we are evaluating automated speech intelligence and CRM workflows for our regional operations across India. We need automated Whisper transcription and predictive lead scoring.",
+          "timestamp": "00:18",
+          "sentiment": "neutral"
+        },
+        {
+          "speaker": "Staff",
+          "text": "Lead-IQ handles that seamlessly. It runs automated Whisper transcription with Indian English accent optimization, calculates dynamic 0-100 conversion probability scores, and automates email, WhatsApp, and Telegram proposals.",
+          "timestamp": "00:38",
+          "sentiment": "positive"
+        }
+      ]
+    },
+    "summary": {
+      "overview": "Discovery call with Vikram Adani (Kavach Cybersecurity Systems). Client validated active requirement for 35 sales agents, approved budget of ₹4,50,000, and requested GST commercial quotation.",
+      "keyDiscussionPoints": [
+        "Requirement for 35 sales agents across regional offices",
+        "Confirmed GST invoice requirement and AWS Mumbai data residency",
+        "Demonstrated Whisper speech-to-text accuracy in Indian English"
+      ],
+      "customerObjections": [
+        "Required formal GST-compliant commercial proposal for procurement committee"
+      ],
+      "customerInterests": [
+        "Speech-to-text transcripts",
+        "AI Smart Leads ranking",
+        "Multi-channel proposals"
+      ],
+      "sentimentScore": 94,
+      "buyingIntentScore": 96,
+      "recommendedTimeline": "Follow up within 24 hours to secure Q3 commit"
+    },
+    "recommendation": {
+      "type": "EMAIL",
+      "title": "Automated GST Proposal Email",
+      "reason": "AI detected high buying intent and explicit request for commercial terms.",
+      "priority": "HIGH",
+      "generatedContent": {
+        "to": "vikram@kavach-sec.in",
+        "subject": "Lead-IQ Commercial Proposal & GST Quotation for Kavach Cybersecurity Systems",
+        "body": "Dear Vikram Adani,\n\nThank you for taking the time to speak with me today regarding Kavach Cybersecurity Systems's sales operations. As discussed on our call, Lead-IQ provides automated Whisper speech transcription and predictive lead scoring designed to accelerate your conversion rate.\n\nAttached is our formal enterprise GST quotation (₹4,50,000/year for 35 seats) and our ISO 27001 security dossier with AWS Mumbai cloud residency details.\n\nPlease let me know if tomorrow at 3:00 PM IST works for a 15-minute review with your finance committee.\n\nWarm regards,\nSneha Kulkarni\nLead-IQ India Operations"
+      },
+      "isExecuted": false
+    },
+    "resultingScore": {
+      "score": 92,
+      "category": "Hot",
+      "probability": 94,
+      "confidence": 95,
+      "factors": [
+        "Approved budget (₹4,50,000) verified on call",
+        "Decision maker requested formal GST invoice",
+        "Positive dialogue sentiment across all speaker turns"
+      ],
+      "updatedAt": "2026-09-10T09:30:17.864Z"
+    }
+  },
+  {
+    "id": "call-1789032191422",
+    "leadId": "lead-1789032191417-8lsr",
+    "leadName": "Rahul Sharma",
+    "staffId": "staff-1",
+    "staffName": "Sneha Kulkarni",
+    "startTime": "2026-09-10T09:23:08.422Z",
+    "endTime": "2026-09-10T09:23:11.422Z",
+    "durationSeconds": 3,
+    "status": "Completed",
+    "waveformData": [
+      54,
+      88,
+      32,
+      48,
+      20,
+      19,
+      33,
+      67,
+      74,
+      21,
+      58,
+      43,
+      35,
+      55,
+      85,
+      18,
+      68,
+      35,
+      35,
+      93,
+      52,
+      39,
+      75,
+      43,
+      65,
+      70,
+      90,
+      47,
+      80,
+      56,
+      69,
+      21
+    ],
+    "transcript": {
+      "durationSeconds": 3,
+      "language": "English (India) & Hindi Nuances",
+      "extractedKeyPoints": [
+        "Automated Whisper speech-to-text accuracy and Indian English dialect evaluated",
+        "Verified requirement for GST compliance and AWS Mumbai data residency",
+        "Commercial budget and multi-seat deployment discussed with decision maker",
+        "Standard email and WhatsApp follow-up established"
+      ],
+      "turns": [
+        {
+          "speaker": "Staff",
+          "text": "Namaste and welcome. Thank you for connecting with Lead-IQ today. How can we assist your sales team?",
+          "timestamp": "00:04",
+          "sentiment": "positive"
+        },
+        {
+          "speaker": "Lead",
+          "text": "Hello! Yes, we are evaluating automated speech intelligence and CRM workflows for our regional operations across India. We need automated Whisper transcription and predictive lead scoring.",
+          "timestamp": "00:18",
+          "sentiment": "neutral"
+        },
+        {
+          "speaker": "Staff",
+          "text": "Lead-IQ handles that seamlessly. It runs automated Whisper transcription with Indian English accent optimization, calculates dynamic 0-100 conversion probability scores, and automates email, WhatsApp, and Telegram proposals.",
+          "timestamp": "00:38",
+          "sentiment": "positive"
+        }
+      ]
+    },
+    "summary": {
+      "overview": "Discovery call with Rahul Sharma (Shree Enterprises). Client validated active requirement for 35 sales agents, approved budget of ₹4,50,000, and requested GST commercial quotation.",
+      "keyDiscussionPoints": [
+        "Requirement for 35 sales agents across regional offices",
+        "Confirmed GST invoice requirement and AWS Mumbai data residency",
+        "Demonstrated Whisper speech-to-text accuracy in Indian English"
+      ],
+      "customerObjections": [
+        "Required formal GST-compliant commercial proposal for procurement committee"
+      ],
+      "customerInterests": [
+        "Speech-to-text transcripts",
+        "AI Smart Leads ranking",
+        "Multi-channel proposals"
+      ],
+      "sentimentScore": 94,
+      "buyingIntentScore": 96,
+      "recommendedTimeline": "Follow up within 24 hours to secure Q3 commit"
+    },
+    "recommendation": {
+      "type": "EMAIL",
+      "title": "GST Commercial Proposal",
+      "reason": "AI detected high buying intent and explicit request for commercial terms.",
+      "priority": "HIGH",
+      "generatedContent": {
+        "to": "rahul.sharma@apextech.io",
+        "subject": "Lead-IQ Commercial Proposal & GST Quotation for Shree Enterprises",
+        "body": "Dear Rahul Sharma,\n\nThank you for taking the time to speak with me today regarding Shree Enterprises's sales operations. As discussed on our call, Lead-IQ provides automated Whisper speech transcription and predictive lead scoring designed to accelerate your conversion rate.\n\nAttached is our formal enterprise GST quotation (₹4,50,000/year for 35 seats) and our ISO 27001 security dossier with AWS Mumbai cloud residency details.\n\nPlease let me know if tomorrow at 3:00 PM IST works for a 15-minute review with your finance committee.\n\nWarm regards,\nSneha Kulkarni\nLead-IQ India Operations"
+      },
+      "isExecuted": false
+    },
+    "resultingScore": {
+      "score": 92,
+      "category": "Hot",
+      "probability": 94,
+      "confidence": 95,
+      "factors": [
+        "Approved budget (₹4,50,000) verified on call",
+        "Decision maker requested formal GST invoice",
+        "Positive dialogue sentiment across all speaker turns"
+      ],
+      "updatedAt": "2026-09-10T09:23:11.414Z"
+    }
+  },
+  {
+    "id": "call-1",
+    "leadId": "lead-1",
+    "leadName": "Rahul Sharma",
+    "staffId": "staff-1",
+    "staffName": "Sneha Kulkarni",
+    "startTime": "2026-09-09T14:15:00Z",
+    "endTime": "2026-09-09T14:31:45Z",
+    "durationSeconds": 1005,
+    "status": "Completed",
+    "waveformData": [
+      12,
+      28,
+      45,
+      60,
+      35,
+      78,
+      92,
+      65,
+      40,
+      55,
+      82,
+      95,
+      70,
+      48,
+      62,
+      88,
+      75,
+      50,
+      68,
+      85,
+      90,
+      60,
+      45,
+      70,
+      82,
+      58,
+      40,
+      75,
+      88,
+      65,
+      30,
+      15
+    ],
+    "transcript": {
+      "durationSeconds": 1005,
+      "language": "English (India) & Hindi Nuances",
+      "detectedTelegramHandle": "shravaz_mali",
+      "detectedWhatsAppNumber": "+91 98765 43210",
+      "extractedKeyPoints": [
+        "35 sales representatives migration required across Pune & Mumbai offices",
+        "Confirmed GST invoice requirement and ISO compliance documentation",
+        "Validated budget of ₹4,50,000 approved by management",
+        "Requested Telegram coordination with @shravaz_mali and WhatsApp +91 98765 43210"
+      ],
+      "turns": [
+        {
+          "speaker": "Staff",
+          "text": "Namaste Rahul ji, Sneha here from Lead-IQ. Thanks for taking out time today to evaluate our AI Lead Management platform for Shree Enterprises.",
+          "timestamp": "00:05",
+          "sentiment": "positive"
+        },
+        {
+          "speaker": "Lead",
+          "text": "Hello Sneha. Glad to connect. Our sales team in Pune and Mumbai currently manages leads across multiple WhatsApp chats and spreadsheets. We need automated call recording and scoring for our 35 reps.",
+          "timestamp": "00:20",
+          "sentiment": "neutral"
+        },
+        {
+          "speaker": "Staff",
+          "text": "Lead-IQ takes care of that seamlessly. It runs automated Whisper transcription with Indian English accent optimization, calculates dynamic 0-100 conversion probability scores, and automates email and Telegram proposals.",
+          "timestamp": "00:40",
+          "sentiment": "positive"
+        },
+        {
+          "speaker": "Lead",
+          "text": "That is very helpful. What about GST billing and data security in India? If compliant, we have an approved budget of ₹4,50,000 ready for deployment this quarter.",
+          "timestamp": "01:12",
+          "sentiment": "positive"
+        },
+        {
+          "speaker": "Staff",
+          "text": "We provide 100% GST-compliant invoicing with Indian cloud residency on AWS Mumbai. I can share our formal commercial quotation and technical security dossier right away.",
+          "timestamp": "01:38",
+          "sentiment": "positive"
+        },
+        {
+          "speaker": "Lead",
+          "text": "Excellent. Please send the formal proposal to my email rahul.sharma@apextech.io. You can also ping me on Telegram at @shravaz_mali or WhatsApp on +91 98765 43210 for faster coordination with our finance team.",
+          "timestamp": "02:08",
+          "sentiment": "positive"
+        }
+      ]
+    },
+    "summary": {
+      "overview": "High-value discovery call with Rahul Sharma (Director of Operations & IT at Shree Enterprises / Apex Tech, Pune). Client has an active requirement for 35 sales agents, verified budget of ₹4,50,000, and requested GST quotation.",
+      "keyDiscussionPoints": [
+        "Migration of 35 sales agents across Pune and Mumbai offices",
+        "Confirmation of GST compliance and AWS Mumbai data residency",
+        "Whisper speech-to-text accuracy demo and automated scoring",
+        "Telegram communication preference established (@shravaz_mali)"
+      ],
+      "customerObjections": [
+        "Required formal GST-compliant commercial proposal for internal procurement committee"
+      ],
+      "customerInterests": [
+        "Automated call transcripts in Indian English",
+        "AI Smart Leads prioritization",
+        "Telegram & WhatsApp automated follow-up proposals"
+      ],
+      "sentimentScore": 94,
+      "buyingIntentScore": 96,
+      "recommendedTimeline": "Send GST commercial quotation and schedule follow-up within 24 hours"
+    },
+    "recommendation": {
+      "type": "EMAIL",
+      "title": "Commercial Proposal & GST Quotation",
+      "reason": "AI detected high buying intent and explicit request for commercial terms.",
+      "priority": "HIGH",
+      "generatedContent": {
+        "to": "rahul.sharma@apextech.io",
+        "subject": "Lead-IQ Commercial Proposal & GST Quotation for Shree Enterprises",
+        "body": "Dear Rahul,\n\nThank you for speaking with me today regarding Shree Enterprises' sales operations in Pune and Mumbai. As discussed on our call, Lead-IQ provides automated Whisper speech transcription and predictive lead scoring designed to accelerate your pipeline.\n\nAttached is our formal enterprise GST quotation (₹4,50,000/year for 35 sales seats) and our ISO 27001 security dossier with AWS Mumbai cloud residency details.\n\nI have also noted your Telegram handle (@shravaz_mali) and WhatsApp (+91 98765 43210) for quick coordination.\n\nPlease let me know if tomorrow at 3:00 PM IST works for a 15-minute review with your finance committee.\n\nWarm regards,\nSneha Kulkarni\nLead-IQ India Operations"
+      },
+      "isExecuted": false
+    },
+    "resultingScore": {
+      "score": 92,
+      "category": "Hot",
+      "probability": 94,
+      "confidence": 95,
+      "factors": [
+        "Commercial budget (₹4,50,000) confirmed on call",
+        "Needs GST quotation for 35 sales agents",
+        "High positive sentiment (94%) detected in transcript",
+        "Active Telegram (@shravaz_mali) registered"
+      ],
+      "updatedAt": "2026-09-09T14:32:00Z"
+    }
+  }
+]

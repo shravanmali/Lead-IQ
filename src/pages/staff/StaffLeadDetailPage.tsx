@@ -14,8 +14,11 @@ import { TranscriptViewer } from '../../components/call/TranscriptViewer';
 import { AISummaryCard } from '../../components/call/AISummaryCard';
 import { EmailAutomationModal } from '../../components/automation/EmailAutomationModal';
 import { TelegramAutomationModal } from '../../components/automation/TelegramAutomationModal';
+import { WhatsAppAutomationModal } from '../../components/automation/WhatsAppAutomationModal';
+import { AudioUploadModal } from '../../components/call/AudioUploadModal';
 import { StatusAuditModal } from '../../components/common/StatusAuditModal';
 import { LoadingState } from '../../components/common/LoadingState';
+import { automationService } from '../../services/automationService';
 import { formatINR, formatIndianDateTime } from '../../utils/formatters';
 import {
   Phone,
@@ -37,7 +40,10 @@ import {
   TrendingUp,
   MessageSquare,
   ShieldCheck,
-  Calendar
+  Calendar,
+  UploadCloud,
+  ExternalLink,
+  Bot
 } from 'lucide-react';
 
 interface StaffLeadDetailPageProps {
@@ -52,13 +58,15 @@ export const StaffLeadDetailPage: React.FC<StaffLeadDetailPageProps> = ({ leadId
   const [activities, setActivities] = useState<LeadActivity[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Active Call Studio State
+  // Active Call Studio & Upload State
   const [isCallingModalOpen, setIsCallingModalOpen] = useState(false);
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [pipelineStep, setPipelineStep] = useState<'transcribing' | 'summarizing' | 'scoring' | 'recommending' | 'saving' | 'complete' | null>(null);
 
-  // Modals
+  // Communication & Action Modals (5 Channels)
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
   const [isTelegramModalOpen, setIsTelegramModalOpen] = useState(false);
+  const [isWhatsAppModalOpen, setIsWhatsAppModalOpen] = useState(false);
   const [isStatusModalOpen, setIsStatusModalOpen] = useState(false);
 
   const loadLeadDossier = async () => {
@@ -150,26 +158,18 @@ export const StaffLeadDetailPage: React.FC<StaffLeadDetailPageProps> = ({ leadId
           <span style={{ color: 'var(--text-muted)', fontSize: '0.8125rem' }}>({lead.company})</span>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', flexWrap: 'wrap' }}>
           <button onClick={() => setIsStatusModalOpen(true)} className="btn btn-secondary btn-sm">
             <span>Stage: {lead.status}</span>
           </button>
           <button
-            onClick={() => setIsEmailModalOpen(true)}
+            onClick={() => setIsUploadModalOpen(true)}
             className="btn btn-secondary btn-sm"
+            style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}
           >
-            <Mail size={14} />
-            <span>Draft Email</span>
+            <UploadCloud size={14} />
+            <span>Upload Audio</span>
           </button>
-          {lead.telegramUsername && (
-            <button
-              onClick={() => setIsTelegramModalOpen(true)}
-              className="btn btn-secondary btn-sm"
-            >
-              <Send size={14} />
-              <span>Telegram</span>
-            </button>
-          )}
           <button
             onClick={handleStartCall}
             className="btn btn-primary btn-sm"
@@ -177,6 +177,115 @@ export const StaffLeadDetailPage: React.FC<StaffLeadDetailPageProps> = ({ leadId
           >
             <Phone size={14} />
             <span>Launch Call Studio</span>
+          </button>
+        </div>
+      </div>
+
+      {/* 5-CHANNEL INTEGRATED COMMUNICATION & ACTION BAR */}
+      <div
+        className="glass-card"
+        style={{
+          padding: '1rem 1.25rem',
+          borderRadius: 'var(--radius-lg)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '1rem',
+          border: '1px solid rgba(79, 242, 176, 0.2)'
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div
+            style={{
+              width: '36px',
+              height: '36px',
+              borderRadius: '8px',
+              backgroundColor: 'rgba(79, 242, 176, 0.12)',
+              color: 'var(--brand-primary)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <Zap size={18} />
+          </div>
+          <div>
+            <div style={{ fontSize: '0.875rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+              5-Channel Engagement Center
+            </div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+              Execute pre-filled manual deep-links or server-side automated bot/SMTP dispatches
+            </div>
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+          {/* 1. Manual Email */}
+          <button
+            onClick={() => {
+              const subj = `Lead-IQ Commercial Proposal & Enterprise Onboarding for ${lead.company}`;
+              const body = `Dear ${lead.name},\n\nThank you for speaking with us today regarding ${lead.company}. Attached is our formal GST quotation (${formatINR(lead.dealValue)}/year).\n\nWarm regards,\n${user?.name || 'Staff'}\nLead-IQ`;
+              automationService.triggerManualEmail(lead.email, subj, body, lead.id, user?.name);
+              showToast('Manual Email Triggered', `Opened default mail client for ${lead.email}.`, 'info');
+              loadLeadDossier();
+            }}
+            className="btn btn-secondary btn-sm"
+            style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.78rem' }}
+            title="Open default email client with pre-filled subject and proposal text"
+          >
+            <ExternalLink size={13} />
+            <span>[ Manual Email ]</span>
+          </button>
+
+          {/* 2. Automatic Email */}
+          <button
+            onClick={() => setIsEmailModalOpen(true)}
+            className="btn btn-secondary btn-sm"
+            style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.78rem', borderColor: 'rgba(59, 130, 246, 0.4)' }}
+            title="Dispatch personalized proposal via Gmail SMTP Relay with AI generation"
+          >
+            <Mail size={13} style={{ color: '#3b82f6' }} />
+            <span>[ Automatic Email ]</span>
+          </button>
+
+          {/* 3. Manual Telegram */}
+          <button
+            onClick={() => {
+              const handle = lead.telegramUsername || 'prospect';
+              const text = `Namaste ${lead.name.split(' ')[0]} ji! 👋 ${user?.name?.split(' ')[0] || 'Sneha'} from Lead-IQ here. Sent the proposal to ${lead.email}!`;
+              automationService.triggerManualTelegram(handle, text, lead.id, user?.name);
+              showToast('Manual Telegram Triggered', `Opened direct Telegram chat @${handle}.`, 'info');
+              loadLeadDossier();
+            }}
+            className="btn btn-secondary btn-sm"
+            style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.78rem' }}
+            title="Open direct Telegram chat (t.me/{username}) with pre-filled message"
+          >
+            <ExternalLink size={13} />
+            <span>[ Manual Telegram ]</span>
+          </button>
+
+          {/* 4. Automatic Telegram */}
+          <button
+            onClick={() => setIsTelegramModalOpen(true)}
+            className="btn btn-secondary btn-sm"
+            style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.78rem', borderColor: 'rgba(139, 92, 246, 0.4)' }}
+            title="Dispatch direct message via Lead-IQ Telegram Bot"
+          >
+            <Bot size={13} style={{ color: '#8b5cf6' }} />
+            <span>[ Automatic Telegram ]</span>
+          </button>
+
+          {/* 5. Manual WhatsApp */}
+          <button
+            onClick={() => setIsWhatsAppModalOpen(true)}
+            className="btn btn-secondary btn-sm"
+            style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.78rem', borderColor: 'rgba(37, 211, 102, 0.4)' }}
+            title="Open WhatsApp click-to-chat deep-link (wa.me) with pre-filled proposal"
+          >
+            <MessageSquare size={13} style={{ color: '#25D366' }} />
+            <span>[ Manual WhatsApp ]</span>
           </button>
         </div>
       </div>
@@ -381,10 +490,16 @@ export const StaffLeadDetailPage: React.FC<StaffLeadDetailPageProps> = ({ leadId
               <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', maxWidth: '360px', margin: 0 }}>
                 Launch Call Studio to simulate a live customer conversation with automated Whisper speech-to-text.
               </p>
-              <button onClick={handleStartCall} className="btn btn-primary btn-sm" style={{ marginTop: '0.5rem' }}>
-                <Phone size={14} />
-                <span>Simulate Call Now</span>
-              </button>
+              <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
+                <button onClick={() => setIsUploadModalOpen(true)} className="btn btn-secondary btn-sm" style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                  <UploadCloud size={14} />
+                  <span>Upload Recording</span>
+                </button>
+                <button onClick={handleStartCall} className="btn btn-primary btn-sm" style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                  <Phone size={14} />
+                  <span>Simulate Call</span>
+                </button>
+              </div>
             </div>
           )}
 
@@ -597,6 +712,23 @@ export const StaffLeadDetailPage: React.FC<StaffLeadDetailPageProps> = ({ leadId
         isOpen={isTelegramModalOpen}
         lead={lead}
         onClose={() => setIsTelegramModalOpen(false)}
+        onSuccess={() => loadLeadDossier()}
+      />
+
+      {/* WhatsApp Automation Modal */}
+      <WhatsAppAutomationModal
+        isOpen={isWhatsAppModalOpen}
+        lead={lead}
+        initialBody={latestCall ? `Namaste ${lead.name.split(' ')[0]} ji! 👋 Thank you for our discussion today regarding ${lead.company}. I've sent over your formal enterprise GST quotation to ${lead.email}. Please let me know if you need any clarification.` : undefined}
+        onClose={() => setIsWhatsAppModalOpen(false)}
+        onSuccess={() => loadLeadDossier()}
+      />
+
+      {/* Audio Upload Modal */}
+      <AudioUploadModal
+        isOpen={isUploadModalOpen}
+        preselectedLead={lead}
+        onClose={() => setIsUploadModalOpen(false)}
         onSuccess={() => loadLeadDossier()}
       />
 

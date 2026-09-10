@@ -4,7 +4,6 @@ import { leadService } from '../../services/leadService';
 import { Lead } from '../../types/lead';
 import { RevenueDataPoint, StaffRevenueMetric, SourceRevenueMetric } from '../../types/revenue';
 import { KPICard } from '../../components/common/KPICard';
-import { RetentionKPICard } from '../../components/retention/RetentionKPICard';
 import { GreetingSection } from '../../components/common/GreetingSection';
 import { AIPriorityQueueTable } from '../../components/leads/AIPriorityQueueTable';
 import { ConversionTrendCard } from '../../components/charts/ConversionTrendCard';
@@ -117,13 +116,11 @@ export const ManagerDashboard: React.FC = () => {
               icon={Target}
               glow
             />
-            <RetentionKPICard
-              rate="78.4%"
-              trendPP="+4.2 pp"
-              retainedCount={392}
-              totalCount={500}
-              periodLabel="30-day retention"
-              onClick={() => (window.location.hash = '#/manager/revenue')}
+            <KPICard
+              title="Pipeline Value"
+              value="₹38.7L"
+              trend={{ value: '+22%', isPositive: true, label: 'vs last week' }}
+              icon={IndianRupee}
             />
             <KPICard
               title="Conversion Rate"

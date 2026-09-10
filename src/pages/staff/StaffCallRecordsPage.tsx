@@ -8,7 +8,8 @@ import { AISummaryCard } from '../../components/call/AISummaryCard';
 import { LoadingState } from '../../components/common/LoadingState';
 import { Modal } from '../../components/common/Modal';
 import { useToast } from '../../context/ToastContext';
-import { PhoneCall, FileText, Sparkles, ArrowRight, Clock, Mic, ShieldCheck } from 'lucide-react';
+import { PhoneCall, FileText, Sparkles, ArrowRight, Clock, Mic, ShieldCheck, UploadCloud } from 'lucide-react';
+import { AudioUploadModal } from '../../components/call/AudioUploadModal';
 
 export const StaffCallRecordsPage: React.FC = () => {
   const { user } = useAuth();
@@ -16,19 +17,21 @@ export const StaffCallRecordsPage: React.FC = () => {
   const [calls, setCalls] = useState<CallRecord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCall, setSelectedCall] = useState<CallRecord | null>(null);
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+
+  const loadCalls = async () => {
+    setIsLoading(true);
+    try {
+      const data = await callService.getCallHistory(user?.id);
+      setCalls(data);
+    } catch (err: any) {
+      showToast('Error Loading Calls', err.message, 'error');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const loadCalls = async () => {
-      setIsLoading(true);
-      try {
-        const data = await callService.getCallHistory(user?.id);
-        setCalls(data);
-      } catch (err: any) {
-        showToast('Error Loading Calls', err.message, 'error');
-      } finally {
-        setIsLoading(false);
-      }
-    };
     loadCalls();
   }, [user]);
 
@@ -54,15 +57,19 @@ export const StaffCallRecordsPage: React.FC = () => {
           </p>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
           <div className="glass-card" style={{ padding: '0.4rem 0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem' }}>
             <span style={{ color: 'var(--text-muted)' }}>Archive Records:</span>
             <span style={{ color: 'var(--brand-primary)', fontWeight: 800, fontFamily: 'var(--font-mono)' }}>{calls.length}</span>
           </div>
-          <div className="glass-card" style={{ padding: '0.4rem 0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.78rem', color: '#10b981' }}>
-            <ShieldCheck size={14} />
-            <span style={{ fontWeight: 600 }}>AWS Mumbai Compliant</span>
-          </div>
+          <button
+            onClick={() => setIsUploadModalOpen(true)}
+            className="btn btn-primary btn-sm"
+            style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 700, boxShadow: '0 4px 16px rgba(79, 242, 176, 0.35)' }}
+          >
+            <UploadCloud size={15} />
+            <span>Upload Call Recording</span>
+          </button>
         </div>
       </div>
 
@@ -177,6 +184,16 @@ export const StaffCallRecordsPage: React.FC = () => {
           </div>
         )}
       </Modal>
+
+      {/* Audio Upload Modal */}
+      <AudioUploadModal
+        isOpen={isUploadModalOpen}
+        onClose={() => setIsUploadModalOpen(false)}
+        onSuccess={(newCall) => {
+          setCalls(prev => [newCall, ...prev.filter(c => c.id !== newCall.id)]);
+          setSelectedCall(newCall);
+        }}
+      />
     </div>
   );
 };

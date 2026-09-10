@@ -32,6 +32,22 @@ export interface PipelineProgressCallback {
 
 export const callService = {
   async getCallHistory(staffId?: string, leadId?: string): Promise<CallRecord[]> {
+    try {
+      const res = await fetch('/api/calls');
+      if (res.ok) {
+        const data = await res.json();
+        if (data && Array.isArray(data.calls) && data.calls.length > 0) {
+          saveStoredCalls(data.calls);
+          let calls: CallRecord[] = data.calls;
+          if (staffId) calls = calls.filter(c => c.staffId === staffId);
+          if (leadId) calls = calls.filter(c => c.leadId === leadId);
+          return calls;
+        }
+      }
+    } catch {
+      // Fallback to local storage if server offline
+    }
+
     await delay(150);
     let calls = getStoredCalls();
     if (staffId) {
@@ -44,9 +60,59 @@ export const callService = {
   },
 
   async getCallById(callId: string): Promise<CallRecord | null> {
-    await delay(120);
-    const calls = getStoredCalls();
+    const calls = await this.getCallHistory();
     return calls.find(c => c.id === callId) || null;
+  },
+
+  /**
+   * Upload an audio file recording (MP3, WAV, M4A, WEBM)
+   * The backend validates format, divides long audio into 120s chunks using ffmpeg,
+   * performs Whisper STT on chunks, merges transcripts, extracts lead & keywords with Gemini AI,
+   * synthesizes proposals, and persists the lead & call record.
+   */
+  async uploadCallRecording(
+    file: File,
+    leadId?: string,
+    staffId?: string,
+    staffName?: string
+  ): Promise<{ success: boolean; call: CallRecord; lead?: Lead; message?: string }> {
+    const formData = new FormData();
+    formData.append('audio', file);
+    if (leadId) formData.append('leadId', leadId);
+    if (staffId) formData.append('staffId', staffId);
+    if (staffName) formData.append('staffName', staffName);
+
+    const res = await fetch('/api/calls/upload', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ error: 'Audio processing failed' }));
+      throw new Error(err.error || `Upload failed with status ${res.status}`);
+    }
+
+    const data = await res.json();
+    if (!data.success || !data.call) {
+      throw new Error(data.error || 'Failed to process audio recording');
+    }
+
+    // Update client-side local cache immediately for responsive UI
+    const existingCalls = getStoredCalls();
+    saveStoredCalls([data.call, ...existingCalls.filter(c => c.id !== data.call.id)]);
+
+    if (data.lead) {
+      const existingLeads = getStoredLeads();
+      const idx = existingLeads.findIndex(l => l.id === data.lead.id);
+      if (idx !== -1) {
+        existingLeads[idx] = data.lead;
+        saveStoredLeads(existingLeads);
+      } else {
+        saveStoredLeads([data.lead, ...existingLeads]);
+      }
+    }
+
+    return data;
   },
 
   /**
@@ -83,7 +149,7 @@ export const callService = {
 
     onProgress?.('saving');
 
-    // Generate random synthetic waveform data
+    // Generate synthetic waveform data
     const waveformData = Array.from({ length: 32 }, () => Math.floor(Math.random() * 85) + 15);
 
     const callRecord: CallRecord = {
@@ -103,7 +169,28 @@ export const callService = {
       resultingScore: newScore
     };
 
-    // Save Call Record
+    // Save Call Record to backend if available
+    try {
+      await fetch('/api/calls/process', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          leadId: lead.id,
+          leadName: lead.name,
+          staffId: staff.id,
+          staffName: staff.name,
+          durationSeconds,
+          transcript,
+          summary,
+          recommendation: primaryRecommendation,
+          resultingScore: newScore
+        })
+      });
+    } catch {
+      // Backend optional
+    }
+
+    // Save Call Record in local cache
     const calls = getStoredCalls();
     saveStoredCalls([callRecord, ...calls]);
 

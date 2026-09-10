@@ -1,0 +1,1085 @@
+[
+  {
+    "id": "lead-1789033428898-4dq2",
+    "name": "Rajesh Sharma",
+    "company": "Apex Logistics Solutions Pvt Ltd",
+    "title": "Director / Decision Maker",
+    "email": "rajesh.sharma@apexlogistics.in",
+    "phone": "+91 98765 43210",
+    "country": "Pune, Maharashtra",
+    "industry": "Enterprise Client",
+    "status": "Contacted",
+    "score": {
+      "score": 65,
+      "category": "Warm",
+      "probability": 50,
+      "confidence": 85,
+      "factors": [
+        "Inbound inquiry initiated by prospect",
+        "Needs qualification and requirement gathering",
+        "High responsiveness from sales staff"
+      ],
+      "updatedAt": "2026-09-10T09:43:48.897Z"
+    },
+    "dealValue": 500000,
+    "assignedStaffId": "staff-1",
+    "assignedStaffName": "Sneha Kulkarni",
+    "lastContact": "Just now",
+    "telegramUsername": "",
+    "telegramChatId": "6805311711",
+    "interestedIn": "Lead-IQ Enterprise Suite",
+    "requirements": "Initial inbound customer inquiry; seeking detailed solution overview, capability scope, and enterprise deployment quote.",
+    "notes": "AI Extracted from Call: The sales representative greeted the customer promptly to open an inquiry conversation. This initial contact established rapport and opened the channel for the customer to detail their business requirements.",
+    "nextAction": "Send welcome note, brochure, and schedule discovery call to capture technical requirements",
+    "activityTimeline": [
+      {
+        "id": "act_1789033433125",
+        "leadId": "lead-1789033428898-4dq2",
+        "type": "whatsapp_prepared",
+        "title": "WhatsApp Message Prepared for Manual Sending",
+        "description": "WhatsApp Web/App triggered for +919876543210 with prefilled message.",
+        "timestamp": "2026-09-10T09:43:53.125Z",
+        "performedBy": "Sneha Kulkarni (Staff AE)",
+        "metadata": {
+          "channel": "phone",
+          "deliveryMethod": "direct_link",
+          "phone": "+919876543210"
+        }
+      },
+      {
+        "id": "act_1789033433111",
+        "leadId": "lead-1789033428898-4dq2",
+        "type": "telegram_sent",
+        "title": "Telegram Message Automatically Sent",
+        "description": "Confirmed delivered via @Lead_IQ_bot to @shravaz_mali.",
+        "timestamp": "2026-09-10T09:43:53.111Z",
+        "performedBy": "Sneha Kulkarni (Staff AE)",
+        "metadata": {
+          "channel": "telegram",
+          "deliveryMethod": "bot_api",
+          "recipient": "shravaz_mali",
+          "chatId": "6805311711",
+          "messageId": 12
+        }
+      },
+      {
+        "id": "act_1789033432496",
+        "leadId": "lead-1789033428898-4dq2",
+        "type": "telegram_prepared",
+        "title": "Telegram Prepared for Manual Sending",
+        "description": "Direct Telegram link opened for @shravaz_mali.",
+        "timestamp": "2026-09-10T09:43:52.497Z",
+        "performedBy": "Sneha Kulkarni (Staff AE)",
+        "metadata": {
+          "channel": "telegram",
+          "deliveryMethod": "direct_link",
+          "recipient": "shravaz_mali"
+        }
+      },
+      {
+        "id": "act_1789033432487",
+        "leadId": "lead-1789033428898-4dq2",
+        "type": "email_sent",
+        "title": "Email Automatically Sent",
+        "description": "Confirmed delivered via Gmail SMTP (Shravan Mali (Lead—IQ) <shravan18loco9@gmail.com>) to sachinshravan836@gmail.com. Subject: \"Lead-IQ Automated Speech & Proposal Verification\"",
+        "timestamp": "2026-09-10T09:43:52.487Z",
+        "performedBy": "Sneha Kulkarni (Staff AE)",
+        "metadata": {
+          "channel": "email",
+          "deliveryMethod": "smtp",
+          "recipient": "sachinshravan836@gmail.com",
+          "subject": "Lead-IQ Automated Speech & Proposal Verification",
+          "messageId": "<9d5f5fb9-b460-a46f-b221-5ccd760f0d12@gmail.com>"
+        }
+      },
+      {
+        "id": "act_1789033428916",
+        "leadId": "lead-1789033428898-4dq2",
+        "type": "email_prepared",
+        "title": "Email Prepared for Manual Sending",
+        "description": "Default email client triggered with prefilled proposal for sachinshravan836@gmail.com.",
+        "timestamp": "2026-09-10T09:43:48.916Z",
+        "performedBy": "Sneha Kulkarni (Staff AE)",
+        "metadata": {
+          "channel": "email",
+          "deliveryMethod": "mailto",
+          "recipient": "sachinshravan836@gmail.com",
+          "subject": "Follow up regarding your inquiry"
+        }
+      },
+      {
+        "id": "act-1789033428902",
+        "leadId": "lead-1789033428898-4dq2",
+        "type": "call",
+        "title": "Call Recording Analyzed (0m 6s)",
+        "description": "Whisper audio transcribed into 1 dialogue turns. Sentiment: 80%. Predictive Lead Score: 65/100 (Warm).",
+        "timestamp": "2026-09-10T09:43:48.902Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "callId": "call-1789033428899",
+          "durationSeconds": 6,
+          "keywords": [
+            "Initial Inquiry",
+            "Enterprise ERP",
+            "Pune",
+            "Greeting",
+            "Customer Service"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "lead-1789033389956-nhvs",
+    "name": "Rahul Sharma",
+    "company": "Shree Enterprises",
+    "title": "Director / Decision Maker",
+    "email": "rahul.sharma@apextech.io",
+    "phone": "+91 98765 43210",
+    "country": "Pune, Maharashtra",
+    "industry": "Enterprise Client",
+    "status": "Contacted",
+    "score": {
+      "score": 89,
+      "category": "Hot",
+      "probability": 90,
+      "confidence": 92,
+      "factors": [
+        "Well-defined technical requirements provided",
+        "Specific operational criteria (AWS Mumbai, GST invoicing)",
+        "High urgency for AI voice analytics solution"
+      ],
+      "updatedAt": "2026-09-10T09:45:03.031Z"
+    },
+    "dealValue": 500000,
+    "assignedStaffId": "staff-1",
+    "assignedStaffName": "Sneha Kulkarni",
+    "lastContact": "Just now (Call Transcribed)",
+    "telegramChatId": "",
+    "interestedIn": "Lead-IQ Enterprise Suite",
+    "requirements": "Automated Whisper speech-to-text, 0-100 conversion probability scoring, GST invoicing, AWS Mumbai cloud hosting.",
+    "notes": "AI Extracted from Call: Discovery call with Rahul Sharma (Shree Enterprises). Client validated active requirement for 35 sales agents, approved budget of ₹4,50,000, and requested GST commercial quotation.\n\nAI Call Summary: Initial interaction initiated with Rahul Sharma from Shree Enterprises following a technical inquiry. The prospect requires an enterprise voice CRM solution featuring automated Whisper speech-to-text and 0-100 conversion probability scoring hosted in AWS Mumbai. Full GST invoicing and local cloud compliance were highlighted as core criteria.",
+    "nextAction": "Follow-up: Send detailed proposal with GST quote and AWS Mumbai architecture details.",
+    "activityTimeline": [
+      {
+        "id": "act_1789033596242",
+        "leadId": "lead-1789033389956-nhvs",
+        "type": "email_sent",
+        "title": "Email Automatically Sent",
+        "description": "Confirmed delivered via Gmail SMTP (Shravan Mali (Lead—IQ) <shravan18loco9@gmail.com>) to rahul.sharma@apextech.io. Subject: \"Test\"",
+        "timestamp": "2026-09-10T09:46:36.242Z",
+        "performedBy": "Sneha Kulkarni (Staff AE)",
+        "metadata": {
+          "channel": "email",
+          "deliveryMethod": "smtp",
+          "recipient": "rahul.sharma@apextech.io",
+          "subject": "Test",
+          "messageId": "<a153405b-55b0-89c5-97d0-935613ebd56b@gmail.com>"
+        }
+      },
+      {
+        "id": "act-1789033503057",
+        "leadId": "lead-1789033389956-nhvs",
+        "type": "call",
+        "title": "Call Recording Analyzed (0m 6s)",
+        "description": "Whisper audio transcribed into 1 dialogue turns. Sentiment: 88%. Predictive Lead Score: 89/100 (Hot).",
+        "timestamp": "2026-09-10T09:45:03.057Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "callId": "call-1789033503044",
+          "durationSeconds": 6,
+          "keywords": [
+            "Whisper STT",
+            "Conversion Scoring",
+            "GST Invoicing",
+            "AWS Mumbai",
+            "CRM Intelligence"
+          ]
+        }
+      },
+      {
+        "id": "act-1789033389960",
+        "leadId": "lead-1789033389956-nhvs",
+        "type": "call",
+        "title": "Call Recording Analyzed (0m 6s)",
+        "description": "Whisper audio transcribed into 1 dialogue turns. Sentiment: 94%. Predictive Lead Score: 92/100 (Hot).",
+        "timestamp": "2026-09-10T09:43:09.960Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "callId": "call-1789033389957",
+          "durationSeconds": 6,
+          "keywords": [
+            "Whisper STT",
+            "GST Quotation",
+            "AWS Mumbai",
+            "Lead Scoring",
+            "Enterprise CRM"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "lead-1789033301142-x6yn",
+    "name": "Rajesh Sharma",
+    "company": "Apex Solutions India",
+    "title": "Director / Decision Maker",
+    "email": "rajesh.sharma@apexsolutions.in",
+    "phone": "+91 98765 43210",
+    "country": "Bengaluru, Karnataka",
+    "industry": "Enterprise Client",
+    "status": "Contacted",
+    "score": {
+      "score": 60,
+      "category": "Warm",
+      "probability": 50,
+      "confidence": 80,
+      "factors": [
+        "Inbound inquiry initiated by customer",
+        "Positive initial greeting and engagement",
+        "Discovery phase required to assess fit and budget"
+      ],
+      "updatedAt": "2026-09-10T09:41:41.134Z"
+    },
+    "dealValue": 500000,
+    "assignedStaffId": "staff-1",
+    "assignedStaffName": "Sneha Kulkarni",
+    "lastContact": "Just now",
+    "telegramUsername": "",
+    "telegramChatId": "",
+    "interestedIn": "Lead-IQ Enterprise Suite",
+    "requirements": "Initial inbound inquiry regarding enterprise software capabilities and deployment options.",
+    "notes": "AI Extracted from Call: The sales representative greeted the prospect and opened the conversation for initial discovery. The interaction represents an inbound customer inquiry requiring further qualification to understand specific enterprise requirements. A structured follow-up is recommended to establish project scope and timeline.",
+    "nextAction": "Schedule a detailed discovery call to identify technical requirements and share initial product documentation.",
+    "activityTimeline": [
+      {
+        "id": "act_1789033302431",
+        "leadId": "lead-1789033301142-x6yn",
+        "type": "whatsapp_prepared",
+        "title": "WhatsApp Message Prepared for Manual Sending",
+        "description": "WhatsApp Web/App triggered for +919876543210 with prefilled message.",
+        "timestamp": "2026-09-10T09:41:42.431Z",
+        "performedBy": "Sneha Kulkarni (Staff AE)",
+        "metadata": {
+          "channel": "phone",
+          "deliveryMethod": "direct_link",
+          "phone": "+919876543210"
+        }
+      },
+      {
+        "id": "act_1789033301396",
+        "leadId": "lead-1789033301142-x6yn",
+        "type": "telegram_prepared",
+        "title": "Telegram Prepared for Manual Sending",
+        "description": "Direct Telegram link opened for @shravan_007.",
+        "timestamp": "2026-09-10T09:41:41.396Z",
+        "performedBy": "Sneha Kulkarni (Staff AE)",
+        "metadata": {
+          "channel": "telegram",
+          "deliveryMethod": "direct_link",
+          "recipient": "shravan_007"
+        }
+      },
+      {
+        "id": "act-1789033301160",
+        "leadId": "lead-1789033301142-x6yn",
+        "type": "call",
+        "title": "Call Recording Analyzed (0m 6s)",
+        "description": "Whisper audio transcribed into 1 dialogue turns. Sentiment: 80%. Predictive Lead Score: 60/100 (Warm).",
+        "timestamp": "2026-09-10T09:41:41.160Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "callId": "call-1789033301148",
+          "durationSeconds": 6,
+          "keywords": [
+            "Customer Inquiry",
+            "Initial Greeting",
+            "Enterprise CRM",
+            "Discovery Call",
+            "Lead Qualification"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "lead-1789032191417-8lsr",
+    "name": "Rahul Sharma",
+    "company": "Shree Enterprises",
+    "title": "Director / Decision Maker",
+    "email": "rahul.sharma@apextech.io",
+    "phone": "+91 98765 43210",
+    "country": "Pune, Maharashtra",
+    "industry": "Enterprise Client",
+    "status": "Contacted",
+    "score": {
+      "score": 90,
+      "category": "Hot",
+      "probability": 92,
+      "confidence": 95,
+      "factors": [
+        "Clear technical requirements specified (Whisper STT, scoring)",
+        "Defined cloud infrastructure preference (AWS Mumbai)",
+        "Established enterprise buying compliance criteria (GST invoicing)"
+      ],
+      "updatedAt": "2026-09-10T09:59:10.229Z"
+    },
+    "dealValue": 500000,
+    "assignedStaffId": "staff-1",
+    "assignedStaffName": "Sneha Kulkarni",
+    "lastContact": "Just now (Call Transcribed)",
+    "telegramChatId": "6805311711",
+    "interestedIn": "Lead-IQ Enterprise Suite",
+    "requirements": "Automated Whisper speech-to-text, 0-100 conversion probability scoring, GST invoicing, AWS Mumbai cloud hosting.",
+    "notes": "AI Extracted from Call: Discovery call with Rahul Sharma (Shree Enterprises). Client validated active requirement for 35 sales agents, approved budget of ₹4,50,000, and requested GST commercial quotation.\n\nAI Call Summary: Initial interaction opened with Rahul Sharma from Shree Enterprises. Based on documented requirements, the lead seeks an enterprise solution offering Whisper speech-to-text, 0-100 conversion probability scoring, hosted on AWS Mumbai with GST invoicing.",
+    "nextAction": "Follow-up: Send detailed proposal with GST breakdown and schedule technical demo for Whisper STT integration on AWS Mumbai.",
+    "activityTimeline": [
+      {
+        "id": "act-1789034350258",
+        "leadId": "lead-1789032191417-8lsr",
+        "type": "call",
+        "title": "Call Recording Analyzed (0m 6s)",
+        "description": "Whisper audio transcribed into 1 dialogue turns. Sentiment: 88%. Predictive Lead Score: 90/100 (Hot).",
+        "timestamp": "2026-09-10T09:59:10.258Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "callId": "call-1789034350242",
+          "durationSeconds": 6,
+          "keywords": [
+            "Whisper STT",
+            "Conversion Scoring",
+            "AWS Mumbai",
+            "GST Invoicing",
+            "Enterprise AI"
+          ]
+        }
+      },
+      {
+        "id": "act-1789034308858",
+        "leadId": "lead-1789032191417-8lsr",
+        "type": "telegram_sent",
+        "title": "Automated Telegram Message Sent (@shravaz_mali)",
+        "description": "Dispatched direct Telegram message via Lead-IQ Telegram Bot: \"Namaste Rahul ji! 👋 Sneha from Lead-IQ here. Just sent over the full ...\"",
+        "timestamp": "2026-09-10T09:58:28.858Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "username": "shravaz_mali",
+          "body": "Namaste Rahul ji! 👋 Sneha from Lead-IQ here. Just sent over the full enterprise proposal and GST quotation to your email (rahul.sharma@apextech.io). Feel free to ping me here if you need quick answers on contract terms or onboarding!",
+          "messageId": "18"
+        }
+      },
+      {
+        "id": "act_1789034308791",
+        "leadId": "lead-1789032191417-8lsr",
+        "type": "telegram_sent",
+        "title": "Telegram Message Automatically Sent",
+        "description": "Confirmed delivered via @Lead_IQ_bot to @shravaz_mali.",
+        "timestamp": "2026-09-10T09:58:28.791Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "channel": "telegram",
+          "deliveryMethod": "bot_api",
+          "recipient": "shravaz_mali",
+          "chatId": "6805311711",
+          "messageId": 18
+        }
+      },
+      {
+        "id": "act-1789032191429",
+        "leadId": "lead-1789032191417-8lsr",
+        "type": "call",
+        "title": "Call Recording Analyzed (0m 3s)",
+        "description": "Whisper audio transcribed into 3 dialogue turns. Sentiment: 94%. Predictive Lead Score: 92/100 (Hot).",
+        "timestamp": "2026-09-10T09:23:11.429Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "callId": "call-1789032191422",
+          "durationSeconds": 3,
+          "keywords": [
+            "Whisper STT",
+            "GST Quotation",
+            "AWS Mumbai",
+            "Lead Scoring",
+            "Enterprise CRM"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "lead-1",
+    "name": "Rahul Sharma",
+    "company": "Shree Enterprises / Apex Tech",
+    "title": "Director of Operations & IT",
+    "email": "rahul.sharma@apextech.io",
+    "phone": "+91 98765 43210",
+    "country": "Pune, Maharashtra",
+    "industry": "Industrial Automation & ERP",
+    "status": "In Discussion",
+    "score": {
+      "score": 92,
+      "category": "Hot",
+      "probability": 94,
+      "confidence": 95,
+      "factors": [
+        "Commercial budget (₹4,50,000) confirmed on call",
+        "Needs GST quotation for 35 sales agents",
+        "High positive sentiment (94%) detected in transcript",
+        "Active Telegram (@shravaz_mali) registered"
+      ],
+      "updatedAt": "2026-09-10T08:30:00Z"
+    },
+    "dealValue": 450000,
+    "assignedStaffId": "staff-1",
+    "assignedStaffName": "Sneha Kulkarni",
+    "lastContact": "Today, 2:30 PM",
+    "telegramUsername": "shravaz_mali",
+    "telegramChatId": "6805311711",
+    "interestedIn": "Premium Enterprise Plan (35 seats)",
+    "requirements": "Automated Whisper speech-to-text, GST compliant billing, AWS Mumbai data residency, Telegram bot integration.",
+    "notes": "Decision maker. Spoke for 12 mins. Needs formal commercial proposal before Thursday executive committee review.",
+    "nextAction": "Send Automated GST Proposal Email & Telegram sync",
+    "activityTimeline": [
+      {
+        "id": "act-1789032509444",
+        "leadId": "lead-1",
+        "type": "email_sent",
+        "title": "Test Verification Email",
+        "description": "Automated integration test passed.",
+        "timestamp": "2026-09-10T09:28:29.444Z",
+        "performedBy": "Automated Test"
+      },
+      {
+        "id": "act-101",
+        "leadId": "lead-1",
+        "type": "call",
+        "title": "Call Completed (16m 45s)",
+        "description": "Whisper audio analyzed. Sentiment Score: 94%. Predictive Lead Score: 92/100 (Hot).",
+        "timestamp": "2026-09-09T14:31:45Z",
+        "performedBy": "Sneha Kulkarni"
+      }
+    ]
+  },
+  {
+    "id": "lead-2",
+    "name": "Priya Deshmukh",
+    "company": "Maharashtra Logistics Corp",
+    "title": "Head of Enterprise Supply Chain",
+    "email": "priya.deshmukh@mlc-india.com",
+    "phone": "+91 98220 11223",
+    "country": "Mumbai, Maharashtra",
+    "industry": "Supply Chain & Logistics",
+    "status": "Qualified",
+    "score": {
+      "score": 88,
+      "category": "Hot",
+      "probability": 89,
+      "confidence": 92,
+      "factors": [
+        "High deal value: ₹7,80,000",
+        "Requested SOC2 and cloud residency audit documentation",
+        "High buying velocity"
+      ],
+      "updatedAt": "2026-09-10T07:15:00Z"
+    },
+    "dealValue": 780000,
+    "assignedStaffId": "staff-1",
+    "assignedStaffName": "Sneha Kulkarni",
+    "lastContact": "Yesterday",
+    "telegramUsername": "priya_deshmukh_logistics",
+    "telegramChatId": "",
+    "interestedIn": "Custom Logistics Fleet Suite",
+    "requirements": "Multi-warehouse dispatch tracking, WhatsApp proposal alerts, Indian GST invoices.",
+    "notes": "Interested in AI automated lead capture for inbound phone inquiries.",
+    "nextAction": "Share SOC2 Security Whitepaper & Custom Proposal",
+    "activityTimeline": []
+  },
+  {
+    "id": "lead-3",
+    "name": "Amit Patel",
+    "company": "Gujarat BioMed Instruments",
+    "title": "Managing Director",
+    "email": "amit.patel@gujbiomed.in",
+    "phone": "+91 97250 88990",
+    "country": "Ahmedabad, Gujarat",
+    "industry": "Healthcare & MedTech",
+    "status": "Contacted",
+    "score": {
+      "score": 78,
+      "category": "Warm",
+      "probability": 80,
+      "confidence": 88,
+      "factors": [
+        "Budget allocated: ₹3,20,000",
+        "Evaluating two CRM vendors for clinical rep tracking"
+      ],
+      "updatedAt": "2026-09-08T11:00:00Z"
+    },
+    "dealValue": 320000,
+    "assignedStaffId": "staff-1",
+    "assignedStaffName": "Sneha Kulkarni",
+    "lastContact": "2 days ago",
+    "telegramUsername": "amit_patel_med",
+    "telegramChatId": "",
+    "interestedIn": "Medical Rep Tracking & Call STT",
+    "requirements": "Medical terminology transcription in Indian accents.",
+    "notes": "Follow-up requested after their quarterly board review.",
+    "nextAction": "Schedule Technical Demo",
+    "activityTimeline": []
+  },
+  {
+    "id": "lead-4",
+    "name": "Vikram Adani",
+    "company": "Kavach Cybersecurity Systems",
+    "title": "Chief Technology Officer",
+    "email": "vikram@kavach-sec.in",
+    "phone": "+91 98110 55443",
+    "country": "Bengaluru, Karnataka",
+    "industry": "Cloud & Cyber Defense",
+    "status": "In Discussion",
+    "score": {
+      "score": 92,
+      "category": "Hot",
+      "probability": 94,
+      "confidence": 95,
+      "factors": [
+        "Approved budget (₹4,50,000) verified on call",
+        "Decision maker requested formal GST invoice",
+        "Positive dialogue sentiment across all speaker turns"
+      ],
+      "updatedAt": "2026-09-10T09:33:39.809Z"
+    },
+    "dealValue": 450000,
+    "assignedStaffId": "staff-1",
+    "assignedStaffName": "Sneha Kulkarni",
+    "lastContact": "Just now (Call Transcribed)",
+    "telegramUsername": "vikram_adani_kavach",
+    "telegramChatId": "",
+    "interestedIn": "Enterprise High-Volume Whisper Pipeline",
+    "requirements": "Automated Whisper speech-to-text, 0-100 conversion probability scoring, GST invoicing, AWS Mumbai cloud hosting.",
+    "notes": "Final procurement sign-off in progress.\n\nAI Call Summary: Discovery call with Vikram Adani (Kavach Cybersecurity Systems). Client validated active requirement for 35 sales agents, approved budget of ₹4,50,000, and requested GST commercial quotation.\n\nAI Call Summary: Discovery call with Vikram Adani (Kavach Cybersecurity Systems). Client validated active requirement for 35 sales agents, approved budget of ₹4,50,000, and requested GST commercial quotation.",
+    "nextAction": "Follow-up: Send formal GST quotation and schedule review with finance lead.",
+    "activityTimeline": [
+      {
+        "id": "act-1789032819833",
+        "leadId": "lead-4",
+        "type": "call",
+        "title": "Call Recording Analyzed (0m 6s)",
+        "description": "Whisper audio transcribed into 3 dialogue turns. Sentiment: 94%. Predictive Lead Score: 92/100 (Hot).",
+        "timestamp": "2026-09-10T09:33:39.833Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "callId": "call-1789032819823",
+          "durationSeconds": 6,
+          "keywords": [
+            "Whisper STT",
+            "GST Quotation",
+            "AWS Mumbai",
+            "Lead Scoring",
+            "Enterprise CRM"
+          ]
+        }
+      },
+      {
+        "id": "act-1789032682972",
+        "leadId": "lead-4",
+        "type": "call",
+        "title": "Call Recording Analyzed (0m 6s)",
+        "description": "Whisper audio transcribed into 3 dialogue turns. Sentiment: 94%. Predictive Lead Score: 92/100 (Hot).",
+        "timestamp": "2026-09-10T09:31:22.972Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "callId": "call-1789032682960",
+          "durationSeconds": 6,
+          "keywords": [
+            "Whisper STT",
+            "GST Quotation",
+            "AWS Mumbai",
+            "Lead Scoring",
+            "Enterprise CRM"
+          ]
+        }
+      },
+      {
+        "id": "act-1789032617897",
+        "leadId": "lead-4",
+        "type": "call",
+        "title": "Call Completed (0m 28s)",
+        "description": "Whisper audio analyzed. Sentiment Score: 94%. Predictive Lead Score: 92/100.",
+        "timestamp": "2026-09-10T09:30:17.897Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "callId": "call-1789032617881",
+          "score": 92
+        }
+      }
+    ]
+  },
+  {
+    "id": "lead-5",
+    "name": "Ananya Sen",
+    "company": "Bengal FinTech Innovations",
+    "title": "VP Products",
+    "email": "ananya.sen@bengalfintech.co.in",
+    "phone": "+91 98300 77665",
+    "country": "Kolkata, West Bengal",
+    "industry": "Banking & FinTech",
+    "status": "New",
+    "score": {
+      "score": 82,
+      "category": "Warm",
+      "probability": 84,
+      "confidence": 89,
+      "factors": [
+        "Inbound website inquiry for Whisper Indian speech AI",
+        "Projected deal value: ₹5,00,000"
+      ],
+      "updatedAt": "2026-09-10T06:00:00Z"
+    },
+    "dealValue": 500000,
+    "assignedStaffId": "staff-1",
+    "assignedStaffName": "Sneha Kulkarni",
+    "lastContact": "Today, 11:30 AM",
+    "telegramUsername": "ananya_fintech",
+    "telegramChatId": "",
+    "interestedIn": "FinTech Voice Intelligence",
+    "requirements": "Strict RBI financial compliance, automated call recording.",
+    "notes": "First discovery call requested.",
+    "nextAction": "Launch Call Studio for Discovery Call",
+    "activityTimeline": []
+  },
+  {
+    "id": "lead-101",
+    "name": "Rahul Sharma",
+    "company": "Shree Enterprises",
+    "title": "Director of Operations & IT",
+    "phone": "+91 98765 43210",
+    "email": "rahul.sharma@shreeenterprises.in",
+    "telegramUsername": "rahul_shree",
+    "status": "Interested",
+    "score": {
+      "score": 92,
+      "category": "Hot",
+      "probability": 94,
+      "confidence": 96,
+      "factors": [
+        "Approved ₹4,50,000 annual IT automation budget for Pune & Mumbai teams",
+        "Requested GST quotation and auto-dialer speech intelligence demo",
+        "Direct signing authority for commercial procurement"
+      ],
+      "updatedAt": "2026-09-09T14:32:00Z"
+    },
+    "assignedStaffId": "staff-1",
+    "assignedStaffName": "Sneha Kulkarni",
+    "lastContact": "Yesterday at 2:30 PM IST",
+    "nextAction": "Send Formal GST Quotation & Telegram Onboarding Link",
+    "industry": "Manufacturing & Industrial Solutions",
+    "dealValue": 450000,
+    "country": "Pune, Maharashtra",
+    "activityTimeline": [
+      {
+        "id": "act_1789034194973",
+        "leadId": "lead-101",
+        "type": "telegram_sent",
+        "title": "Telegram Message Automatically Sent",
+        "description": "Confirmed delivered via @Lead_IQ_bot to @shravaz_mali.",
+        "timestamp": "2026-09-10T09:56:34.973Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "channel": "telegram",
+          "deliveryMethod": "bot_api",
+          "recipient": "shravaz_mali",
+          "chatId": "6805311711",
+          "messageId": 15
+        }
+      },
+      {
+        "id": "act_1789034194279",
+        "leadId": "lead-101",
+        "type": "email_sent",
+        "title": "Email Automatically Sent",
+        "description": "Confirmed delivered via Gmail SMTP (Shravan Mali (Lead—IQ) <shravan18loco9@gmail.com>) to sachinshravan836@gmail.com. Subject: \"Lead-IQ Automated Test Proposal for lead-101\"",
+        "timestamp": "2026-09-10T09:56:34.279Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "channel": "email",
+          "deliveryMethod": "smtp",
+          "recipient": "sachinshravan836@gmail.com",
+          "subject": "Lead-IQ Automated Test Proposal for lead-101",
+          "messageId": "<d1fc35ee-d5ec-bebb-44c9-0ba81f1c4567@gmail.com>"
+        }
+      },
+      {
+        "id": "act_1789033999343",
+        "leadId": "lead-101",
+        "type": "telegram_sent",
+        "title": "Telegram Message Automatically Sent",
+        "description": "Confirmed delivered via @Lead_IQ_bot to @rahul_shree.",
+        "timestamp": "2026-09-10T09:53:19.343Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "channel": "telegram",
+          "deliveryMethod": "bot_api",
+          "recipient": "rahul_shree",
+          "chatId": "6805311711",
+          "messageId": 14
+        }
+      },
+      {
+        "id": "act_1789033998695",
+        "leadId": "lead-101",
+        "type": "email_sent",
+        "title": "Email Automatically Sent",
+        "description": "Confirmed delivered via Gmail SMTP (Shravan Mali (Lead—IQ) <shravan18loco9@gmail.com>) to sachinshravan836@gmail.com. Subject: \"Lead-IQ Automated Test Proposal\"",
+        "timestamp": "2026-09-10T09:53:18.695Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "channel": "email",
+          "deliveryMethod": "smtp",
+          "recipient": "sachinshravan836@gmail.com",
+          "subject": "Lead-IQ Automated Test Proposal",
+          "messageId": "<46ffdfd7-662a-b82a-8e4b-150424b66985@gmail.com>"
+        }
+      },
+      {
+        "id": "act_1789033809011",
+        "leadId": "lead-101",
+        "type": "telegram_sent",
+        "title": "Telegram Message Automatically Sent",
+        "description": "Confirmed delivered via @Lead_IQ_bot to @rahul_shree.",
+        "timestamp": "2026-09-10T09:50:09.011Z",
+        "performedBy": "Sneha Kulkarni (Staff AE)",
+        "metadata": {
+          "channel": "telegram",
+          "deliveryMethod": "bot_api",
+          "recipient": "rahul_shree",
+          "chatId": "6805311711",
+          "messageId": 13
+        }
+      },
+      {
+        "id": "act_1789033807796",
+        "leadId": "lead-101",
+        "type": "email_sent",
+        "title": "Email Automatically Sent",
+        "description": "Confirmed delivered via Gmail SMTP (Shravan Mali (Lead—IQ) <shravan18loco9@gmail.com>) to sachinshravan836@gmail.com. Subject: \"Lead-101 Test Email\"",
+        "timestamp": "2026-09-10T09:50:07.796Z",
+        "performedBy": "Sneha Kulkarni (Staff AE)",
+        "metadata": {
+          "channel": "email",
+          "deliveryMethod": "smtp",
+          "recipient": "sachinshravan836@gmail.com",
+          "subject": "Lead-101 Test Email",
+          "messageId": "<f86506f1-8f01-b860-90b0-74ac44117f0b@gmail.com>"
+        }
+      }
+    ],
+    "telegramChatId": "6805311711"
+  },
+  {
+    "id": "lead-102",
+    "name": "Pooja Shah",
+    "company": "Mumbai Digital Works",
+    "title": "Chief Operating Officer",
+    "phone": "+91 98234 56120",
+    "email": "pooja.shah@mumbaidigital.co.in",
+    "telegramUsername": "poojashah_mdw",
+    "status": "Approved",
+    "score": {
+      "score": 87,
+      "category": "Hot",
+      "probability": 89,
+      "confidence": 93,
+      "factors": [
+        "Executive board approved 35-seat pilot program",
+        "GST and data privacy compliance verified by legal team",
+        "High engagement during live platform demo"
+      ],
+      "updatedAt": "2026-09-08T16:15:00Z"
+    },
+    "assignedStaffId": "staff-1",
+    "assignedStaffName": "Sneha Kulkarni",
+    "lastContact": "08 Sep 2026",
+    "nextAction": "Finalize Master Services Agreement (MSA)",
+    "industry": "Digital Marketing & Media Tech",
+    "dealValue": 650000,
+    "country": "Mumbai, Maharashtra",
+    "activityTimeline": [
+      {
+        "id": "act_1789034198669",
+        "leadId": "lead-102",
+        "type": "telegram_sent",
+        "title": "Telegram Message Automatically Sent",
+        "description": "Confirmed delivered via @Lead_IQ_bot to @shravaz_mali.",
+        "timestamp": "2026-09-10T09:56:38.669Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "channel": "telegram",
+          "deliveryMethod": "bot_api",
+          "recipient": "shravaz_mali",
+          "chatId": "6805311711",
+          "messageId": 16
+        }
+      },
+      {
+        "id": "act_1789034197884",
+        "leadId": "lead-102",
+        "type": "email_sent",
+        "title": "Email Automatically Sent",
+        "description": "Confirmed delivered via Gmail SMTP (Shravan Mali (Lead—IQ) <shravan18loco9@gmail.com>) to sachinshravan836@gmail.com. Subject: \"Lead-IQ Automated Test Proposal for lead-102\"",
+        "timestamp": "2026-09-10T09:56:37.884Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "channel": "email",
+          "deliveryMethod": "smtp",
+          "recipient": "sachinshravan836@gmail.com",
+          "subject": "Lead-IQ Automated Test Proposal for lead-102",
+          "messageId": "<e66575f2-79c2-7eac-4f31-a0a7a70f9a85@gmail.com>"
+        }
+      }
+    ],
+    "telegramChatId": "6805311711"
+  },
+  {
+    "id": "lead-103",
+    "name": "Amit Patil",
+    "company": "Patil Industries & Logistics",
+    "title": "VP of Growth & Strategy",
+    "phone": "+91 97654 32109",
+    "email": "amit.patil@patilindustries.com",
+    "telegramUsername": "amitpatil_ind",
+    "status": "Contacted",
+    "score": {
+      "score": 79,
+      "category": "Warm",
+      "probability": 76,
+      "confidence": 88,
+      "factors": [
+        "Evaluating integration with Tally ERP and custom logistics software",
+        "Requested API webhook performance documentation",
+        "Budget confirmed for Q3 rollout"
+      ],
+      "updatedAt": "2026-09-07T11:45:00Z"
+    },
+    "assignedStaffId": "staff-1",
+    "assignedStaffName": "Sneha Kulkarni",
+    "lastContact": "07 Sep 2026",
+    "nextAction": "Send Technical ERP & Tally Integration Dossier",
+    "industry": "Logistics & Supply Chain",
+    "dealValue": 375000,
+    "country": "Nashik, Maharashtra",
+    "activityTimeline": []
+  },
+  {
+    "id": "lead-104",
+    "name": "Rohit Verma",
+    "company": "NexGen Solutions India",
+    "title": "Head of Business Operations",
+    "phone": "+91 98980 11223",
+    "email": "rohit.verma@nexgenindia.com",
+    "telegramUsername": "rohit_nexgen",
+    "status": "Hold",
+    "score": {
+      "score": 65,
+      "category": "Warm",
+      "probability": 61,
+      "confidence": 82,
+      "factors": [
+        "Internal restructuring of Bengaluru sales division in progress",
+        "Project temporarily on hold until 15 October",
+        "Expressed continued interest in AI voice transcription"
+      ],
+      "updatedAt": "2026-09-06T10:00:00Z"
+    },
+    "assignedStaffId": "staff-1",
+    "assignedStaffName": "Sneha Kulkarni",
+    "lastContact": "06 Sep 2026",
+    "nextAction": "Schedule check-in call for 12 Oct",
+    "industry": "Enterprise Software & IT",
+    "dealValue": 275000,
+    "country": "Bengaluru, Karnataka",
+    "activityTimeline": []
+  },
+  {
+    "id": "lead-105",
+    "name": "Saurabh Pawar",
+    "company": "Sharma Retail Group",
+    "title": "Procurement Lead",
+    "phone": "+91 98450 77889",
+    "email": "saurabh.p@sharmaretail.in",
+    "status": "Declined",
+    "score": {
+      "score": 42,
+      "category": "Cold",
+      "probability": 35,
+      "confidence": 85,
+      "factors": [
+        "Locked into 2-year contract with legacy ERP provider",
+        "No budget reallocation permitted until FY2027",
+        "Low response rate on follow-up emails"
+      ],
+      "updatedAt": "2026-09-05T09:10:00Z"
+    },
+    "assignedStaffId": "staff-1",
+    "assignedStaffName": "Sneha Kulkarni",
+    "lastContact": "05 Sep 2026",
+    "nextAction": "Add to quarterly newsletter nurture sequence",
+    "industry": "Retail & Multi-Store Chains",
+    "dealValue": 180000,
+    "country": "Nagpur, Maharashtra",
+    "activityTimeline": [
+      {
+        "id": "act_1789034201969",
+        "leadId": "lead-105",
+        "type": "telegram_sent",
+        "title": "Telegram Message Automatically Sent",
+        "description": "Confirmed delivered via @Lead_IQ_bot to @shravaz_mali.",
+        "timestamp": "2026-09-10T09:56:41.969Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "channel": "telegram",
+          "deliveryMethod": "bot_api",
+          "recipient": "shravaz_mali",
+          "chatId": "6805311711",
+          "messageId": 17
+        }
+      },
+      {
+        "id": "act_1789034201427",
+        "leadId": "lead-105",
+        "type": "email_sent",
+        "title": "Email Automatically Sent",
+        "description": "Confirmed delivered via Gmail SMTP (Shravan Mali (Lead—IQ) <shravan18loco9@gmail.com>) to sachinshravan836@gmail.com. Subject: \"Lead-IQ Automated Test Proposal for lead-105\"",
+        "timestamp": "2026-09-10T09:56:41.427Z",
+        "performedBy": "Sneha Kulkarni",
+        "metadata": {
+          "channel": "email",
+          "deliveryMethod": "smtp",
+          "recipient": "sachinshravan836@gmail.com",
+          "subject": "Lead-IQ Automated Test Proposal for lead-105",
+          "messageId": "<a5ec0971-2e77-bb25-fad8-303be71e5c8c@gmail.com>"
+        }
+      }
+    ],
+    "telegramChatId": "6805311711"
+  },
+  {
+    "id": "lead-106",
+    "name": "Ananya Iyer",
+    "company": "Bharat Business Solutions",
+    "title": "Chief Technology Officer",
+    "phone": "+91 98401 23456",
+    "email": "ananya.iyer@bharatbiz.in",
+    "telegramUsername": "ananya_bharat",
+    "status": "Converted",
+    "score": {
+      "score": 96,
+      "category": "Hot",
+      "probability": 99,
+      "confidence": 98,
+      "factors": [
+        "2-year enterprise agreement signed (₹12,50,000 ARR)",
+        "Onboarding kickoff scheduled for 75 sales reps across India",
+        "High appraisal of Whisper AI Hindi & Indian English accuracy"
+      ],
+      "updatedAt": "2026-09-08T18:00:00Z"
+    },
+    "assignedStaffId": "staff-2",
+    "assignedStaffName": "Akash Jadhav",
+    "lastContact": "08 Sep 2026",
+    "nextAction": "Customer Success Onboarding Kickoff",
+    "industry": "Fintech & Digital Payments",
+    "dealValue": 1250000,
+    "country": "Chennai, Tamil Nadu",
+    "activityTimeline": []
+  },
+  {
+    "id": "lead-107",
+    "name": "Vikram Singh",
+    "company": "Aarav Technologies",
+    "title": "CISO & Infrastructure Head",
+    "phone": "+91 98660 34567",
+    "email": "vikram.singh@aaravtech.co.in",
+    "status": "New",
+    "score": {
+      "score": 54,
+      "category": "Moderate",
+      "probability": 52,
+      "confidence": 72,
+      "factors": [
+        "Downloaded Lead-IQ AI Whitepaper on Cloud Voice Intelligence",
+        "Inquired about data localization in Indian cloud data centers (Mumbai/Hyderabad)",
+        "Awaiting technical discovery call"
+      ],
+      "updatedAt": "2026-09-09T08:00:00Z"
+    },
+    "assignedStaffId": "staff-3",
+    "assignedStaffName": "Riya Gupta",
+    "lastContact": "Never contacted",
+    "nextAction": "Initiate Discovery Call & Confirm India Cloud Residency",
+    "industry": "Cybersecurity & Cloud",
+    "dealValue": 420000,
+    "country": "Hyderabad, Telangana",
+    "activityTimeline": []
+  },
+  {
+    "id": "lead-108",
+    "name": "Neha Joshi",
+    "company": "Maharashtra Enterprises",
+    "title": "VP of Business Development",
+    "phone": "+91 98200 45678",
+    "email": "neha.joshi@mahabiz.in",
+    "telegramUsername": "neha_mahabiz",
+    "status": "Interested",
+    "score": {
+      "score": 81,
+      "category": "Warm",
+      "probability": 83,
+      "confidence": 91,
+      "factors": [
+        "Expanding regional sales presence across Pune, Nashik, and Kolhapur",
+        "Highly valued the automated Telegram instant alert workflow",
+        "Target decision timeline: End of current month"
+      ],
+      "updatedAt": "2026-09-08T12:00:00Z"
+    },
+    "assignedStaffId": "staff-1",
+    "assignedStaffName": "Sneha Kulkarni",
+    "lastContact": "Yesterday at 5:00 PM IST",
+    "nextAction": "Send Demo Recording & Telegram Commercial Summary",
+    "industry": "Renewable Energy & Infrastructure",
+    "dealValue": 550000,
+    "country": "Pune, Maharashtra",
+    "activityTimeline": []
+  },
+  {
+    "id": "lead-109",
+    "name": "Karan Malhotra",
+    "company": "Kaveri Healthcare Systems",
+    "title": "Managing Director",
+    "phone": "+91 98110 56789",
+    "email": "karan.m@kaverihealth.in",
+    "telegramUsername": "karan_kaveri",
+    "status": "New",
+    "score": {
+      "score": 72,
+      "category": "Warm",
+      "probability": 70,
+      "confidence": 84,
+      "factors": [
+        "Attended product webinar on AI Lead Intelligence",
+        "Managing 30 clinical sales advisors across North India",
+        "Targeting Q3 rollout"
+      ],
+      "updatedAt": "2026-09-09T18:00:00Z"
+    },
+    "assignedStaffId": "staff-4",
+    "assignedStaffName": "Amit Patil",
+    "lastContact": "Never contacted",
+    "nextAction": "Schedule Discovery Call",
+    "industry": "Healthcare & Diagnostics",
+    "dealValue": 310000,
+    "country": "Delhi NCR",
+    "activityTimeline": []
+  }
+]

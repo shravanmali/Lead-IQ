@@ -1,11 +1,8 @@
 import { Lead, LeadStatus, LeadActivity, StatusUpdatePayload } from '../types/lead';
 import { INITIAL_LEADS, INITIAL_ACTIVITIES } from './mockData';
-import { formatIndianDate } from '../utils/formatters';
 
 const LEADS_STORAGE_KEY = 'leadiq_leads_in';
 const ACTIVITIES_STORAGE_KEY = 'leadiq_activities_in';
-
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export function getStoredLeads(): Lead[] {
   try {
@@ -51,8 +48,26 @@ export interface LeadFilterOptions {
 
 export const leadService = {
   async getLeads(filters?: LeadFilterOptions): Promise<Lead[]> {
-    await delay(180);
-    let list = getStoredLeads();
+    let list: Lead[] = [];
+
+    // Attempt to fetch from backend API
+    try {
+      const res = await fetch('/api/leads');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && Array.isArray(data.leads)) {
+          list = data.leads;
+          saveStoredLeads(list);
+        }
+      }
+    } catch {
+      // Offline fallback
+      list = getStoredLeads();
+    }
+
+    if (list.length === 0) {
+      list = getStoredLeads();
+    }
 
     if (filters) {
       if (filters.status && filters.status !== 'All') {
@@ -84,106 +99,126 @@ export const leadService = {
   },
 
   async getLeadById(id: string): Promise<Lead | null> {
-    await delay(150);
+    try {
+      const res = await fetch(`/api/leads/${id}`);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && data.lead) {
+          return data.lead;
+        }
+      }
+    } catch {
+      // Fallback
+    }
+
     const leads = getStoredLeads();
     return leads.find(l => l.id === id) || null;
   },
 
   /**
-   * Smart Leads Algorithm:
-   * Returns leads strictly sorted in DESCENDING ORDER by AI Lead Score.
-   * Highest scoring lead (e.g. Rahul Sharma 92 Hot) appears FIRST with AI Priority #1.
+   * Smart Leads: Returns leads sorted in DESCENDING order by AI Lead Score
    */
   async getSmartLeads(staffId?: string): Promise<Lead[]> {
-    await delay(200);
-    let list = getStoredLeads();
-    if (staffId) {
-      list = list.filter(l => l.assignedStaffId === staffId);
-    }
-    // Strict DESC sorting by score.score
+    const list = await this.getLeads(staffId ? { assignedStaffId: staffId } : undefined);
     return [...list].sort((a, b) => b.score.score - a.score.score);
   },
 
   async updateLeadStatus(payload: StatusUpdatePayload): Promise<Lead> {
-    await delay(300);
+    try {
+      const res = await fetch(`/api/leads/${payload.leadId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          status: payload.newStatus,
+          lastContact: 'Just now'
+        })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && data.lead) {
+          // Log activity
+          await this.addLeadActivity(payload.leadId, {
+            leadId: payload.leadId,
+            type: 'status_change',
+            title: `Status updated to ${payload.newStatus}`,
+            description: `Status changed from ${payload.previousStatus} to ${payload.newStatus}. ${payload.reason ? `Reason: "${payload.reason}"` : ''}`,
+            performedBy: payload.updatedBy,
+            metadata: {
+              previousStatus: payload.previousStatus,
+              newStatus: payload.newStatus,
+              reason: payload.reason
+            }
+          });
+
+          return data.lead;
+        }
+      }
+    } catch {
+      // Fallback
+    }
+
     const leads = getStoredLeads();
     const index = leads.findIndex(l => l.id === payload.leadId);
     if (index === -1) {
       throw new Error(`Lead ${payload.leadId} not found`);
     }
 
-    const current = leads[index];
     const updatedLead: Lead = {
-      ...current,
+      ...leads[index],
       status: payload.newStatus,
       lastContact: 'Just now'
     };
 
     leads[index] = updatedLead;
     saveStoredLeads(leads);
-
-    // Record activity audit entry
-    const newActivity: LeadActivity = {
-      id: `act-${Date.now()}`,
-      leadId: payload.leadId,
-      type: 'status_change',
-      title: `Status updated to ${payload.newStatus}`,
-      description: `Status changed from ${payload.previousStatus} to ${payload.newStatus}. ${payload.reason ? `Reason: "${payload.reason}"` : ''}`,
-      timestamp: new Date().toISOString(),
-      performedBy: payload.updatedBy,
-      metadata: {
-        previousStatus: payload.previousStatus,
-        newStatus: payload.newStatus,
-        reason: payload.reason
-      }
-    };
-
-    const activities = getStoredActivities();
-    saveStoredActivities([newActivity, ...activities]);
-
     return updatedLead;
   },
 
   async getLeadActivities(leadId: string): Promise<LeadActivity[]> {
-    await delay(150);
-    const activities = getStoredActivities();
-    return activities.filter(a => a.leadId === leadId);
+    try {
+      const res = await fetch(`/api/leads/${leadId}/activities`);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && Array.isArray(data.activities)) {
+          return data.activities;
+        }
+      }
+    } catch {
+      // Fallback
+    }
+
+    const acts = getStoredActivities();
+    return acts.filter(a => a.leadId === leadId);
   },
 
-  async addLead(lead: Partial<Lead>): Promise<Lead> {
-    await delay(300);
-    const leads = getStoredLeads();
-    const newLead: Lead = {
-      id: `lead-${Date.now()}`,
-      name: lead.name || 'New Client Prospect',
-      company: lead.company || 'Enterprise Solutions India',
-      title: lead.title || 'Director',
-      phone: lead.phone || '+91 98000 00000',
-      email: lead.email || 'contact@prospect.in',
-      telegramUsername: lead.telegramUsername,
-      status: lead.status || 'New',
-      score: lead.score || {
-        score: 65,
-        category: 'Warm',
-        probability: 60,
-        confidence: 75,
-        factors: ['Inbound demo inquiry', 'Awaiting discovery call'],
-        updatedAt: new Date().toISOString()
-      },
-      assignedStaffId: lead.assignedStaffId || 'staff-1',
-      assignedStaffName: lead.assignedStaffName || 'Sneha Kulkarni',
-      lastContact: 'Never contacted',
-      nextAction: 'Initiate Discovery Call & Confirm Requirements',
-      industry: lead.industry || 'Technology & IT Services',
-      dealValue: lead.dealValue || 350000,
-      source: lead.source || 'Inbound Website',
-      createdAt: new Date().toISOString(),
-      notes: lead.notes || '',
-      country: lead.country || 'Pune, Maharashtra'
+  async addLeadActivity(leadId: string, activity: Omit<LeadActivity, 'id' | 'timestamp'>): Promise<LeadActivity> {
+    try {
+      const res = await fetch(`/api/leads/${leadId}/activities`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(activity)
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && data.activity) {
+          return data.activity;
+        }
+      }
+    } catch {
+      // Fallback
+    }
+
+    const newAct: LeadActivity = {
+      ...activity,
+      id: `act-${Date.now()}`,
+      leadId,
+      timestamp: new Date().toISOString()
     };
 
-    const updated = [newLead, ...leads];
-    saveStoredLeads(updated);
-    return newLead;
+    const acts = getStoredActivities();
+    saveStoredActivities([newAct, ...acts]);
+    return newAct;
   }
 };

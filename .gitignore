@@ -10,7 +10,19 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+# Environment and secrets
+.env
+.env.local
+.env.*.local
 *.local
+
+# Uploads and temporary media
+uploads/*
+!uploads/.gitkeep
+
+# Archives and large files
+*.zip
+*.tar.gz
 
 # Editor directories and files
 .vscode/*
